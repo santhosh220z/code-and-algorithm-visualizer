@@ -18,7 +18,7 @@ export function NarrationBar({ step, cursor, total }: NarrationBarProps) {
       </span>
       <p
         key={cursor}
-        className="flex-1 text-[13px] leading-snug text-[var(--color-text)] truncate"
+        className="anim-step-in flex-1 text-[13px] leading-snug text-[var(--color-text)] truncate"
         title={step?.description ?? ''}
       >
         {step?.description ?? 'Select an algorithm from the sidebar and press Play.'}

@@ -70,7 +70,7 @@ export function PlayerControls() {
   }, [togglePlay, stepForward, stepBackward, jumpToStart, jumpToEnd]);
 
   const btn =
-    'flex items-center justify-center w-9 h-9 rounded-lg bg-[#20222f] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-white hover:border-[var(--color-accent)] transition-colors disabled:opacity-30 disabled:pointer-events-none';
+    'flex items-center justify-center w-9 h-9 rounded-lg bg-[#20222f] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-white hover:border-[var(--color-accent)] hover:-translate-y-px active:scale-90 transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none';
 
   return (
     <div className="shrink-0 flex flex-col gap-2 px-4 py-3 bg-[var(--color-bg-elevated)] border-t border-[var(--color-border)]">
@@ -83,7 +83,7 @@ export function PlayerControls() {
           <Icon path="M15 6v12l-9-6z" />
         </button>
         <button
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-all shadow-[0_0_14px_rgba(168,85,247,0.4)] disabled:opacity-40 disabled:pointer-events-none"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] hover:scale-105 active:scale-95 transition-all duration-150 shadow-[0_0_14px_rgba(168,85,247,0.4)] disabled:opacity-40 disabled:pointer-events-none"
           onClick={togglePlay}
           disabled={!steps.length}
           title={isPlaying ? 'Pause (Space)' : 'Play (Space)'}

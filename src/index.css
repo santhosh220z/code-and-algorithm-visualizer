@@ -19,6 +19,12 @@
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 }
 
+/* Shared motion curves */
+:root {
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -34,6 +40,7 @@
     font-size: 14px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   code, pre {
     font-family: var(--font-mono);
@@ -52,11 +59,44 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--color-text-muted);
   }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
     scrollbar-color: var(--color-border) transparent;
+  }
+
+  /* Step narration slides in softly on every cursor change */
+  .anim-step-in {
+    animation: stepIn 200ms var(--ease-smooth) both;
+  }
+  /* Hit-counter badges pop when their count changes */
+  .anim-badge-pop {
+    animation: badgePop 240ms var(--ease-out-back) both;
+  }
+  /* Sidebar sections/items cascade in when a dropdown opens */
+  .anim-item-in {
+    animation: itemIn 260ms var(--ease-smooth) both;
+  }
+
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes badgePop {
+    0%   { opacity: 0; transform: scale(0.6); }
+    60%  { opacity: 1; transform: scale(1.18); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes itemIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
   }
 }

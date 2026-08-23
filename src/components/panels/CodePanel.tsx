@@ -80,13 +80,14 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops }: Cod
             return (
               <div
                 key={rail.label}
-                className={`absolute w-[3px] rounded-full transition-all duration-200 ${
+                className={`absolute w-[3px] rounded-full ${
                   iter !== null ? 'bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent)]' : 'bg-[var(--color-border)]'
                 }`}
                 style={{
                   top: `${(rail.startLine + 1) * 26}px`,
                   height: `${(rail.endLine - rail.startLine + 1) * 26}px`,
                   opacity: iter !== null ? 1 : 0.5,
+                  transition: 'top 260ms cubic-bezier(0.4,0,0.2,1), height 260ms cubic-bezier(0.4,0,0.2,1), opacity 200ms ease, background-color 200ms ease',
                 }}
               />
             );
@@ -144,7 +145,8 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops }: Cod
               {/* Hit counter badge */}
               {hits > 0 && (
                 <span
-                  className={`ml-2 px-1.5 py-0 rounded-full text-[9px] font-mono shrink-0 ${
+                  key={`${index}-${hits}`}
+                  className={`anim-badge-pop ml-2 px-1.5 py-0 rounded-full text-[9px] font-mono shrink-0 ${
                     isActive
                       ? 'bg-[var(--color-accent)] text-white font-bold'
                       : 'bg-[#262838] text-[var(--color-text-muted)]'

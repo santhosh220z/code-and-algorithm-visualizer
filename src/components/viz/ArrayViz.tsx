@@ -15,6 +15,9 @@ const COLORS: Record<ArrayHighlight['kind'], string> = {
   trail: 'rgba(96,165,250,0.45)',
 };
 
+const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
+const SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+
 export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
   if (array.length === 0) {
     return (
@@ -30,43 +33,48 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
   const barW = Math.max(6, Math.min(48, 760 / n - gap));
   const chartH = 260;
 
+  // Latest highlight wins per index
   const kindOf = new Map<number, ArrayHighlight['kind']>();
   for (const h of highlights) kindOf.set(h.index, h.kind);
 
-  const pointerRows = new Map<number, Pointer[]>();
+  // Stack row per pointer at the same index; keyed by label so arrows GLIDE.
+  const rowOf = new Map<string, number>();
+  const seenAt = new Map<number, number>();
   for (const p of pointers) {
-    const row = pointerRows.get(p.index) ?? [];
-    row.push(p);
-    pointerRows.set(p.index, row);
+    const row = seenAt.get(p.index) ?? 0;
+    rowOf.set(p.label, row);
+    seenAt.set(p.index, row + 1);
   }
 
   return (
     <div className="w-full h-full flex flex-col justify-end overflow-hidden">
       <div className="flex-1" />
-      {/* Pointer labels */}
+
+      {/* Pointer labels — keyed by label + absolute left so they animate between indices */}
       <div className="relative h-6 mx-auto" style={{ width: n * (barW + gap) }}>
-        {[...pointerRows.entries()].map(([index, ptrs]) => (
-          <div
-            key={index}
-            className="absolute bottom-0 flex flex-col items-center"
-            style={{
-              left: index * (barW + gap),
-              width: barW,
-              transform: `translateX(${barW / 2}px)`,
-            }}
-          >
-            {ptrs.map((p, i) => (
+        {pointers.map((p) => {
+          const row = rowOf.get(p.label) ?? 0;
+          return (
+            <div
+              key={p.label}
+              className="absolute bottom-0 flex flex-col items-center"
+              style={{
+                left: p.index * (barW + gap),
+                transform: `translateX(${barW / 2}px) translateY(-${row * 11}px)`,
+                transition: `left 260ms ${EASE}, transform 260ms ${EASE}`,
+              }}
+            >
               <span
-                key={p.label}
                 className="text-[10px] font-mono font-semibold leading-tight whitespace-nowrap"
-                style={{ color: p.color ?? '#a855f7', marginTop: i > 0 ? -2 : 0 }}
+                style={{ color: p.color ?? '#a855f7' }}
               >
-                {i === 0 ? '▾' : ''}{p.label}
+                ▾{p.label}
               </span>
-            ))}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
+
       {/* Bars */}
       <div className="flex items-end mx-auto" style={{ gap: `${gap}px`, height: chartH + 24 }}>
         {array.map((value, i) => {
@@ -76,23 +84,34 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
           const glowing = kind === 'compare' || kind === 'swap' || kind === 'current';
           return (
             <div key={i} className="relative shrink-0" style={{ width: barW }}>
+              {/* Value label rides the bar top smoothly */}
               {n <= 30 && (
                 <span
-                  className={`absolute left-1/2 -translate-x-1/2 text-center font-mono text-[10px] transition-colors ${
+                  className={`absolute left-1/2 -translate-x-1/2 text-center font-mono text-[10px] ${
                     kind ? 'text-white font-bold' : 'text-[#5a5e6e]'
                   }`}
-                  style={{ top: `${chartH - h - 16}px`, width: barW * 2 }}
+                  style={{
+                    top: `${chartH - h - 16}px`,
+                    width: barW * 2,
+                    transition: `top 220ms ${EASE}, color 150ms linear`,
+                  }}
                 >
                   {value}
                 </span>
               )}
               <div
-                className="rounded-t-[3px] transition-all duration-150 ease-out"
+                className="rounded-t-[3px]"
                 style={{
                   height: `${h}px`,
                   background: color,
-                  boxShadow: glowing ? `0 0 10px ${color}` : undefined,
-                  transform: kind === 'swap' ? 'scale(1.06)' : undefined,
+                  boxShadow: glowing ? `0 0 12px ${color}` : '0 0 0 rgba(0,0,0,0)',
+                  transform:
+                    kind === 'swap'
+                      ? 'scaleY(1.07)'
+                      : kind === 'compare' || kind === 'current'
+                      ? 'translateY(-3px)'
+                      : 'none',
+                  transition: `height 200ms ${EASE}, background-color 160ms linear, box-shadow 200ms ${EASE}, transform 220ms ${kind === 'swap' ? SPRING : EASE}`,
                 }}
               />
               {n <= 20 && (
