@@ -58,7 +58,7 @@ export function* gridDfs(input: AlgorithmInput): Generator<Step> {
       [{ label: 'dfs', iteration: iter }]
     );
 
-    for (const [nr, nc] of neighbors4(g, ur, uc)) {
+    for (const [nr, nc] of neighbors4(g, ur, uc, g.end)) {
       const v = key(nr, nc);
       if (!seen.has(v)) {
         parent.set(v, u);

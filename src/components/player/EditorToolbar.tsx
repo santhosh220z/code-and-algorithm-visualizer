@@ -1,5 +1,7 @@
 import { useEditorStore } from '../../core/editorStore';
-import type { AlgorithmCategory } from '../../core/types';
+import { usePlayerStore } from '../../core/player';
+import { resizeGrid } from '../../core/presets';
+import type { AlgorithmCategory, GridInputData, AlgorithmInput } from '../../core/types';
 
 const GRAPH_TOOLS = [
   { id: 'select', label: 'Move / Edit', icon: 'M5 3l14 8-6 2-2 6z' },
@@ -18,9 +20,22 @@ const GRID_TOOLS = [
   { id: 'setEnd', label: 'Set Goal', icon: 'M19 12l-7 7v-4H5V8h7V4z' },
 ] as const;
 
+const numInput =
+  'w-14 px-1.5 py-1 rounded-md bg-[#20222f] border border-[var(--color-border)] text-[11px] font-mono text-white focus:border-[var(--color-accent)] focus:outline-none text-center';
+
 export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
   const { tool, setTool } = useEditorStore();
+  const input = usePlayerStore((s) => s.input);
+  const patchInput = usePlayerStore((s) => s.patchInput);
   const tools = category === 'graph' ? GRAPH_TOOLS : GRID_TOOLS;
+
+  const grid = (input as { grid?: GridInputData }).grid;
+
+  const applySize = (rows: number, cols: number) => {
+    if (!grid) return;
+    if (!Number.isFinite(rows) || !Number.isFinite(cols)) return;
+    patchInput({ grid: resizeGrid(grid, rows, cols) } as unknown as AlgorithmInput);
+  };
 
   return (
     <div className="shrink-0 flex items-center gap-1.5 px-3 py-2 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] overflow-x-auto scrollbar-thin">
@@ -45,6 +60,34 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
           </button>
         );
       })}
+
+      {/* Custom grid size */}
+      {category === 'grid' && grid && (
+        <div className="ml-auto flex items-center gap-1.5 shrink-0 pl-3 border-l border-[var(--color-border)]">
+          <span className="text-[10px] uppercase tracking-wider text-[#4a4d5a]">Grid</span>
+          <input
+            type="number"
+            min={5}
+            max={30}
+            value={grid.rows}
+            onChange={(e) => applySize(e.target.valueAsNumber, grid.cols)}
+            className={numInput}
+            aria-label="Grid rows (5–30)"
+            title="Rows (5–30)"
+          />
+          <span className="text-[#4a4d5a] text-xs">×</span>
+          <input
+            type="number"
+            min={8}
+            max={50}
+            value={grid.cols}
+            onChange={(e) => applySize(grid.rows, e.target.valueAsNumber)}
+            className={numInput}
+            aria-label="Grid columns (8–50)"
+            title="Columns (8–50)"
+          />
+        </div>
+      )}
     </div>
   );
 }

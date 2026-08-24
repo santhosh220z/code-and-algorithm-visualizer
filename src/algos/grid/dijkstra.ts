@@ -72,7 +72,7 @@ export function* gridDijkstra(input: AlgorithmInput): Generator<Step> {
     open.delete(u);
     closed.add(u);
 
-    for (const [nr, nc] of neighbors4(g, ur, uc)) {
+    for (const [nr, nc] of neighbors4(g, ur, uc, g.end)) {
       const v = key(nr, nc);
       if (closed.has(v)) continue;
       const alt = best + costOf(g, nr, nc);

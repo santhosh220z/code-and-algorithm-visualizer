@@ -37,10 +37,44 @@ const DELTAS: [number, number][] = [
   [0, 1],
 ];
 
-/** Walkable 4-neighbors in deterministic order: up, down, left, right. */
-export function neighbors4(g: GridInputData, r: number, c: number): [number, number][] {
+/**
+ * Walkable 4-neighbors ordered goal-biased: the direction that closes the most
+ * distance to `goal` expands first, so equal-cost paths come out as straight
+ * lines instead of staircase drift. Deterministic; optimality is unaffected —
+ * this only changes WHICH optimal path is found.
+ */
+export function neighbors4(
+  g: GridInputData,
+  r: number,
+  c: number,
+  goal?: [number, number]
+): [number, number][] {
+  let order = DELTAS;
+  if (goal) {
+    const drSign = Math.sign(goal[0] - r);
+    const dcSign = Math.sign(goal[1] - c);
+    const dDr = Math.abs(goal[0] - r);
+    const dC = Math.abs(goal[1] - c);
+
+    // Primary axis first (larger remaining distance), then secondary toward,
+    // then the two away-directions.
+    const primary: [number, number] = dC >= dDr ? [0, dcSign] : [drSign, 0];
+    const secondary: [number, number] = dC >= dDr ? [drSign, 0] : [0, dcSign];
+    const awayPrimary: [number, number] = [-primary[0], -primary[1]];
+    const awaySecondary: [number, number] = [-secondary[0], -secondary[1]];
+
+    order = [];
+    for (const d of [primary, secondary, awayPrimary, awaySecondary]) {
+      if (d[0] !== 0 || d[1] !== 0) order.push(d);
+    }
+    // Fill in any directions lost to zero-signs so all four stay represented
+    for (const d of DELTAS) {
+      if (!order.some((o) => o[0] === d[0] && o[1] === d[1])) order.push(d);
+    }
+  }
+
   const out: [number, number][] = [];
-  for (const [dr, dc] of DELTAS) {
+  for (const [dr, dc] of order) {
     const nr = r + dr;
     const nc = c + dc;
     if (nr < 0 || nc < 0 || nr >= g.rows || nc >= g.cols) continue;

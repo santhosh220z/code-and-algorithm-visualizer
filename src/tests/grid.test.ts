@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import type { AlgorithmDef, Step, GridInputData } from '../core/types';
 import { getAlgorithm } from '../core/registry';
+import { resizeGrid } from '../core/presets';
+import { usePlayerStore } from '../core/player';
 import '../algos/grid';
 
 function runGrid(def: AlgorithmDef, g: GridInputData): Step[] {
@@ -101,6 +103,27 @@ describe('grid pathfinding', () => {
     expect(last.vars?.pathSteps).toBe(6);
   });
 
+  it('open-grid paths are monotone toward the goal (straight, no staircase drift)', () => {
+    const g: GridInputData = emptyBase(); // S(2,0) -> E(2,6), no obstacles
+    for (const id of ['grid-bfs', 'grid-dijkstra', 'grid-astar']) {
+      const def = getAlgorithm(id)!;
+      const steps = runGrid(def, g);
+      const last = lastStep(steps);
+      if (last.viz.type !== 'grid') throw new Error(`${id}: no grid viz`);
+      const ordered = last.viz.highlights.filter((h) => h.kind === 'path');
+      expect(ordered.length).toBe(7); // optimal: 6 moves + start cell
+
+      // Every consecutive step must close exactly one unit of Manhattan distance
+      let dist = Math.abs(g.end[0] - g.start[0]) + Math.abs(g.end[1] - g.start[1]);
+      for (let i = 1; i < ordered.length; i++) {
+        const dr = Math.abs(g.end[0] - ordered[i].row) + Math.abs(g.end[1] - ordered[i].col);
+        expect(dr).toBe(dist - 1);
+        dist = dr;
+      }
+      expect(dist).toBe(0); // ends exactly at the goal
+    }
+  });
+
   it('dijkstra routes around expensive corridor (cost 6 vs 31)', () => {
     const def = getAlgorithm('grid-dijkstra')!;
     const g: GridInputData = {
@@ -134,6 +157,87 @@ describe('grid pathfinding', () => {
     const last = lastStep(steps);
     expect(last.vars?.found).toBe(false);
     expect(pathCells(steps).size).toBe(0);
+  });
+});
+
+describe('custom grid sizing (resizeGrid)', () => {
+  it('shrinks: drops out-of-bounds walls/weights and clamps endpoints inside', () => {
+    const g: GridInputData = {
+      rows: 10,
+      cols: 20,
+      walls: ['1,1', '9,19', '4,10', '12,25'],
+      weights: { '2,10': 6, '15,30': 4 },
+      start: [8, 1],
+      end: [9, 18],
+    };
+    const r = resizeGrid(g, 6, 16);
+    expect(r.rows).toBe(6);
+    expect(r.cols).toBe(16);
+    for (const w of r.walls) {
+      const [row, col] = w.split(',').map(Number);
+      expect(row).toBeLessThan(6);
+      expect(col).toBeLessThan(16);
+    }
+    expect(r.walls.sort()).toEqual(['1,1', '4,10']);
+    expect(Object.keys(r.weights)).toEqual(['2,10']);
+    for (const [r0, c0] of [r.start, r.end]) {
+      expect(r0).toBeLessThan(6);
+      expect(c0).toBeLessThan(16);
+    }
+  });
+
+  it('never leaves an endpoint on a wall or lets them coincide', () => {
+    const g: GridInputData = {
+      rows: 5,
+      cols: 8,
+      walls: ['0,7'],
+      weights: {},
+      start: [0, 7], // clamps onto the wall cell
+      end: [4, 7],
+    };
+    const r = resizeGrid(g, 5, 8);
+    const startKey = `${r.start[0]},${r.start[1]}`;
+    const endKey = `${r.end[0]},${r.end[1]}`;
+    expect(r.walls).not.toContain(startKey);
+    expect(r.walls).not.toContain(endKey);
+    expect(startKey).not.toBe(endKey);
+  });
+
+  it('growing keeps everything; absurd values clamp to bounds', () => {
+    const g: GridInputData = {
+      rows: 5, cols: 8, walls: ['2,2', '3,3'], weights: { '1,1': 4 },
+      start: [2, 0], end: [2, 7],
+    };
+    const grown = resizeGrid(g, 10, 20);
+    expect(grown.walls.sort()).toEqual(['2,2', '3,3']);
+    expect(grown.weights['1,1']).toBe(4);
+
+    const clamped = resizeGrid(g, 1000, -3);
+    expect(clamped.rows).toBe(30);
+    expect(clamped.cols).toBe(8); // min bound
+  });
+
+  it('patchInput snaps to the new end when the previous run was completed', () => {
+    const store = usePlayerStore.getState();
+    const def = getAlgorithm('grid-bfs')!;
+    store.setAlgorithm(def);
+    let s = usePlayerStore.getState();
+    s.jumpToEnd();
+    s = usePlayerStore.getState();
+    const oldLen = s.steps.length;
+    expect(s.cursor).toBe(oldLen - 1);
+
+    // Edit after completion with a LARGER grid (longer trace)
+    const grid = s.input.grid as GridInputData;
+    s.patchInput({ grid: resizeGrid(grid, grid.rows + 5, grid.cols + 5) } as never);
+    s = usePlayerStore.getState();
+    expect(s.steps.length).toBeGreaterThan(oldLen);
+    expect(s.cursor).toBe(s.steps.length - 1); // still at the finished path
+
+    // Mid-trace edits keep the absolute position
+    s.setCursor(3);
+    usePlayerStore.getState().patchInput({ grid: s.input.grid } as never);
+    expect(usePlayerStore.getState().cursor).toBe(3);
   });
 });
 

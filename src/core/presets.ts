@@ -175,3 +175,39 @@ export function randomWalls(rows = 12, cols = 20, density = 0.28): GridInputData
   }
   return { ...base, walls };
 }
+
+/** Resize a grid to custom dimensions, preserving everything that still fits.
+ *  Walls/weights outside the new bounds are dropped; endpoints are clamped inside
+ *  and never left on a wall or coinciding with each other. */
+export function resizeGrid(g: GridInputData, rows: number, cols: number): GridInputData {
+  const R = Math.max(5, Math.min(30, Math.round(rows) || g.rows));
+  const C = Math.max(8, Math.min(50, Math.round(cols) || g.cols));
+
+  const fits = (k: string) => {
+    const [r, c] = k.split(',').map(Number);
+    return r >= 0 && c >= 0 && r < R && c < C;
+  };
+
+  const walls = g.walls.filter(fits);
+  const weights: Record<string, number> = {};
+  for (const [k, v] of Object.entries(g.weights)) {
+    if (fits(k)) weights[k] = v;
+  }
+
+  let start: [number, number] = [Math.min(g.start[0], R - 1), Math.min(g.start[1], C - 1)];
+  let end: [number, number] = [Math.min(g.end[0], R - 1), Math.min(g.end[1], C - 1)];
+
+  // Endpoints must not sit on a wall (drop the wall instead)
+  const wallSet = new Set(walls);
+  wallSet.delete(start.join(','));
+  wallSet.delete(end.join(','));
+
+  // Endpoints must not coincide — nudge end one cell toward available space
+  if (start[0] === end[0] && start[1] === end[1]) {
+    const nc = Math.min(C - 1, end[1] + 1);
+    end = [end[0], nc];
+    wallSet.delete(end.join(','));
+  }
+
+  return { rows: R, cols: C, walls: [...wallSet], weights, start, end };
+}

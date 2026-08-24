@@ -55,12 +55,19 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     });
   },
 
-  /** Regenerate the trace for edited input while preserving cursor position and playback. */
+  /** Regenerate the trace for edited input while preserving playback position.
+   *  If the previous run had played to the end, stay at the end so the finished
+   *  path remains visible after edits (marker drags, wall paints). */
   patchInput: (input) => {
-    const { algorithm, cursor } = get();
+    const { algorithm, cursor, steps } = get();
     if (!algorithm) return;
-    const steps = collectSteps(algorithm, input);
-    set({ input, steps, cursor: Math.min(cursor, Math.max(0, steps.length - 1)) });
+    const wasComplete = steps.length > 0 && cursor >= steps.length - 1;
+    const nextSteps = collectSteps(algorithm, input);
+    const nextCursor =
+      wasComplete && nextSteps.length > 0
+        ? nextSteps.length - 1
+        : Math.min(cursor, Math.max(0, nextSteps.length - 1));
+    set({ input, steps: nextSteps, cursor: nextCursor });
   },
 
   regenerate: () => {

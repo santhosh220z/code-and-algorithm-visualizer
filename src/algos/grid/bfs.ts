@@ -27,7 +27,8 @@ export function* gridBfs(input: AlgorithmInput): Generator<Step> {
   const parent = new Map<string, string>();
 
   yield makeGridStep([{ row: g.start[0], col: g.start[1], kind: 'frontier' }], 1,
-    `Initialize: queue = [S], seen = {S}`, { queueSize: 1 });
+    `Initialize: queue = [S], seen = {S}. BFS ignores terrain weights — use Dijkstra/A* for cheapest paths`,
+    { queueSize: 1 });
 
   let iter = 0;
   while (queue.length > 0) {
@@ -50,12 +51,12 @@ export function* gridBfs(input: AlgorithmInput): Generator<Step> {
     yield makeGridStep(
       [...visitedHi(seen, queue, u), ...queueHi(queue), { row: ur, col: uc, kind: 'current' }],
       4,
-      `Dequeue ${u} (FIFO). Walkable neighbors: ${neighbors4(g, ur, uc).length}`,
+      `Dequeue ${u} (FIFO). Walkable neighbors: ${neighbors4(g, ur, uc, g.end).length}`,
       { u, queueSize: queue.length },
       [{ label: 'bfs', iteration: iter }]
     );
 
-    for (const [nr, nc] of neighbors4(g, ur, uc)) {
+    for (const [nr, nc] of neighbors4(g, ur, uc, g.end)) {
       const v = key(nr, nc);
       if (!seen.has(v)) {
         seen.add(v);

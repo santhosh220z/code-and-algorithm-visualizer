@@ -1,0 +1,62 @@
+﻿
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mC:/Users/santh/OneDrive/Desktop/projects/code-and-algorithm-visualizer[39m
+
+ [31mΓ¥»[39m src/tests/grid.test.ts [2m([22m[2m17 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 197[2mms[22m[39m
+     [32mΓ£ô[39m registers four grid algorithms[32m 3[2mms[22m[39m
+     [32mΓ£ô[39m grid-bfs: every step references non-blank pseudocode lines[32m 13[2mms[22m[39m
+     [32mΓ£ô[39m grid-bfs: respects walls ΓÇö path never crosses them[32m 2[2mms[22m[39m
+     [32mΓ£ô[39m grid-dfs: every step references non-blank pseudocode lines[32m 7[2mms[22m[39m
+     [32mΓ£ô[39m grid-dfs: respects walls ΓÇö path never crosses them[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m grid-dijkstra: every step references non-blank pseudocode lines[32m 11[2mms[22m[39m
+     [32mΓ£ô[39m grid-dijkstra: respects walls ΓÇö path never crosses them[32m 2[2mms[22m[39m
+     [32mΓ£ô[39m grid-astar: every step references non-blank pseudocode lines[32m 8[2mms[22m[39m
+     [32mΓ£ô[39m grid-astar: respects walls ΓÇö path never crosses them[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m bfs finds the minimal cell count through the only gap[32m 2[2mms[22m[39m
+     [32mΓ£ô[39m dijkstra routes around expensive corridor (cost 6 vs 31)[32m 2[2mms[22m[39m
+     [32mΓ£ô[39m astar matches dijkstra optimal cost on weighted terrain[32m 2[2mms[22m[39m
+     [32mΓ£ô[39m reports no path when the goal is sealed off[32m 1[2mms[22m[39m
+[31m     [31m├ù[31m shrinks: drops out-of-bounds walls/weights and clamps endpoints inside[39m[32m 13[2mms[22m[39m
+     [32mΓ£ô[39m never leaves an endpoint on a wall or lets them coincide[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m growing keeps everything; absurd values clamp to bounds[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m patchInput snaps to the new end when the previous run was completed[32m 123[2mms[22m[39m
+node.exe : 
+At C:\Program Files\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Tests 1 [49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m src/tests/grid.test.ts[2m > [22mcustom grid sizing (resizeGrid)[2m > [22mshrinks: drops 
+out-of-bounds walls/weights and clamps endpoints inside
+[31m[1mAssertionError[22m: expected [] to deeply equal [ '2,18' ][39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- [[39m
+[32m-   "2,18",[39m
+[32m- ][39m
+[31m+ [][39m
+
+[36m [2mΓ¥»[22m src/tests/grid.test.ts:[2m161:36[22m[39m
+    [90m159|[39m     }
+    [90m160|[39m     
+[34mexpect[39m(r[33m.[39mwalls[33m.[39m[34msort[39m())[33m.[39m[34mtoEqual[39m([[32m'1,1'[39m[33m,[39m 
+[32m'4,10'[39m])[33m;[39m
+    [90m161|[39m     [34mexpect[39m([33mObject[39m[33m.[39m[34mkeys[39m(r[33m.[39mweights))[33m.[39m[34m
+toEqual[39m([[32m'2,18'[39m])[33m;[39m
+    [90m   |[39m                                    [31m^[39m
+    [90m162|[39m     [35mfor[39m ([35mconst[39m [r0[33m,[39m c0] [35mof[39m [r[33m.[39mstart[33m,[39m 
+r[33m.[39mend]) {
+    [90m163|[39m       [34mexpect[39m(r0)[33m.[39m[34mtoBeLessThan[39m([34m6[39m)[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/1]ΓÄ»[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m16 passed[39m[22m[90m (17)[39m
+[2m   Start at [22m 22:24:21
+[2m   Duration [22m 862ms[2m (transform 216ms, setup 0ms, import 307ms, tests 197ms, environment 0ms)[22m
+
