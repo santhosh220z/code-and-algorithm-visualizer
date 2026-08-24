@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { Step, AlgorithmDef, AlgorithmInput } from './types';
+import { randomGraph, randomWalls } from './presets';
 
 interface PlayerState {
   algorithm: AlgorithmDef | null;
@@ -12,6 +13,7 @@ interface PlayerState {
   executedLines: Set<number>;
 
   setAlgorithm: (algo: AlgorithmDef, input?: AlgorithmInput) => void;
+  patchInput: (input: AlgorithmInput) => void;
   regenerate: () => void;
   setCursor: (cursor: number) => void;
   stepForward: () => void;
@@ -53,12 +55,24 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     });
   },
 
+  /** Regenerate the trace for edited input while preserving cursor position and playback. */
+  patchInput: (input) => {
+    const { algorithm, cursor } = get();
+    if (!algorithm) return;
+    const steps = collectSteps(algorithm, input);
+    set({ input, steps, cursor: Math.min(cursor, Math.max(0, steps.length - 1)) });
+  },
+
   regenerate: () => {
     const { algorithm, input } = get();
     if (!algorithm) return;
 
-    let nextInput = input;
-    if ('array' in algorithm.defaultInput) {
+    let nextInput: AlgorithmInput = input;
+    if (algorithm.category === 'graph') {
+      nextInput = { graph: randomGraph() };
+    } else if (algorithm.category === 'grid') {
+      nextInput = { grid: randomWalls() };
+    } else if ('array' in algorithm.defaultInput) {
       const size = Array.isArray((input as { array?: number[] }).array)
         ? ((input as { array: number[] }).array.length)
         : ((algorithm.defaultInput.size as number) ?? 12);

@@ -55,6 +55,20 @@ describe('sorting traces', () => {
     });
   }
 
+  it('insertion-sort: never displays duplicated values mid-trace (shift-copy regression)', () => {
+    const algo = getAlgorithm('insertion-sort')!;
+    const input = [7, 3, 9, 1, 5]; // all distinct values
+    let sawSwap = false;
+    for (const step of algo.run({ array: [...input] })) {
+      if (step.viz.type !== 'array') continue;
+      // Shift-based insertion sort briefly duplicates values (A[j+1]=A[j]);
+      // exchange-based never does. Guard against that class of visual bug.
+      expect(new Set(step.viz.array).size).toBe(step.viz.array.length);
+      if (step.viz.highlights.some((h) => h.kind === 'swap')) sawSwap = true;
+    }
+    expect(sawSwap).toBe(true); // sanity: swaps actually occur on this input
+  });
+
   it('bubble sort: every swap step is followed by a correctly swapped array', () => {
     const algo = getAlgorithm('bubble-sort')!;
     let prev: number[] | null = null;

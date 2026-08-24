@@ -4,6 +4,8 @@ import { HomePage } from './pages/HomePage';
 import { CategoryPage } from './pages/CategoryPage';
 import './algos/sorting';
 import './algos/search';
+import './algos/graph';
+import './algos/grid';
 
 function App() {
   return (

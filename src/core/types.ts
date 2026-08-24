@@ -16,14 +16,7 @@ export interface Step {
   viz: VizPayload;
 }
 
-export type VizPayload =
-  | { type: 'array'; array: number[]; highlights: ArrayHighlight[]; pointers: Pointer[] }
-  | { type: 'graph'; nodes: GraphNode[]; edges: GraphEdge[]; highlights: GraphHighlight[] }
-  | { type: 'grid'; grid: GridCell[][]; highlights: GridHighlight[]; path?: [number, number][] }
-  | { type: 'tree'; nodes: TreeNode[]; highlights: TreeHighlight[] }
-  | { type: 'list'; nodes: ListNode[]; highlights: ListHighlight[] }
-  | { type: 'table'; table: TableCell[][]; highlights: TableHighlight[] }
-  | { type: 'none' };
+/* ---------------------------------- Array --------------------------------- */
 
 export interface ArrayHighlight {
   index: number;
@@ -36,38 +29,83 @@ export interface Pointer {
   color?: string;
 }
 
-export interface GraphNode {
+/* ---------------------------------- Graph --------------------------------- */
+
+/** Base graph data — lives in player input, edited by tools, never copied into steps. */
+export interface GraphNodeBase {
   id: string;
+  /** Normalized coordinates in a 0–100 space. */
   x: number;
   y: number;
-  label?: string;
 }
 
-export interface GraphEdge {
+export interface GraphEdgeBase {
   from: string;
   to: string;
-  weight?: number;
-  directed?: boolean;
+  weight: number;
 }
 
-export interface GraphHighlight {
-  nodeId?: string;
-  edgeId?: string;
-  kind: 'visit' | 'frontier' | 'relaxed' | 'path' | 'current';
+export interface GraphInputData {
+  nodes: GraphNodeBase[];
+  edges: GraphEdgeBase[];
+  directed: boolean;
+  weighted: boolean;
+  startId: string;
+  endId: string;
 }
 
-export interface GridCell {
-  row: number;
-  col: number;
-  type: 'empty' | 'wall' | 'start' | 'end' | 'weighted';
-  weight?: number;
+export type NodeHighlightKind = 'current' | 'frontier' | 'visited' | 'path';
+
+export interface GraphNodeHighlight {
+  id: string;
+  kind: NodeHighlightKind;
+  /** Live distance / g-score label rendered under the node. */
+  dist?: number | null;
 }
+
+export type EdgeHighlightKind = 'comparing' | 'relaxed' | 'path';
+
+export interface GraphEdgeHighlight {
+  from: string;
+  to: string;
+  kind: EdgeHighlightKind;
+}
+
+/* ----------------------------------- Grid ---------------------------------- */
+
+export interface GridInputData {
+  rows: number;
+  cols: number;
+  /** "r,c" keys of wall cells. */
+  walls: string[];
+  /** "r,c" -> traversal cost for non-wall cells (default 1). */
+  weights: Record<string, number>;
+  start: [number, number];
+  end: [number, number];
+}
+
+export type GridHighlightKind = 'current' | 'frontier' | 'visited' | 'path';
 
 export interface GridHighlight {
   row: number;
   col: number;
-  kind: 'visit' | 'frontier' | 'path' | 'current' | 'start' | 'end';
+  kind: GridHighlightKind;
+  /** g-score label for Dijkstra/A*. */
+  g?: number;
 }
+
+/* ------------------------------ Step payloads ----------------------------- */
+
+export type VizPayload =
+  | { type: 'array'; array: number[]; highlights: ArrayHighlight[]; pointers: Pointer[] }
+  | { type: 'graph'; highlights: GraphNodeHighlight[]; edgeHighlights: GraphEdgeHighlight[] }
+  | { type: 'grid'; highlights: GridHighlight[] }
+  | { type: 'tree'; nodes: TreeNode[]; highlights: TreeHighlight[] }
+  | { type: 'list'; nodes: ListNode[]; highlights: ListHighlight[] }
+  | { type: 'table'; table: TableCell[][]; highlights: TableHighlight[] }
+  | { type: 'none' };
+
+/* --------------------- Reserved for later milestones ---------------------- */
 
 export interface TreeNode {
   id: string;
@@ -110,6 +148,8 @@ export interface TableHighlight {
   kind: 'compute' | 'read' | 'result' | 'current';
 }
 
+/* -------------------------------- Registry -------------------------------- */
+
 export interface AlgorithmDef {
   id: string;
   name: string;
@@ -133,9 +173,4 @@ export interface LoopScope {
   startLine: number;
   endLine: number;
   depth: number;
-}
-
-export interface ParsedPseudocode {
-  lines: PseudocodeLine[];
-  loops: LoopScope[];
 }

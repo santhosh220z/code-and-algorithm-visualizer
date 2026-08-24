@@ -7,8 +7,11 @@ import { CodePanel } from '../panels/CodePanel';
 import { VarsPanel } from '../panels/VarsPanel';
 import { NarrationBar } from '../panels/NarrationBar';
 import { ArrayViz } from '../viz/ArrayViz';
+import { GraphViz } from '../viz/GraphViz';
+import { GridViz } from '../viz/GridViz';
+import { EditorToolbar } from '../player/EditorToolbar';
 import { usePlayerStore, useCurrentStep } from '../../core/player';
-import type { LoopScope } from '../../core/types';
+import type { AlgorithmCategory, LoopScope } from '../../core/types';
 
 /** Derive loop scopes (for rails) from pseudocode indentation. */
 function parseLoops(pseudocode: { text: string; indent: number; isLoopHeader?: boolean; loopLabel?: string }[]): LoopScope[] {
@@ -40,7 +43,27 @@ export function Layout() {
   );
 
   const onAlgorithmRoute = /\/algo\/[^/]+\/[^/]+$/.test(location.pathname);
-  const hasArrayViz = currentStep?.viz.type === 'array';
+  const currentCategory = location.pathname.split('/')[2] as AlgorithmCategory;
+  const vizType = currentStep?.viz.type;
+
+  const renderViz = () => {
+    if (vizType === 'array' && currentStep?.viz.type === 'array') {
+      return (
+        <ArrayViz
+          array={currentStep.viz.array}
+          highlights={currentStep.viz.highlights}
+          pointers={currentStep.viz.pointers}
+        />
+      );
+    }
+    if (vizType === 'graph') return <GraphViz />;
+    if (vizType === 'grid') return <GridViz />;
+    return (
+      <div className="h-full flex items-center justify-center">
+        <p className="text-sm text-[#4a4d5a] italic">Press Play or → to step through the trace.</p>
+      </div>
+    );
+  };
 
   return (
     <div className="h-full flex bg-[var(--color-bg)]">
@@ -76,19 +99,10 @@ export function Layout() {
             <div className="flex-1 min-h-0 flex">
               {/* Left column */}
               <section className="flex-1 min-w-0 flex flex-col">
-                <div className="flex-1 min-h-0 p-4 pb-1">
-                  {hasArrayViz && currentStep?.viz.type === 'array' ? (
-                    <ArrayViz
-                      array={currentStep.viz.array}
-                      highlights={currentStep.viz.highlights}
-                      pointers={currentStep.viz.pointers}
-                    />
-                  ) : (
-                    <div className="h-full flex items-center justify-center">
-                      <p className="text-sm text-[#4a4d5a] italic">Press Play or → to step through the trace.</p>
-                    </div>
-                  )}
-                </div>
+                {(currentCategory === 'graph' || currentCategory === 'grid') && (
+                  <EditorToolbar category={currentCategory} />
+                )}
+                <div className="flex-1 min-h-0 p-4 pb-1">{renderViz()}</div>
                 <NarrationBar step={currentStep} cursor={cursor} total={steps.length} />
                 <PlayerControls />
               </section>

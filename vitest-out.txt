@@ -1,0 +1,52 @@
+﻿
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mC:/Users/santh/OneDrive/Desktop/projects/code-and-algorithm-visualizer[39m
+
+ [31mΓ¥»[39m src/tests/graph.test.ts [2m([22m[2m13 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 41[2mms[22m[39m
+     [32mΓ£ô[39m graph-bfs: every step references non-blank pseudocode lines[32m 11[2mms[22m[39m
+     [32mΓ£ô[39m graph-bfs: reaches the goal and ends with a highlighted path[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m graph-dfs: every step references non-blank pseudocode lines[32m 2[2mms[22m[39m
+     [32mΓ£ô[39m graph-dfs: reaches the goal and ends with a highlighted path[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m graph-dijkstra: every step references non-blank pseudocode lines[32m 4[2mms[22m[39m
+     [32mΓ£ô[39m graph-dijkstra: reaches the goal and ends with a highlighted path[32m 0[2mms[22m[39m
+     [32mΓ£ô[39m graph-astar: every step references non-blank pseudocode lines[32m 3[2mms[22m[39m
+     [32mΓ£ô[39m graph-astar: reaches the goal and ends with a highlighted path[32m 1[2mms[22m[39m
+[31m     [31m├ù[31m bfs path has minimal hop count[39m[32m 12[2mms[22m[39m
+     [32mΓ£ô[39m dijkstra distances match reference relaxation[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m astar returns the same optimal cost as dijkstra[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m dfs path edges actually exist in the graph[32m 1[2mms[22m[39m
+     [32mΓ£ô[39m directed graphs respect edge direction[32m 0[2mms[22m[39m
+node.exe : 
+At C:\Program Files\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Tests 1 [49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m src/tests/graph.test.ts[2m > [22mgraph algorithms[2m > [22mbfs path has minimal hop count
+[31m[1mAssertionError[22m: expected 4 to be 3 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 3[39m
+[31m+ 4[39m
+
+[36m [2mΓ¥»[22m src/tests/graph.test.ts:[2m107:18[22m[39m
+    [90m105|[39m     [35mconst[39m last [33m=[39m [34mlastStep[39m(steps)[33m;[39m
+    [90m106|[39m     [35mconst[39m hops [33m=[39m [33mNumber[39m(last[33m.[39mvars[33m?.[39mpathLength 
+[33m??[39m [33mNaN[39m)[33m;[39m
+    [90m107|[39m     [34mexpect[39m(hops)[33m.[39m[34mtoBe[39m(expected)[33m;[39m
+    [90m   |[39m                  [31m^[39m
+    [90m108|[39m   })[33m;[39m
+    [90m109|[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/1]ΓÄ»[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m12 passed[39m[22m[90m (13)[39m
+[2m   Start at [22m 21:31:32
+[2m   Duration [22m 679ms[2m (transform 204ms, setup 0ms, import 271ms, tests 41ms, environment 0ms)[22m
+
