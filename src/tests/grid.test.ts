@@ -239,6 +239,28 @@ describe('custom grid sizing (resizeGrid)', () => {
     usePlayerStore.getState().patchInput({ grid: s.input.grid } as never);
     expect(usePlayerStore.getState().cursor).toBe(3);
   });
+
+  it('regenerate (New data) preserves custom grid dimensions', () => {
+    const store = usePlayerStore.getState();
+    const def = getAlgorithm('grid-astar')!;
+    store.setAlgorithm(def);
+
+    // Resize to a custom size, then regenerate obstacles
+    let s = usePlayerStore.getState();
+    const original = s.input.grid as GridInputData;
+    s.patchInput({ grid: resizeGrid(original, 18, 34) } as never);
+
+    usePlayerStore.getState().regenerate();
+    s = usePlayerStore.getState();
+
+    const after = s.input.grid as GridInputData;
+    expect(after.rows).toBe(18); // NOT the 12 default
+    expect(after.cols).toBe(34); // NOT the 20 default
+    expect(Array.isArray(after.walls)).toBe(true);
+    // Trace was rebuilt for the new layout
+    expect(s.steps.length).toBeGreaterThan(0);
+    expect(s.cursor).toBe(0);
+  });
 });
 
 function emptyBase(): GridInputData {

@@ -78,7 +78,11 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     if (algorithm.category === 'graph') {
       nextInput = { graph: randomGraph() };
     } else if (algorithm.category === 'grid') {
-      nextInput = { grid: randomWalls() };
+      // Regenerate obstacles but PRESERVE the user's custom grid dimensions
+      const currentGrid = (input as { grid?: import('./types').GridInputData }).grid;
+      nextInput = {
+        grid: randomWalls(currentGrid?.rows ?? 12, currentGrid?.cols ?? 20),
+      };
     } else if ('array' in algorithm.defaultInput) {
       const size = Array.isArray((input as { array?: number[] }).array)
         ? ((input as { array: number[] }).array.length)

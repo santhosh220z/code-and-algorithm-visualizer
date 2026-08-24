@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useEditorStore } from '../../core/editorStore';
 import { usePlayerStore } from '../../core/player';
 import { resizeGrid } from '../../core/presets';
@@ -31,10 +32,19 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
 
   const grid = (input as { grid?: GridInputData }).grid;
 
-  const applySize = (rows: number, cols: number) => {
-    if (!grid) return;
-    if (!Number.isFinite(rows) || !Number.isFinite(cols)) return;
+  // Draft values: edits stay local until the user commits with OK / Enter.
+  const [draft, setDraft] = useState<{ r: number; c: number } | null>(null);
+  const rows = draft?.r ?? grid?.rows ?? 12;
+  const cols = draft?.c ?? grid?.cols ?? 20;
+  const dirty = !!grid && !!draft && (draft.r !== grid.rows || draft.c !== grid.cols);
+
+  const commitSize = () => {
+    if (!grid || !dirty) {
+      setDraft(null);
+      return;
+    }
     patchInput({ grid: resizeGrid(grid, rows, cols) } as unknown as AlgorithmInput);
+    setDraft(null);
   };
 
   return (
@@ -61,7 +71,7 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
         );
       })}
 
-      {/* Custom grid size */}
+      {/* Custom grid size — draft inputs, applied on OK */}
       {category === 'grid' && grid && (
         <div className="ml-auto flex items-center gap-1.5 shrink-0 pl-3 border-l border-[var(--color-border)]">
           <span className="text-[10px] uppercase tracking-wider text-[#4a4d5a]">Grid</span>
@@ -69,9 +79,10 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
             type="number"
             min={5}
             max={30}
-            value={grid.rows}
-            onChange={(e) => applySize(e.target.valueAsNumber, grid.cols)}
-            className={numInput}
+            value={rows}
+            onChange={(e) => setDraft({ r: e.target.valueAsNumber, c: cols })}
+            onKeyDown={(e) => e.key === 'Enter' && commitSize()}
+            className={`${numInput} ${dirty ? 'border-[var(--color-accent)]' : ''}`}
             aria-label="Grid rows (5–30)"
             title="Rows (5–30)"
           />
@@ -80,12 +91,25 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
             type="number"
             min={8}
             max={50}
-            value={grid.cols}
-            onChange={(e) => applySize(grid.rows, e.target.valueAsNumber)}
-            className={numInput}
+            value={cols}
+            onChange={(e) => setDraft({ r: rows, c: e.target.valueAsNumber })}
+            onKeyDown={(e) => e.key === 'Enter' && commitSize()}
+            className={`${numInput} ${dirty ? 'border-[var(--color-accent)]' : ''}`}
             aria-label="Grid columns (8–50)"
             title="Columns (8–50)"
           />
+          <button
+            onClick={commitSize}
+            disabled={!dirty}
+            title="Apply new grid size"
+            className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold whitespace-nowrap transition-all duration-150 active:scale-95 ${
+              dirty
+                ? 'bg-[var(--color-accent)] text-white shadow-[0_0_10px_rgba(168,85,247,0.35)] hover:bg-[var(--color-accent-hover)]'
+                : 'bg-[#20222f] text-[#4a4d5a] border border-[var(--color-border)] cursor-not-allowed'
+            }`}
+          >
+            OK
+          </button>
         </div>
       )}
     </div>
