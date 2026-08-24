@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import type { AlgorithmDef, Step, GraphInputData } from '../core/types';
 import { getAlgorithm } from '../core/registry';
+import { randomGraph, nextNodeId, nodeIdIndex, nodeIdAt } from '../core/presets';
 import '../algos/graph';
 
 function graphOf(def: AlgorithmDef): GraphInputData {
@@ -166,5 +167,32 @@ describe('graph algorithms', () => {
     // With this truncated directed graph the trace must terminate without crashing;
     // either finds a path within the first 3 edges or reports no path.
     expect(last.description.length).toBeGreaterThan(0);
+  });
+
+  it('regenerated graphs use fresh alphabetical ids starting at A (no counter drift)', () => {
+    for (let k = 0; k < 3; k++) {
+      const g = randomGraph();
+      const idxs = g.nodes.map((n) => nodeIdIndex(n.id));
+      // every id is a letter id and the set is exactly A..(A+K-1) in some layout order
+      expect(idxs.every((i) => i >= 0)).toBe(true);
+      const sorted = [...idxs].sort((a, b) => a - b);
+      expect(sorted).toEqual(Array.from({ length: g.nodes.length }, (_, i) => i));
+    }
+  });
+
+  it('nextNodeId continues the alphabet without collisions', () => {
+    expect(nextNodeId(['A', 'B', 'D'])).toBe('E'); // max+1 semantics
+    expect(nextNodeId(['A', 'I'])).toBe('J');
+    expect(nextNodeId([])).toBe('A');
+    expect(nextNodeId(['n1', 'n5'])).toBe('A'); // legacy numeric ids ignored
+    const sampleIds = (getAlgorithm('graph-bfs')!.defaultInput.graph as GraphInputData)
+      .nodes.map((n) => n.id);
+    const candidate = nextNodeId(sampleIds);
+    expect(sampleIds.includes(candidate)).toBe(false);
+    expect(candidate).toBe('J'); // sample ends at I
+
+    // wrap past Z stays collision-free
+    const allLetters = Array.from({ length: 26 }, (_, i) => nodeIdAt(i));
+    expect(nextNodeId(allLetters)).toBe('AA');
   });
 });

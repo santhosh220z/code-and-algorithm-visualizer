@@ -7,3 +7,11 @@
 
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
 [2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m9:57:20 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/viz/GraphViz.tsx, /src/components/layout/Layout.tsx, /src/pages/AlgorithmLoader.tsx, /src/components/viz/GridViz.tsx, /src/components/player/PlayerControls.tsx, /src/App.tsx[22m
+[2m9:57:43 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/viz/GraphViz.tsx[22m
+[2m9:57:59 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/layout/Layout.tsx, /src/pages/AlgorithmLoader.tsx, /src/components/viz/GraphViz.tsx, /src/components/viz/GridViz.tsx, /src/components/player/PlayerControls.tsx[22m
+[2m9:58:16 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m9:58:26 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m10:02:10 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/viz/GraphViz.tsx, /src/components/layout/Layout.tsx, /src/pages/AlgorithmLoader.tsx, /src/components/viz/GridViz.tsx, /src/components/player/PlayerControls.tsx, /src/App.tsx[22m
+[2m10:03:07 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m10:03:26 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m

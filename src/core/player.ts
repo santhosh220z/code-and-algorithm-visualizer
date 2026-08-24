@@ -76,7 +76,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       const size = Array.isArray((input as { array?: number[] }).array)
         ? ((input as { array: number[] }).array.length)
         : ((algorithm.defaultInput.size as number) ?? 12);
-      nextInput = { ...input, array: generateRandomArray(size, 99) };
+      const fresh = generateRandomArray(size, 99);
+      nextInput = { ...input, array: fresh };
+      // For searching algorithms pick a target that actually exists in the new data
+      if (algorithm.category === 'search' && fresh.length > 0) {
+        nextInput = { ...nextInput, target: fresh[Math.floor(Math.random() * fresh.length)] };
+      }
     }
 
     const steps = collectSteps(algorithm, nextInput);

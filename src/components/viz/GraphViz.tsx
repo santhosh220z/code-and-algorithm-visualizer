@@ -137,7 +137,7 @@ export function GraphViz() {
     const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(svg.getScreenCTM()!.inverse());
     const x = Math.max(5, Math.min(95, pt.x));
     const y = Math.max(5, Math.min(95, pt.y));
-    update((g) => g.nodes.push({ id: nextNodeId(), x, y }));
+    update((g) => g.nodes.push({ id: nextNodeId(g.nodes.map((n) => n.id)), x, y }));
   };
 
   const edgeClick = (e: React.MouseEvent, edge: GraphEdgeBase) => {

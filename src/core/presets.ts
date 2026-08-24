@@ -35,12 +35,47 @@ export const SAMPLE_GRAPH: GraphInputData = {
   endId: 'I',
 };
 
-let nodeCounter = 0;
-export function nextNodeId(): string {
-  return `n${++nodeCounter}`;
+/** Spreadsheet-style letter id: 0→A, 1→B … 25→Z, 26→AA … */
+export function nodeIdAt(index: number): string {
+  let n = index;
+  let s = '';
+  do {
+    s = String.fromCharCode(65 + (n % 26)) + s;
+    n = Math.floor(n / 26) - 1;
+  } while (n >= 0);
+  return s;
 }
 
-/** Random connected undirected graph: scattered points + spanning tree + extra links. */
+/** Inverse of nodeIdAt: A→0, Z→25, AA→26 … Non-letter ids yield -1. */
+export function nodeIdIndex(id: string): number {
+  if (!/^[A-Za-z]+$/.test(id)) return -1;
+  let idx = 0;
+  for (const ch of id.toUpperCase()) {
+    idx = idx * 26 + (ch.charCodeAt(0) - 64);
+  }
+  return idx - 1;
+}
+
+/**
+ * Collision-free id for a new interactive node, continuing the alphabetical
+ * standard: one past the highest existing letter id (A..Z, AA..).
+ */
+export function nextNodeId(existingIds: string[]): string {
+  const taken = new Set(existingIds.map((id) => id.toUpperCase()));
+  let maxIdx = -1;
+  for (const id of taken) {
+    maxIdx = Math.max(maxIdx, nodeIdIndex(id));
+  }
+  let idx = maxIdx + 1;
+  let candidate = nodeIdAt(idx);
+  while (taken.has(candidate)) {
+    candidate = nodeIdAt(++idx);
+  }
+  return candidate;
+}
+
+/** Random connected undirected graph: scattered points + spanning tree + extra links.
+ *  Node ids follow the alphabetical standard (A, B, C …), fresh per generation. */
 export function randomGraph(nodeCount = 9, extraEdgeRatio = 0.35): GraphInputData {
   const nodes: GraphNodeBase[] = [];
   const minDist = 18;
@@ -49,7 +84,7 @@ export function randomGraph(nodeCount = 9, extraEdgeRatio = 0.35): GraphInputDat
     const x = 10 + Math.random() * 80;
     const y = 10 + Math.random() * 80;
     if (nodes.every((n) => Math.hypot(n.x - x, n.y - y) >= minDist)) {
-      nodes.push({ id: nextNodeId(), x, y });
+      nodes.push({ id: nodeIdAt(nodes.length), x, y });
     }
   }
   if (nodes.length < 2) return structuredClone(SAMPLE_GRAPH);
