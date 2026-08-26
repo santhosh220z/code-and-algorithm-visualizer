@@ -84,6 +84,11 @@ export interface GridInputData {
   end: [number, number];
 }
 
+export interface DPInputData {
+  dpTableInfo?: DPTableInfo;
+  [key: string]: unknown;
+}
+
 export type GridHighlightKind = 'current' | 'frontier' | 'visited' | 'path';
 
 export interface GridHighlight {
@@ -150,6 +155,17 @@ export interface TableHighlight {
 
 /* -------------------------------- Registry -------------------------------- */
 
+export interface AlgorithmOp {
+  id: string;
+  label: string;
+  needsValue?: boolean;
+}
+
+export interface DPTableInfo {
+  rowLabels?: string[];
+  colLabels?: string[];
+}
+
 export interface AlgorithmDef {
   id: string;
   name: string;
@@ -159,6 +175,8 @@ export interface AlgorithmDef {
   complexity: { time: string; space: string };
   defaultInput: AlgorithmInput;
   run: (input: AlgorithmInput) => Generator<Step>;
+  ops?: AlgorithmOp[];
+  dpTableInfo?: DPTableInfo;
 }
 
 export interface PseudocodeLine {
