@@ -9,6 +9,10 @@ import { NarrationBar } from '../panels/NarrationBar';
 import { ArrayViz } from '../viz/ArrayViz';
 import { GraphViz } from '../viz/GraphViz';
 import { GridViz } from '../viz/GridViz';
+import { TreeViz } from '../viz/TreeViz';
+import { ListViz } from '../viz/ListViz';
+import { TableViz } from '../viz/TableViz';
+import { HanoiViz } from '../viz/HanoiViz';
 import { EditorToolbar } from '../player/EditorToolbar';
 import { usePlayerStore, useCurrentStep } from '../../core/player';
 import type { AlgorithmCategory, LoopScope } from '../../core/types';
@@ -58,6 +62,18 @@ export function Layout() {
     }
     if (vizType === 'graph') return <GraphViz />;
     if (vizType === 'grid') return <GridViz />;
+    if (vizType === 'tree' && currentStep?.viz.type === 'tree') {
+      return <TreeViz nodes={currentStep.viz.nodes} highlights={currentStep.viz.highlights} />;
+    }
+    if (vizType === 'list' && currentStep?.viz.type === 'list') {
+      return <ListViz nodes={currentStep.viz.nodes} highlights={currentStep.viz.highlights} />;
+    }
+    if (vizType === 'table' && currentStep?.viz.type === 'table') {
+      return <TableViz table={currentStep.viz.table} highlights={currentStep.viz.highlights} />;
+    }
+    if (vizType === 'hanoi' && currentStep?.viz.type === 'hanoi') {
+      return <HanoiViz pegs={currentStep.viz.pegs} highlights={currentStep.viz.highlights} />;
+    }
     return (
       <div className="h-full flex items-center justify-center">
         <p className="text-sm text-[#4a4d5a] italic">Press Play or → to step through the trace.</p>

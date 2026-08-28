@@ -1,14 +1,14 @@
 {
   "0": "AlgorithmDef",
   "1": "Layout.tsx",
-  "2": "ds/helpers.ts",
+  "2": "types.ts",
   "3": "grid/bfs.ts",
   "4": "graph/bfs.ts",
   "5": "devDependencies",
   "6": "compilerOptions",
   "7": "registry.ts",
   "8": "compilerOptions",
-  "9": ".oxlintrc.json",
+  "9": "plugins",
   "10": "AGENTS.md",
   "11": "graphify.js",
   "12": "tsconfig.json",
@@ -16,6 +16,6 @@
   "14": "opencode.json",
   "15": "React + TypeScript + Vite",
   "16": "knapsack.ts",
-  "17": "types.ts",
+  "17": "permutations.ts",
   "18": "Step"
 }

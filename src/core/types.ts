@@ -108,6 +108,7 @@ export type VizPayload =
   | { type: 'tree'; nodes: TreeNode[]; highlights: TreeHighlight[] }
   | { type: 'list'; nodes: ListNode[]; highlights: ListHighlight[] }
   | { type: 'table'; table: TableCell[][]; highlights: TableHighlight[] }
+  | { type: 'hanoi'; pegs: HanoiPegs; highlights: HanoiHighlight[]; moving: HanoiMovingDisk | null }
   | { type: 'none' };
 
 /* --------------------- Reserved for later milestones ---------------------- */
@@ -151,6 +152,22 @@ export interface TableHighlight {
   row: number;
   col: number;
   kind: 'compute' | 'read' | 'result' | 'current';
+}
+
+/** Disks per peg, ordered from bottom (index 0) to top. */
+export type HanoiPegs = Record<'A' | 'B' | 'C', number[]>;
+
+export interface HanoiHighlight {
+  peg: 'A' | 'B' | 'C';
+  disk: number;
+  kind: 'moving' | 'settled';
+}
+
+/** An in-flight disk lifted above the pegs while it travels. Coordinates are SVG units. */
+export interface HanoiMovingDisk {
+  disk: number;
+  x: number;
+  y: number;
 }
 
 /* -------------------------------- Registry -------------------------------- */

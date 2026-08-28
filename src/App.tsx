@@ -6,6 +6,9 @@ import './algos/sorting';
 import './algos/search';
 import './algos/graph';
 import './algos/grid';
+import './algos/ds';
+import './algos/dp';
+import './algos/recursion';
 
 function App() {
   return (

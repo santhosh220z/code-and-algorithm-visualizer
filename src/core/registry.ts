@@ -33,6 +33,7 @@ export const categories: CategoryInfo[] = [
   { id: 'grid', name: 'Pathfinding', icon: 'grid', description: 'Navigate grids around obstacles (coming soon)' },
   { id: 'ds', name: 'Data Structures', icon: 'tree', description: 'Lists, trees, stacks and queues (coming soon)' },
   { id: 'dp', name: 'Dynamic Programming', icon: 'table', description: 'Build up optimal solutions (coming soon)' },
+  { id: 'recursion', name: 'Recursion', icon: 'recurse', description: 'Functions that call themselves' },
 ];
 
 export const CATEGORY_NAMES: Record<AlgorithmCategory, string> = {
