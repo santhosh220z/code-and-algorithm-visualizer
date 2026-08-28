@@ -1,7 +1,7 @@
 import type { AlgorithmDef, AlgorithmInput, Step, HanoiPegs, HanoiHighlight, HanoiMovingDisk } from '../../core/types';
 import { registerAlgorithm } from '../../core/registry';
 import { frame } from './helpers';
-import { HANOI_MOTION_FRAMES, HANOI_PEG_X, hanoiInterpolate, hanoiRestY } from './hanoiGeometry';
+import { HANOI_PEG_X, hanoiHoverY } from './hanoiGeometry';
 
 const pseudocode = [
   { text: 'procedure hanoi(n, from, to, aux)', indent: 0 },
@@ -28,11 +28,18 @@ export function* hanoi(input: AlgorithmInput): Generator<Step> {
   let moveCount = 0;
   let lastMoved: { peg: Peg; disk: number } | null = null;
 
+  /** Snapshot the current peg state so each emitted step is independent. */
+  const snapshot = (): HanoiPegs => ({
+    A: [...pegs.A],
+    B: [...pegs.B],
+    C: [...pegs.C],
+  });
+
   const render = (
     line: number,
     description: string,
     vars: Record<string, unknown>,
-    pegsOverride: HanoiPegs = pegs,
+    pegsSnapshot: HanoiPegs = snapshot(),
     moving: HanoiMovingDisk | null = null
   ): Step => {
     const highlights: HanoiHighlight[] = [];
@@ -45,14 +52,8 @@ export function* hanoi(input: AlgorithmInput): Generator<Step> {
       vars,
       loops: [],
       stack: [...stack],
-      viz: { type: 'hanoi', pegs: pegsOverride, highlights, moving },
+      viz: { type: 'hanoi', pegs: pegsSnapshot, highlights, moving },
     };
-  };
-
-  const withoutTop = (peg: Peg): HanoiPegs => {
-    const next: HanoiPegs = { A: [...pegs.A], B: [...pegs.B], C: [...pegs.C] };
-    next[peg].pop();
-    return next;
   };
 
   const moveDisk = (from: string, to: string): void => {
@@ -62,29 +63,33 @@ export function* hanoi(input: AlgorithmInput): Generator<Step> {
     lastMoved = { peg: to as Peg, disk };
   };
 
-  /** Emit a series of frames animating `disk` travelling from `from` to `to`. */
-  const animateMove = function* (
+  /** Pick a disk off its peg (hover above source), then place it on the target. */
+  const placeDisk = function* (
     disk: number,
     from: string,
     to: string
   ): Generator<Step> {
     const frm = from as Peg;
-    const dst = to as Peg;
-    const fromX = HANOI_PEG_X[frm];
-    const fromY = hanoiRestY(pegs[frm].length - 1);
-    const toX = HANOI_PEG_X[dst];
-    const toY = hanoiRestY(pegs[dst].length);
+    const motionLine = disk === 1 ? 2 : 5;
+    const picked: HanoiPegs = snapshot();
+    picked[frm].pop();
+    const hover: HanoiMovingDisk = {
+      disk,
+      x: HANOI_PEG_X[frm],
+      y: hanoiHoverY(),
+    };
     const vars = { disk, from, to, move: moveCount + 1 };
 
-    yield render(3, `Lift disk ${disk} off peg ${from}`, vars, withoutTop(frm), { disk, x: fromX, y: fromY });
-    for (let i = 1; i <= HANOI_MOTION_FRAMES; i++) {
-      const t = i / HANOI_MOTION_FRAMES;
-      const { x, y } = hanoiInterpolate(fromX, fromY, toX, toY, t);
-      yield render(3, `Move disk ${disk}: ${from} → ${to}`, { ...vars, phase: i }, withoutTop(frm), { disk, x, y });
-    }
+    yield render(
+      motionLine,
+      `Lift disk ${disk} off peg ${from}`,
+      vars,
+      picked,
+      hover
+    );
     moveDisk(from, to);
     yield render(
-      3,
+      motionLine,
       `Set disk ${disk} onto peg ${to} — move ${moveCount}`,
       { disk, from, to, move: moveCount }
     );
@@ -98,7 +103,7 @@ export function* hanoi(input: AlgorithmInput): Generator<Step> {
   ): Generator<Step> {
     stack.push(frame('hanoi', { n: disk, from, to, aux }));
     if (disk === 1) {
-      yield* animateMove(disk, from, to);
+      yield* placeDisk(disk, from, to);
       yield render(
         2,
         `Disk 1 moved to ${to} — move ${moveCount}`,
@@ -112,7 +117,7 @@ export function* hanoi(input: AlgorithmInput): Generator<Step> {
       );
       yield* recursiveHanoi(disk - 1, from, aux, to);
 
-      yield* animateMove(disk, from, to);
+      yield* placeDisk(disk, from, to);
       yield render(
         5,
         `Disk ${disk} moved to ${to} — move ${moveCount}`,

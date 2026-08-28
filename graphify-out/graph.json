@@ -85,7 +85,7 @@
       "label": "AlgorithmDef",
       "file_type": "code",
       "source_file": "src/core/types.ts",
-      "source_location": "L179",
+      "source_location": "L186",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -186,19 +186,6 @@
       "norm_label": "gridinputdata"
     },
     {
-      "label": "LoopScope",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L199",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_loopscope",
-      "community": 1,
-      "community_name": "Layout.tsx",
-      "norm_label": "loopscope"
-    },
-    {
       "label": "LoopInfo",
       "file_type": "code",
       "source_file": "src/algos/dp/helpers.ts",
@@ -208,268 +195,8 @@
       "_origin": "ast",
       "id": "src_algos_dp_helpers_loopinfo",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "loopinfo"
-    },
-    {
-      "label": "TableCell",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L144",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_tablecell",
-      "community": 16,
-      "community_name": "knapsack.ts",
-      "norm_label": "tablecell"
-    },
-    {
-      "label": "TableHighlight",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L151",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_tablehighlight",
-      "community": 16,
-      "community_name": "knapsack.ts",
-      "norm_label": "tablehighlight"
-    },
-    {
-      "label": "LoopInfo",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L3",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_loopinfo",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "loopinfo"
-    },
-    {
-      "label": "StackFrame",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_stackframe",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "stackframe"
-    },
-    {
-      "label": "ArrayVizProps",
-      "file_type": "code",
-      "source_file": "src/components/viz/ArrayViz.tsx",
-      "source_location": "L3",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_components_viz_arrayviz_arrayvizprops",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "arrayvizprops"
-    },
-    {
-      "label": "AlgorithmOp",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L168",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_algorithmop",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "algorithmop"
-    },
-    {
-      "label": "ArrayHighlight",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L21",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_arrayhighlight",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "arrayhighlight"
-    },
-    {
-      "label": "DPInputData",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L87",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_dpinputdata",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "dpinputdata"
-    },
-    {
-      "label": "DPTableInfo",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L174",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_dptableinfo",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "dptableinfo"
-    },
-    {
-      "label": "EdgeHighlightKind",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L66",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_edgehighlightkind",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "edgehighlightkind"
-    },
-    {
-      "label": "GridHighlightKind",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L92",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_gridhighlightkind",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "gridhighlightkind"
-    },
-    {
-      "label": "HanoiHighlight",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L160",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_hanoihighlight",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "hanoihighlight"
-    },
-    {
-      "label": "HanoiPegs",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L158",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_hanoipegs",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "hanoipegs"
-    },
-    {
-      "label": "ListHighlight",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L139",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_listhighlight",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "listhighlight"
-    },
-    {
-      "label": "ListNode",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L131",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_listnode",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "listnode"
-    },
-    {
-      "label": "NodeHighlightKind",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L57",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_nodehighlightkind",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "nodehighlightkind"
-    },
-    {
-      "label": "Pointer",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L26",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_pointer",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "pointer"
-    },
-    {
-      "label": "TreeHighlight",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L126",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_treehighlight",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "treehighlight"
-    },
-    {
-      "label": "TreeNode",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L116",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_treenode",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "treenode"
-    },
-    {
-      "label": "VizPayload",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L104",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_vizpayload",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "vizpayload"
     },
     {
       "label": "CodePanelProps",
@@ -480,7 +207,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_components_panels_codepanel_codepanelprops",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "codepanelprops"
     },
@@ -493,7 +220,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_components_panels_codepanel_loopscope",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "loopscope"
     },
@@ -506,7 +233,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_components_panels_narrationbar_narrationbarprops",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "narrationbarprops"
     },
@@ -519,7 +246,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_components_panels_varspanel_varspanelprops",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "varspanelprops"
     },
@@ -527,12 +254,12 @@
       "label": "PseudocodeLine",
       "file_type": "code",
       "source_file": "src/core/types.ts",
-      "source_location": "L192",
+      "source_location": "L199",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_core_types_pseudocodeline",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "pseudocodeline"
     },
@@ -545,9 +272,100 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_core_types_step",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "step"
+    },
+    {
+      "label": "TableCell",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L144",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_tablecell",
+      "community": 16,
+      "community_name": "Step",
+      "norm_label": "tablecell"
+    },
+    {
+      "label": "Peg",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L18",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoi_peg",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "peg"
+    },
+    {
+      "label": "LoopInfo",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_loopinfo",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "loopinfo"
+    },
+    {
+      "label": "StackFrame",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_stackframe",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "stackframe"
+    },
+    {
+      "label": "HanoiHighlight",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L160",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_hanoihighlight",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoihighlight"
+    },
+    {
+      "label": "HanoiMovingDisk",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L167",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_hanoimovingdisk",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoimovingdisk"
+    },
+    {
+      "label": "HanoiPegs",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L158",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_hanoipegs",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoipegs"
     },
     {
       "label": "BSTNode",
@@ -559,7 +377,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst_bstnode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "bstnode"
     },
     {
@@ -572,7 +390,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst_positionedbstnode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "positionedbstnode"
     },
     {
@@ -585,7 +403,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_loopinfo",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "loopinfo"
     },
     {
@@ -598,8 +416,216 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_stackframe",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "stackframe"
+    },
+    {
+      "label": "ArrayVizProps",
+      "file_type": "code",
+      "source_file": "src/components/viz/ArrayViz.tsx",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_components_viz_arrayviz_arrayvizprops",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "arrayvizprops"
+    },
+    {
+      "label": "AlgorithmOp",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L175",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_algorithmop",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "algorithmop"
+    },
+    {
+      "label": "ArrayHighlight",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L21",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_arrayhighlight",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "arrayhighlight"
+    },
+    {
+      "label": "DPInputData",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L87",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_dpinputdata",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "dpinputdata"
+    },
+    {
+      "label": "DPTableInfo",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L181",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_dptableinfo",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "dptableinfo"
+    },
+    {
+      "label": "EdgeHighlightKind",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L66",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_edgehighlightkind",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "edgehighlightkind"
+    },
+    {
+      "label": "GridHighlightKind",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L92",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_gridhighlightkind",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "gridhighlightkind"
+    },
+    {
+      "label": "ListHighlight",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L139",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_listhighlight",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "listhighlight"
+    },
+    {
+      "label": "ListNode",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L131",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_listnode",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "listnode"
+    },
+    {
+      "label": "LoopScope",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L206",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_loopscope",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "loopscope"
+    },
+    {
+      "label": "NodeHighlightKind",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L57",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_nodehighlightkind",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "nodehighlightkind"
+    },
+    {
+      "label": "Pointer",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L26",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_pointer",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "pointer"
+    },
+    {
+      "label": "TableHighlight",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L151",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_tablehighlight",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "tablehighlight"
+    },
+    {
+      "label": "TreeHighlight",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L126",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_treehighlight",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "treehighlight"
+    },
+    {
+      "label": "TreeNode",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L116",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_treenode",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "treenode"
+    },
+    {
+      "label": "VizPayload",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L104",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_vizpayload",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "vizpayload"
     },
     {
       "label": "LoopInfo",
@@ -991,18 +1017,6 @@
       "community": 1,
       "community_name": "Layout.tsx",
       "norm_label": "parseloops()"
-    },
-    {
-      "label": "NarrationBar()",
-      "file_type": "code",
-      "source_file": "src/components/panels/NarrationBar.tsx",
-      "source_location": "L9",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_panels_narrationbar_narrationbar",
-      "community": 1,
-      "community_name": "Layout.tsx",
-      "norm_label": "narrationbar()"
     },
     {
       "label": "EditorToolbar()",
@@ -1409,7 +1423,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_fibonacci_fibonacci",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "fibonacci()"
     },
     {
@@ -1421,7 +1435,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_helpers_maketablestep",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "maketablestep()"
     },
     {
@@ -1433,7 +1447,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_helpers_tablecell",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "tablecell()"
     },
     {
@@ -1445,7 +1459,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_helpers_tablecompute",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "tablecompute()"
     },
     {
@@ -1457,7 +1471,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_helpers_tableread",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "tableread()"
     },
     {
@@ -1469,7 +1483,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_helpers_tableresult",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "tableresult()"
     },
     {
@@ -1481,7 +1495,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_knapsack_knapsack",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "knapsack()"
     },
     {
@@ -1493,224 +1507,8 @@
       "_origin": "ast",
       "id": "src_algos_dp_lcs_lcs",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "lcs()"
-    },
-    {
-      "label": "TableViz()",
-      "file_type": "code",
-      "source_file": "src/components/viz/TableViz.tsx",
-      "source_location": "L21",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_viz_tableviz_tableviz",
-      "community": 16,
-      "community_name": "knapsack.ts",
-      "norm_label": "tableviz()"
-    },
-    {
-      "label": "factorialAlgo()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/factorial.ts",
-      "source_location": "L14",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_factorial_factorialalgo",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "factorialalgo()"
-    },
-    {
-      "label": "hanoi()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L17",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_hanoi_hanoi",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "hanoi()"
-    },
-    {
-      "label": "frame()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L45",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_frame",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "frame()"
-    },
-    {
-      "label": "highlightCompare()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L29",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_highlightcompare",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "highlightcompare()"
-    },
-    {
-      "label": "highlightCurrent()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L25",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_highlightcurrent",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "highlightcurrent()"
-    },
-    {
-      "label": "highlightSorted()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L37",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_highlightsorted",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "highlightsorted()"
-    },
-    {
-      "label": "highlightSwap()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L33",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_highlightswap",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "highlightswap()"
-    },
-    {
-      "label": "makeArrayStep()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L12",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_makearraystep",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "makearraystep()"
-    },
-    {
-      "label": "makePointer()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L41",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers_makepointer",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "makepointer()"
-    },
-    {
-      "label": "fact()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/permutations.ts",
-      "source_location": "L106",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_permutations_fact",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "fact()"
-    },
-    {
-      "label": "permutations()",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/permutations.ts",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_recursion_permutations_permutations",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "permutations()"
-    },
-    {
-      "label": "ArrayViz()",
-      "file_type": "code",
-      "source_file": "src/components/viz/ArrayViz.tsx",
-      "source_location": "L21",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_viz_arrayviz_arrayviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "arrayviz()"
-    },
-    {
-      "label": "HanoiViz()",
-      "file_type": "code",
-      "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L26",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_viz_hanoiviz_hanoiviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "hanoiviz()"
-    },
-    {
-      "label": "ListViz()",
-      "file_type": "code",
-      "source_file": "src/components/viz/ListViz.tsx",
-      "source_location": "L24",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_viz_listviz_listviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "listviz()"
-    },
-    {
-      "label": "TreeViz()",
-      "file_type": "code",
-      "source_file": "src/components/viz/TreeViz.tsx",
-      "source_location": "L25",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_viz_treeviz_treeviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "treeviz()"
-    },
-    {
-      "label": "collect()",
-      "file_type": "code",
-      "source_file": "src/tests/recursion.test.ts",
-      "source_location": "L6",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_recursion_test_collect",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "collect()"
-    },
-    {
-      "label": "lastStep()",
-      "file_type": "code",
-      "source_file": "src/tests/recursion.test.ts",
-      "source_location": "L10",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_recursion_test_laststep",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "laststep()"
     },
     {
       "label": "CodePanel()",
@@ -1720,7 +1518,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_panels_codepanel_codepanel",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "codepanel()"
     },
@@ -1732,9 +1530,21 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_panels_codepanel_formatvalue",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "formatvalue()"
+    },
+    {
+      "label": "NarrationBar()",
+      "file_type": "code",
+      "source_file": "src/components/panels/NarrationBar.tsx",
+      "source_location": "L9",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_panels_narrationbar_narrationbar",
+      "community": 16,
+      "community_name": "Step",
+      "norm_label": "narrationbar()"
     },
     {
       "label": "formatValue()",
@@ -1744,7 +1554,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_panels_varspanel_formatvalue",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "formatvalue()"
     },
@@ -1756,7 +1566,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_panels_varspanel_varspanel",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "varspanel()"
     },
@@ -1768,7 +1578,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_dp_test_collect",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "collect()"
     },
@@ -1780,33 +1590,189 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_dp_test_laststep",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "laststep()"
     },
     {
-      "label": "collect()",
+      "label": "factorialAlgo()",
       "file_type": "code",
-      "source_file": "src/tests/ds.test.ts",
-      "source_location": "L6",
+      "source_file": "src/algos/recursion/factorial.ts",
+      "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_tests_ds_test_collect",
-      "community": 18,
-      "community_name": "Step",
-      "norm_label": "collect()"
+      "id": "src_algos_recursion_factorial_factorialalgo",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "factorialalgo()"
     },
     {
-      "label": "lastStep()",
+      "label": "hanoi()",
       "file_type": "code",
-      "source_file": "src/tests/ds.test.ts",
-      "source_location": "L10",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L20",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_tests_ds_test_laststep",
-      "community": 18,
-      "community_name": "Step",
-      "norm_label": "laststep()"
+      "id": "src_algos_recursion_hanoi_hanoi",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoi()"
+    },
+    {
+      "label": "hanoiDiskWidth()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoidiskwidth",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoidiskwidth()"
+    },
+    {
+      "label": "hanoiHoverY()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoihovery",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoihovery()"
+    },
+    {
+      "label": "hanoiRestY()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoiresty",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoiresty()"
+    },
+    {
+      "label": "frame()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L45",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_frame",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "frame()"
+    },
+    {
+      "label": "highlightCompare()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L29",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_highlightcompare",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "highlightcompare()"
+    },
+    {
+      "label": "highlightCurrent()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_highlightcurrent",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "highlightcurrent()"
+    },
+    {
+      "label": "highlightSorted()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_highlightsorted",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "highlightsorted()"
+    },
+    {
+      "label": "highlightSwap()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L33",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_highlightswap",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "highlightswap()"
+    },
+    {
+      "label": "makeArrayStep()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_makearraystep",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "makearraystep()"
+    },
+    {
+      "label": "makePointer()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L41",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers_makepointer",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "makepointer()"
+    },
+    {
+      "label": "fact()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/permutations.ts",
+      "source_location": "L106",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_permutations_fact",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "fact()"
+    },
+    {
+      "label": "permutations()",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/permutations.ts",
+      "source_location": "L19",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_recursion_permutations_permutations",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "permutations()"
+    },
+    {
+      "label": "HanoiViz()",
+      "file_type": "code",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_viz_hanoiviz_hanoiviz",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoiviz()"
     },
     {
       "label": "bstSearch()",
@@ -1817,7 +1783,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst_bstsearch",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "bstsearch()"
     },
     {
@@ -1829,7 +1795,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst_buildbst",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "buildbst()"
     },
     {
@@ -1841,7 +1807,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_hash_hashtable",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "hashtable()"
     },
     {
@@ -1853,7 +1819,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_hash_simplehash",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "simplehash()"
     },
     {
@@ -1865,7 +1831,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_listnode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "listnode()"
     },
     {
@@ -1877,7 +1843,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_makelistnodes",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "makelistnodes()"
     },
     {
@@ -1889,7 +1855,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_makeliststep",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "makeliststep()"
     },
     {
@@ -1901,7 +1867,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_maketablestep",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "maketablestep()"
     },
     {
@@ -1913,7 +1879,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_maketreestep",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "maketreestep()"
     },
     {
@@ -1925,7 +1891,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_tablecell",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "tablecell()"
     },
     {
@@ -1937,7 +1903,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_tablecompute",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "tablecompute()"
     },
     {
@@ -1949,7 +1915,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_tableread",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "tableread()"
     },
     {
@@ -1961,7 +1927,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_tableresult",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "tableresult()"
     },
     {
@@ -1973,7 +1939,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers_treenode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "treenode()"
     },
     {
@@ -1985,7 +1951,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_queue_queuedemo",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "queuedemo()"
     },
     {
@@ -1997,8 +1963,56 @@
       "_origin": "ast",
       "id": "src_algos_ds_stack_stackdemo",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "stackdemo()"
+    },
+    {
+      "label": "ArrayViz()",
+      "file_type": "code",
+      "source_file": "src/components/viz/ArrayViz.tsx",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_viz_arrayviz_arrayviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "arrayviz()"
+    },
+    {
+      "label": "ListViz()",
+      "file_type": "code",
+      "source_file": "src/components/viz/ListViz.tsx",
+      "source_location": "L24",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_viz_listviz_listviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "listviz()"
+    },
+    {
+      "label": "TableViz()",
+      "file_type": "code",
+      "source_file": "src/components/viz/TableViz.tsx",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_viz_tableviz_tableviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "tableviz()"
+    },
+    {
+      "label": "TreeViz()",
+      "file_type": "code",
+      "source_file": "src/components/viz/TreeViz.tsx",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_viz_treeviz_treeviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "treeviz()"
     },
     {
       "label": "closedHi()",
@@ -2493,6 +2507,54 @@
       "norm_label": "homepage()"
     },
     {
+      "label": "collect()",
+      "file_type": "code",
+      "source_file": "src/tests/ds.test.ts",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_ds_test_collect",
+      "community": 7,
+      "community_name": "registry.ts",
+      "norm_label": "collect()"
+    },
+    {
+      "label": "lastStep()",
+      "file_type": "code",
+      "source_file": "src/tests/ds.test.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_ds_test_laststep",
+      "community": 7,
+      "community_name": "registry.ts",
+      "norm_label": "laststep()"
+    },
+    {
+      "label": "collect()",
+      "file_type": "code",
+      "source_file": "src/tests/recursion.test.ts",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_recursion_test_collect",
+      "community": 7,
+      "community_name": "registry.ts",
+      "norm_label": "collect()"
+    },
+    {
+      "label": "lastStep()",
+      "file_type": "code",
+      "source_file": "src/tests/recursion.test.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_recursion_test_laststep",
+      "community": 7,
+      "community_name": "registry.ts",
+      "norm_label": "laststep()"
+    },
+    {
       "label": "binarySearch.ts",
       "file_type": "code",
       "source_file": "src/algos/search/binarySearch.ts",
@@ -2823,17 +2885,6 @@
       "norm_label": "selectionsortdef"
     },
     {
-      "label": "plugins",
-      "file_type": "code",
-      "source_file": ".oxlintrc.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "oxlintrc_plugins",
-      "community": 1,
-      "community_name": "Layout.tsx",
-      "norm_label": "plugins"
-    },
-    {
       "label": "Layout.tsx",
       "file_type": "code",
       "source_file": "src/components/layout/Layout.tsx",
@@ -3076,17 +3127,6 @@
       "norm_label": "grid.test.ts"
     },
     {
-      "label": "oxc",
-      "file_type": "concept",
-      "source_file": ".oxlintrc.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "ref_oxc",
-      "community": 1,
-      "community_name": "Layout.tsx",
-      "norm_label": "oxc"
-    },
-    {
       "label": "react",
       "file_type": "concept",
       "source_file": ".oxlintrc.json",
@@ -3096,17 +3136,6 @@
       "community": 1,
       "community_name": "Layout.tsx",
       "norm_label": "react"
-    },
-    {
-      "label": "typescript",
-      "file_type": "concept",
-      "source_file": ".oxlintrc.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "ref_typescript",
-      "community": 1,
-      "community_name": "Layout.tsx",
-      "norm_label": "typescript"
     },
     {
       "label": "AGENTS.md",
@@ -3370,7 +3399,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_fibonacci",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "fibonacci.ts"
     },
     {
@@ -3381,7 +3410,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_fibonacci_fibonaccidef",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "fibonaccidef"
     },
     {
@@ -3392,7 +3421,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_fibonacci_pseudocode",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -3403,7 +3432,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_helpers",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "dp/helpers.ts"
     },
     {
@@ -3414,7 +3443,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_index",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "dp/index.ts"
     },
     {
@@ -3425,7 +3454,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_knapsack",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "knapsack.ts"
     },
     {
@@ -3436,7 +3465,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_knapsack_default_values",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "default_values"
     },
     {
@@ -3447,7 +3476,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_knapsack_default_weights",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "default_weights"
     },
     {
@@ -3458,7 +3487,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_knapsack_knapsackdef",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "knapsackdef"
     },
     {
@@ -3469,7 +3498,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_knapsack_pseudocode",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -3480,7 +3509,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_lcs",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "lcs.ts"
     },
     {
@@ -3491,7 +3520,7 @@
       "_origin": "ast",
       "id": "src_algos_dp_lcs_lcsdef",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "lcsdef"
     },
     {
@@ -3502,316 +3531,8 @@
       "_origin": "ast",
       "id": "src_algos_dp_lcs_pseudocode",
       "community": 16,
-      "community_name": "knapsack.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
-    },
-    {
-      "label": "TableViz.tsx",
-      "file_type": "code",
-      "source_file": "src/components/viz/TableViz.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_viz_tableviz",
-      "community": 16,
-      "community_name": "knapsack.ts",
-      "norm_label": "tableviz.tsx"
-    },
-    {
-      "label": "CELL_FILL",
-      "file_type": "code",
-      "source_file": "src/components/viz/TableViz.tsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "src_components_viz_tableviz_cell_fill",
-      "community": 16,
-      "community_name": "knapsack.ts",
-      "norm_label": "cell_fill"
-    },
-    {
-      "label": "CELL_STROKE",
-      "file_type": "code",
-      "source_file": "src/components/viz/TableViz.tsx",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "src_components_viz_tableviz_cell_stroke",
-      "community": 16,
-      "community_name": "knapsack.ts",
-      "norm_label": "cell_stroke"
-    },
-    {
-      "label": "factorial.ts",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/factorial.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_algos_recursion_factorial",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "factorial.ts"
-    },
-    {
-      "label": "factorialDef",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/factorial.ts",
-      "source_location": "L99",
-      "_origin": "ast",
-      "id": "src_algos_recursion_factorial_factorialdef",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "factorialdef"
-    },
-    {
-      "label": "pseudocode",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/factorial.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "src_algos_recursion_factorial_pseudocode",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "pseudocode"
-    },
-    {
-      "label": "hanoi.ts",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_algos_recursion_hanoi",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "hanoi.ts"
-    },
-    {
-      "label": "hanoiDef",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L107",
-      "_origin": "ast",
-      "id": "src_algos_recursion_hanoi_hanoidef",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "hanoidef"
-    },
-    {
-      "label": "pseudocode",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "src_algos_recursion_hanoi_pseudocode",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "pseudocode"
-    },
-    {
-      "label": "recursion/helpers.ts",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/helpers.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_algos_recursion_helpers",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "recursion/helpers.ts"
-    },
-    {
-      "label": "recursion/index.ts",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_algos_recursion_index",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "recursion/index.ts"
-    },
-    {
-      "label": "permutations.ts",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/permutations.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_algos_recursion_permutations",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "permutations.ts"
-    },
-    {
-      "label": "permutationsDef",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/permutations.ts",
-      "source_location": "L112",
-      "_origin": "ast",
-      "id": "src_algos_recursion_permutations_permutationsdef",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "permutationsdef"
-    },
-    {
-      "label": "pseudocode",
-      "file_type": "code",
-      "source_file": "src/algos/recursion/permutations.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "src_algos_recursion_permutations_pseudocode",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "pseudocode"
-    },
-    {
-      "label": "ArrayViz.tsx",
-      "file_type": "code",
-      "source_file": "src/components/viz/ArrayViz.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_viz_arrayviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "arrayviz.tsx"
-    },
-    {
-      "label": "COLORS",
-      "file_type": "code",
-      "source_file": "src/components/viz/ArrayViz.tsx",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "src_components_viz_arrayviz_colors",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "colors"
-    },
-    {
-      "label": "HanoiViz.tsx",
-      "file_type": "code",
-      "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_viz_hanoiviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "hanoiviz.tsx"
-    },
-    {
-      "label": "DISK_COLORS",
-      "file_type": "code",
-      "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "src_components_viz_hanoiviz_disk_colors",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "disk_colors"
-    },
-    {
-      "label": "PEG_LABELS",
-      "file_type": "code",
-      "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "src_components_viz_hanoiviz_peg_labels",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "peg_labels"
-    },
-    {
-      "label": "PEG_X",
-      "file_type": "code",
-      "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "src_components_viz_hanoiviz_peg_x",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "peg_x"
-    },
-    {
-      "label": "ListViz.tsx",
-      "file_type": "code",
-      "source_file": "src/components/viz/ListViz.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_viz_listviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "listviz.tsx"
-    },
-    {
-      "label": "NODE_FILL",
-      "file_type": "code",
-      "source_file": "src/components/viz/ListViz.tsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "src_components_viz_listviz_node_fill",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "node_fill"
-    },
-    {
-      "label": "NODE_STROKE",
-      "file_type": "code",
-      "source_file": "src/components/viz/ListViz.tsx",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "src_components_viz_listviz_node_stroke",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "node_stroke"
-    },
-    {
-      "label": "TreeViz.tsx",
-      "file_type": "code",
-      "source_file": "src/components/viz/TreeViz.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_viz_treeviz",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "treeviz.tsx"
-    },
-    {
-      "label": "NODE_FILL",
-      "file_type": "code",
-      "source_file": "src/components/viz/TreeViz.tsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "src_components_viz_treeviz_node_fill",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "node_fill"
-    },
-    {
-      "label": "NODE_STROKE",
-      "file_type": "code",
-      "source_file": "src/components/viz/TreeViz.tsx",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "src_components_viz_treeviz_node_stroke",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "node_stroke"
-    },
-    {
-      "label": "types.ts",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_core_types",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "types.ts"
-    },
-    {
-      "label": "recursion.test.ts",
-      "file_type": "code",
-      "source_file": "src/tests/recursion.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_tests_recursion_test",
-      "community": 17,
-      "community_name": "types.ts",
-      "norm_label": "recursion.test.ts"
     },
     {
       "label": "CodePanel.tsx",
@@ -3820,7 +3541,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_panels_codepanel",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "codepanel.tsx"
     },
@@ -3831,7 +3552,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_panels_narrationbar",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "narrationbar.tsx"
     },
@@ -3842,7 +3563,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_panels_varspanel",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "varspanel.tsx"
     },
@@ -3853,20 +3574,229 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_tests_dp_test",
-      "community": 18,
+      "community": 16,
       "community_name": "Step",
       "norm_label": "dp.test.ts"
     },
     {
-      "label": "ds.test.ts",
+      "label": "factorial.ts",
       "file_type": "code",
-      "source_file": "src/tests/ds.test.ts",
+      "source_file": "src/algos/recursion/factorial.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_tests_ds_test",
-      "community": 18,
-      "community_name": "Step",
-      "norm_label": "ds.test.ts"
+      "id": "src_algos_recursion_factorial",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "factorial.ts"
+    },
+    {
+      "label": "factorialDef",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/factorial.ts",
+      "source_location": "L99",
+      "_origin": "ast",
+      "id": "src_algos_recursion_factorial_factorialdef",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "factorialdef"
+    },
+    {
+      "label": "pseudocode",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/factorial.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_algos_recursion_factorial_pseudocode",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "pseudocode"
+    },
+    {
+      "label": "hanoi.ts",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoi",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoi.ts"
+    },
+    {
+      "label": "hanoiDef",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoi_hanoidef",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoidef"
+    },
+    {
+      "label": "pseudocode",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoi_pseudocode",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "pseudocode"
+    },
+    {
+      "label": "hanoiGeometry.ts",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoigeometry.ts"
+    },
+    {
+      "label": "HANOI_BASE_Y",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoi_base_y",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoi_base_y"
+    },
+    {
+      "label": "HANOI_DISK_H",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoi_disk_h",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoi_disk_h"
+    },
+    {
+      "label": "HANOI_PEG_X",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoi_peg_x",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoi_peg_x"
+    },
+    {
+      "label": "HANOI_VIEW_H",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoi_view_h",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoi_view_h"
+    },
+    {
+      "label": "HANOI_VIEW_W",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_algos_recursion_hanoigeometry_hanoi_view_w",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoi_view_w"
+    },
+    {
+      "label": "recursion/helpers.ts",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/helpers.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_recursion_helpers",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "recursion/helpers.ts"
+    },
+    {
+      "label": "recursion/index.ts",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_recursion_index",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "recursion/index.ts"
+    },
+    {
+      "label": "permutations.ts",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/permutations.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_recursion_permutations",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "permutations.ts"
+    },
+    {
+      "label": "permutationsDef",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/permutations.ts",
+      "source_location": "L112",
+      "_origin": "ast",
+      "id": "src_algos_recursion_permutations_permutationsdef",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "permutationsdef"
+    },
+    {
+      "label": "pseudocode",
+      "file_type": "code",
+      "source_file": "src/algos/recursion/permutations.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_algos_recursion_permutations_pseudocode",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "pseudocode"
+    },
+    {
+      "label": "HanoiViz.tsx",
+      "file_type": "code",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_viz_hanoiviz",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "hanoiviz.tsx"
+    },
+    {
+      "label": "DISK_COLORS",
+      "file_type": "code",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "src_components_viz_hanoiviz_disk_colors",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "disk_colors"
+    },
+    {
+      "label": "PEG_LABELS",
+      "file_type": "code",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_components_viz_hanoiviz_peg_labels",
+      "community": 19,
+      "community_name": "hanoi.ts",
+      "norm_label": "peg_labels"
     },
     {
       "label": "bst.ts",
@@ -3876,7 +3806,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "bst.ts"
     },
     {
@@ -3887,7 +3817,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst_bstsearchdef",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "bstsearchdef"
     },
     {
@@ -3898,7 +3828,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst_pseudocode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -3909,7 +3839,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_bst_tree_values",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "tree_values"
     },
     {
@@ -3920,7 +3850,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_hash",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "hash.ts"
     },
     {
@@ -3931,7 +3861,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_hash_hashtabledef",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "hashtabledef"
     },
     {
@@ -3942,7 +3872,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_hash_pseudocode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -3953,7 +3883,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_helpers",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "ds/helpers.ts"
     },
     {
@@ -3964,7 +3894,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_index",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "ds/index.ts"
     },
     {
@@ -3975,7 +3905,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_queue",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "queue.ts"
     },
     {
@@ -3986,7 +3916,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_queue_pseudocode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -3997,7 +3927,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_queue_queuedemodef",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "queuedemodef"
     },
     {
@@ -4008,7 +3938,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_stack",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "stack.ts"
     },
     {
@@ -4019,7 +3949,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_stack_pseudocode",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -4030,8 +3960,140 @@
       "_origin": "ast",
       "id": "src_algos_ds_stack_stackdemodef",
       "community": 2,
-      "community_name": "ds/helpers.ts",
+      "community_name": "types.ts",
       "norm_label": "stackdemodef"
+    },
+    {
+      "label": "ArrayViz.tsx",
+      "file_type": "code",
+      "source_file": "src/components/viz/ArrayViz.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_viz_arrayviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "arrayviz.tsx"
+    },
+    {
+      "label": "COLORS",
+      "file_type": "code",
+      "source_file": "src/components/viz/ArrayViz.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_components_viz_arrayviz_colors",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "colors"
+    },
+    {
+      "label": "ListViz.tsx",
+      "file_type": "code",
+      "source_file": "src/components/viz/ListViz.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_viz_listviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "listviz.tsx"
+    },
+    {
+      "label": "NODE_FILL",
+      "file_type": "code",
+      "source_file": "src/components/viz/ListViz.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "src_components_viz_listviz_node_fill",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "node_fill"
+    },
+    {
+      "label": "NODE_STROKE",
+      "file_type": "code",
+      "source_file": "src/components/viz/ListViz.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "src_components_viz_listviz_node_stroke",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "node_stroke"
+    },
+    {
+      "label": "TableViz.tsx",
+      "file_type": "code",
+      "source_file": "src/components/viz/TableViz.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_viz_tableviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "tableviz.tsx"
+    },
+    {
+      "label": "CELL_FILL",
+      "file_type": "code",
+      "source_file": "src/components/viz/TableViz.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "src_components_viz_tableviz_cell_fill",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "cell_fill"
+    },
+    {
+      "label": "CELL_STROKE",
+      "file_type": "code",
+      "source_file": "src/components/viz/TableViz.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_components_viz_tableviz_cell_stroke",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "cell_stroke"
+    },
+    {
+      "label": "TreeViz.tsx",
+      "file_type": "code",
+      "source_file": "src/components/viz/TreeViz.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_viz_treeviz",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "treeviz.tsx"
+    },
+    {
+      "label": "NODE_FILL",
+      "file_type": "code",
+      "source_file": "src/components/viz/TreeViz.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "src_components_viz_treeviz_node_fill",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "node_fill"
+    },
+    {
+      "label": "NODE_STROKE",
+      "file_type": "code",
+      "source_file": "src/components/viz/TreeViz.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_components_viz_treeviz_node_stroke",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "node_stroke"
+    },
+    {
+      "label": "types.ts",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_core_types",
+      "community": 2,
+      "community_name": "types.ts",
+      "norm_label": "types.ts"
     },
     {
       "label": "grid/astar.ts",
@@ -5189,6 +5251,28 @@
       "norm_label": "icons"
     },
     {
+      "label": "ds.test.ts",
+      "file_type": "code",
+      "source_file": "src/tests/ds.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_tests_ds_test",
+      "community": 7,
+      "community_name": "registry.ts",
+      "norm_label": "ds.test.ts"
+    },
+    {
+      "label": "recursion.test.ts",
+      "file_type": "code",
+      "source_file": "src/tests/recursion.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_tests_recursion_test",
+      "community": 7,
+      "community_name": "registry.ts",
+      "norm_label": "recursion.test.ts"
+    },
+    {
       "label": "traces.test.ts",
       "file_type": "code",
       "source_file": "src/tests/traces.test.ts",
@@ -5438,8 +5522,19 @@
       "_origin": "ast",
       "id": "oxlintrc",
       "community": 9,
-      "community_name": ".oxlintrc.json",
+      "community_name": "plugins",
       "norm_label": ".oxlintrc.json"
+    },
+    {
+      "label": "plugins",
+      "file_type": "code",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "oxlintrc_plugins",
+      "community": 9,
+      "community_name": "plugins",
+      "norm_label": "plugins"
     },
     {
       "label": "rules",
@@ -5449,7 +5544,7 @@
       "_origin": "ast",
       "id": "oxlintrc_rules",
       "community": 9,
-      "community_name": ".oxlintrc.json",
+      "community_name": "plugins",
       "norm_label": "rules"
     },
     {
@@ -5460,7 +5555,7 @@
       "_origin": "ast",
       "id": "oxlintrc_rules_react_only_export_components",
       "community": 9,
-      "community_name": ".oxlintrc.json",
+      "community_name": "plugins",
       "norm_label": "react/only-export-components"
     },
     {
@@ -5471,7 +5566,7 @@
       "_origin": "ast",
       "id": "oxlintrc_rules_react_rules_of_hooks",
       "community": 9,
-      "community_name": ".oxlintrc.json",
+      "community_name": "plugins",
       "norm_label": "react/rules-of-hooks"
     },
     {
@@ -5482,8 +5577,30 @@
       "_origin": "ast",
       "id": "oxlintrc_schema",
       "community": 9,
-      "community_name": ".oxlintrc.json",
+      "community_name": "plugins",
       "norm_label": "$schema"
+    },
+    {
+      "label": "oxc",
+      "file_type": "concept",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "ref_oxc",
+      "community": 9,
+      "community_name": "plugins",
+      "norm_label": "oxc"
+    },
+    {
+      "label": "typescript",
+      "file_type": "concept",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "ref_typescript",
+      "community": 9,
+      "community_name": "plugins",
+      "norm_label": "typescript"
     },
     {
       "label": "warn",
@@ -5493,7 +5610,7 @@
       "_origin": "ast",
       "id": "ref_warn",
       "community": 9,
-      "community_name": ".oxlintrc.json",
+      "community_name": "plugins",
       "norm_label": "warn"
     }
   ],
@@ -6764,11 +6881,23 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L53",
+      "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_algos_recursion_hanoi_hanoi",
       "target": "src_algos_recursion_helpers_frame"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoi_hanoi",
+      "target": "src_algos_recursion_hanoigeometry_hanoihovery"
     },
     {
       "relation": "calls",
@@ -7789,6 +7918,30 @@
       "source": "src_components_viz_gridviz_gridviz",
       "target": "src_components_viz_gridviz_hikey",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoidiskwidth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoiresty"
     },
     {
       "relation": "calls",
@@ -11004,6 +11157,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_algos_recursion_hanoi",
+      "target": "src_core_types_hanoimovingdisk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoi",
       "target": "src_core_types_hanoipegs",
       "confidence_score": 1.0
     },
@@ -11041,6 +11206,30 @@
       "_origin": "ast",
       "source": "src_algos_recursion_hanoi",
       "target": "src_algos_recursion_helpers_frame",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoi",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_peg_x",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoi",
+      "target": "src_algos_recursion_hanoigeometry_hanoihovery",
       "confidence_score": 1.0
     },
     {
@@ -12744,7 +12933,103 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_viz_hanoiviz",
+      "target": "src_core_types_hanoimovingdisk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
       "target": "src_core_types_hanoipegs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_base_y",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_disk_h",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_peg_x",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_view_h",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_view_w",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoidiskwidth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry_hanoiresty",
       "confidence_score": 1.0
     },
     {
@@ -14131,6 +14416,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoi",
+      "target": "src_algos_recursion_hanoigeometry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/algos/recursion/helpers.ts",
       "source_location": "L1",
       "weight": 1.0,
@@ -15121,6 +15418,18 @@
       "_origin": "ast",
       "source": "src_components_viz_hanoiviz",
       "target": "src_core_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/viz/HanoiViz.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_viz_hanoiviz",
+      "target": "src_algos_recursion_hanoigeometry",
       "confidence_score": 1.0
     },
     {
@@ -16955,7 +17264,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L107",
+      "source_location": "L148",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_algos_recursion_hanoi",
@@ -16966,11 +17275,110 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L5",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoi",
+      "target": "src_algos_recursion_hanoi_peg",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoi.ts",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_algos_recursion_hanoi",
       "target": "src_algos_recursion_hanoi_pseudocode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_peg_x",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoiresty",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoihovery",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_base_y",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_disk_h",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_view_w",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoi_view_h",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/algos/recursion/hanoiGeometry.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_algos_recursion_hanoigeometry",
+      "target": "src_algos_recursion_hanoigeometry_hanoidiskwidth",
       "confidence_score": 1.0
     },
     {
@@ -17846,18 +18254,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L14",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_viz_hanoiviz",
-      "target": "src_components_viz_hanoiviz_peg_x",
+      "target": "src_components_viz_hanoiviz_peg_labels",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L16",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_viz_hanoiviz",
@@ -17868,22 +18276,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L26",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_viz_hanoiviz",
       "target": "src_components_viz_hanoiviz_hanoiviz",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/viz/HanoiViz.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_components_viz_hanoiviz",
-      "target": "src_components_viz_hanoiviz_peg_labels",
       "confidence_score": 1.0
     },
     {
@@ -18429,7 +18826,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/types.ts",
-      "source_location": "L168",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_types",
+      "target": "src_core_types_hanoimovingdisk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/types.ts",
+      "source_location": "L175",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_types",
@@ -18440,7 +18848,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/types.ts",
-      "source_location": "L174",
+      "source_location": "L181",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_types",
@@ -18451,7 +18859,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/types.ts",
-      "source_location": "L179",
+      "source_location": "L186",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_types",
@@ -18462,7 +18870,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/types.ts",
-      "source_location": "L192",
+      "source_location": "L199",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_types",
@@ -18473,7 +18881,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/types.ts",
-      "source_location": "L199",
+      "source_location": "L206",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_types",
@@ -19490,7 +19898,7 @@
       "relation": "indirect_call",
       "confidence": "INFERRED",
       "source_file": "src/algos/recursion/hanoi.ts",
-      "source_location": "L115",
+      "source_location": "L156",
       "weight": 1.0,
       "_origin": "ast",
       "context": "collection",
@@ -19620,5 +20028,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "be0c291d4548acfea4bf8590470bbcdc31dd887c"
+  "built_at_commit": "6c0e52cb752fe6f1a327b9a8fa02515ead88e8f6"
 }

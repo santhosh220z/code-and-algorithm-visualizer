@@ -1,9 +1,9 @@
 {
   "0": "AlgorithmDef",
   "1": "Layout.tsx",
-  "2": "types.ts",
+  "2": "ds/helpers.ts",
   "3": "grid/bfs.ts",
-  "4": "graph/bfs.ts",
+  "4": "presets.ts",
   "5": "devDependencies",
   "6": "compilerOptions",
   "7": "registry.ts",
@@ -15,7 +15,14 @@
   "13": "vite.config.ts",
   "14": "opencode.json",
   "15": "React + TypeScript + Vite",
-  "16": "knapsack.ts",
+  "16": "Step",
   "17": "permutations.ts",
-  "18": "Step"
+  "18": "CodePanel.tsx",
+  "19": "hanoi.ts",
+  "20": "types.ts",
+  "21": "EditorToolbar.tsx",
+  "22": "GraphViz.tsx",
+  "23": "grid.test.ts",
+  "24": "TreeViz.tsx",
+  "25": "TableViz.tsx"
 }

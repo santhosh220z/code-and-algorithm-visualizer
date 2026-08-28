@@ -72,7 +72,7 @@ export function Layout() {
       return <TableViz table={currentStep.viz.table} highlights={currentStep.viz.highlights} />;
     }
     if (vizType === 'hanoi' && currentStep?.viz.type === 'hanoi') {
-      return <HanoiViz pegs={currentStep.viz.pegs} highlights={currentStep.viz.highlights} />;
+      return <HanoiViz pegs={currentStep.viz.pegs} highlights={currentStep.viz.highlights} moving={currentStep.viz.moving} />;
     }
     return (
       <div className="h-full flex items-center justify-center">

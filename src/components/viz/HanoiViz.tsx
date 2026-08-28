@@ -1,17 +1,26 @@
-import type { HanoiPegs, HanoiHighlight } from '../../core/types';
+import type { HanoiPegs, HanoiHighlight, HanoiMovingDisk } from '../../core/types';
+import {
+  HANOI_BASE_Y,
+  HANOI_DISK_H,
+  HANOI_PEG_X,
+  HANOI_VIEW_H,
+  HANOI_VIEW_W,
+  hanoiDiskWidth,
+  hanoiRestY,
+} from '../../algos/recursion/hanoiGeometry';
 
 const PEG_LABELS: ('A' | 'B' | 'C')[] = ['A', 'B', 'C'];
 
-const VIEW_W = 720;
-const VIEW_H = 260;
+const VIEW_W = HANOI_VIEW_W;
+const VIEW_H = HANOI_VIEW_H;
 
-const BASE_Y = 180;
+const BASE_Y = HANOI_BASE_Y;
 const PLATE_Y = 210;
 const POLE_W = 8;
 const POLE_H = 150;
-const DISK_H = 22;
+const DISK_H = HANOI_DISK_H;
 
-const PEG_X: Record<'A' | 'B' | 'C', number> = { A: 150, B: 360, C: 570 };
+const PEG_X = HANOI_PEG_X;
 
 const DISK_COLORS = [
   '#f87171',
@@ -26,11 +35,14 @@ const DISK_COLORS = [
 export function HanoiViz({
   pegs,
   highlights,
+  moving,
 }: {
   pegs: HanoiPegs;
   highlights: HanoiHighlight[];
+  moving: HanoiMovingDisk | null;
 }) {
-  const totalDiskCount = PEG_LABELS.reduce((sum, p) => sum + pegs[p].length, 0);
+  const totalDiskCount =
+    PEG_LABELS.reduce((sum, p) => sum + pegs[p].length, 0) + (moving ? 1 : 0);
   if (totalDiskCount === 0) {
     return (
       <div className="h-full flex items-center justify-center text-sm text-[#4a4d5a] italic">
@@ -43,12 +55,15 @@ export function HanoiViz({
   for (const h of highlights) {
     hiMap.set(`${h.peg}:${h.disk}`, h);
   }
+  const isSettledLast = (peg: 'A' | 'B' | 'C', disk: number) =>
+    hiMap.get(`${peg}:${disk}`)?.kind === 'settled';
 
   const disks = PEG_LABELS.flatMap((peg) =>
     pegs[peg].map((disk, idx) => ({
       peg,
       disk,
-      y: BASE_Y - (idx + 1) * DISK_H,
+      y: hanoiRestY(idx),
+      x: PEG_X[peg],
       bottom: idx,
     }))
   );
@@ -109,11 +124,9 @@ export function HanoiViz({
         })}
 
         {/* disks */}
-        {disks.map(({ peg, disk, y }) => {
-          const x = PEG_X[peg];
-          const hi = hiMap.get(`${peg}:${disk}`);
-          const isMoving = hi?.kind === 'moving';
-          const width = 52 + disk * 34;
+        {disks.map(({ peg, disk, y, x }) => {
+          const settledLast = isSettledLast(peg, disk);
+          const width = hanoiDiskWidth(disk);
           const color = DISK_COLORS[(disk - 1) % DISK_COLORS.length];
           return (
             <g key={`${peg}-${disk}`} style={{ transition: 'all 200ms ease' }}>
@@ -124,11 +137,11 @@ export function HanoiViz({
                 height={DISK_H}
                 rx={DISK_H / 2}
                 fill={color}
-                fillOpacity={isMoving ? 1 : 0.9}
-                stroke={isMoving ? '#ffffff' : 'rgba(255,255,255,0.18)'}
-                strokeWidth={isMoving ? 2 : 1}
+                fillOpacity={settledLast ? 1 : 0.9}
+                stroke={settledLast ? '#ffffff' : 'rgba(255,255,255,0.18)'}
+                strokeWidth={settledLast ? 2 : 1}
                 style={{
-                  filter: isMoving ? `drop-shadow(0 0 8px ${color})` : undefined,
+                  filter: settledLast ? `drop-shadow(0 0 6px ${color})` : undefined,
                   transition: 'all 200ms ease',
                 }}
               />
@@ -148,6 +161,39 @@ export function HanoiViz({
             </g>
           );
         })}
+
+        {/* in-flight disk */}
+        {moving && (
+          <g style={{ transition: 'all 120ms linear' }}>
+            <rect
+              x={moving.x - hanoiDiskWidth(moving.disk) / 2}
+              y={moving.y - DISK_H / 2}
+              width={hanoiDiskWidth(moving.disk)}
+              height={DISK_H}
+              rx={DISK_H / 2}
+              fill={DISK_COLORS[(moving.disk - 1) % DISK_COLORS.length]}
+              stroke="#ffffff"
+              strokeWidth={2.5}
+              style={{
+                filter: `drop-shadow(0 0 10px ${DISK_COLORS[(moving.disk - 1) % DISK_COLORS.length]})`,
+                transition: 'all 120ms linear',
+              }}
+            />
+            <text
+              x={moving.x}
+              y={moving.y + 1}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize={12}
+              fontFamily="JetBrains Mono, monospace"
+              fontWeight={700}
+              fill="#1a1b22"
+              style={{ pointerEvents: 'none', userSelect: 'none' }}
+            >
+              {moving.disk}
+            </text>
+          </g>
+        )}
       </svg>
     </div>
   );

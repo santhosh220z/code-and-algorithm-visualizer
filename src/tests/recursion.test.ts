@@ -63,6 +63,30 @@ describe('recursion', () => {
     expect(last.viz.pegs.B).toEqual([]);
   });
 
+  it('hanoi: each step snapshots its own peg state (no stale completed tower)', () => {
+    const def = getAlgorithm('rec-hanoi')!;
+    const steps = collect(def, { n: 3 });
+    // The very first frame shows all disks still on A, not already solved at C
+    const first = steps[0];
+    if (first.viz.type !== 'hanoi') throw new Error('expected hanoi viz');
+    expect(first.viz.pegs.A).toEqual([3, 2, 1]);
+    expect(first.viz.pegs.C).toEqual([]);
+    expect(first.viz.moving).toBeNull();
+    // Each emitted step must own its own copies of the peg arrays
+    const last = lastStep(steps);
+    if (last.viz.type !== 'hanoi') throw new Error('expected hanoi viz');
+    expect(last.viz.pegs !== first.viz.pegs).toBe(true);
+    expect(last.viz.pegs.A !== first.viz.pegs.A).toBe(true);
+  });
+
+  it('hanoi: a move is a clean pick-and-place without interpolated travel frames', () => {
+    const def = getAlgorithm('rec-hanoi')!;
+    const steps = collect(def, { n: 3 });
+    const picks = steps.filter((s) => s.viz.type === 'hanoi' && s.viz.moving !== null);
+    // one pick frame per move (7 moves)
+    expect(picks.length).toBe(7);
+  });
+
   it('permutations: generates n! permutations', () => {
     const def = getAlgorithm('rec-permutations')!;
     const last = lastStep(collect(def, { array: [1, 2, 3] }));
