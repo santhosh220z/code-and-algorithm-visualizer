@@ -72,7 +72,7 @@ Rules:
 - Sorting tests verify: final sorted array, pseudocode line validity, semantic line matching, no duplicate values mid-trace
 - Search tests verify: correct index/pair finding
 
-**Known flaky test**: `graph.test.ts` — "bfs path has minimal hop count" fails intermittently (expects 3 hops, gets 4). See `vitest-out.txt`.
+**Note**: `graph.test.ts` — "bfs path has minimal hop count" was once flaky; it now computes the expected hop count dynamically from the deterministic `SAMPLE_GRAPH` (`directed: false`), so ordering is stable.
 
 ---
 
