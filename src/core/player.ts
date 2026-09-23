@@ -9,8 +9,6 @@ interface PlayerState {
   cursor: number;
   isPlaying: boolean;
   speed: number;
-  hitCounts: number[];
-  executedLines: Set<number>;
 
   setAlgorithm: (algo: AlgorithmDef, input?: AlgorithmInput) => void;
   patchInput: (input: AlgorithmInput) => void;
@@ -40,8 +38,6 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   cursor: 0,
   isPlaying: false,
   speed: 1,
-  hitCounts: [],
-  executedLines: new Set<number>(),
 
   setAlgorithm: (algo, input) => {
     const effective = input ?? algo.defaultInput;
@@ -150,17 +146,4 @@ export function useCurrentStep(): Step | null {
   const steps = usePlayerStore((s) => s.steps);
   const cursor = usePlayerStore((s) => s.cursor);
   return steps[cursor] ?? null;
-}
-
-/** Hit counts per line for all steps up to and including the cursor. */
-export function useHistoryStats(steps: Step[], cursor: number): number[] {
-  const counts: number[] = [];
-  for (let i = 0; i <= cursor; i++) {
-    const line = steps[i].line;
-    if (line !== undefined) {
-      while (counts.length <= line) counts.push(0);
-      counts[line]++;
-    }
-  }
-  return counts;
 }

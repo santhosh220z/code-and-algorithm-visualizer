@@ -49,7 +49,7 @@ Rules:
 - Zustand store with steps precomputed on algorithm/input change
 - `patchInput(input)` — regenerates trace, preserves cursor if at end
 - `regenerate()` — fresh random data (respects custom grid dimensions)
-- `useCurrentStep()`, `useHistoryStats(steps, cursor)`
+- `useCurrentStep()`
 
 **Algorithm structure** (e.g. `src/algos/sorting/bubbleSort.ts`):
 1. Import types, registry, helpers
