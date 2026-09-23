@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import type { PseudocodeLine, Step } from '../../core/types';
 
 interface LoopScope {
@@ -29,20 +29,22 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops }: Cod
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Hit counts per line for all steps up to cursor
-  const hitCounts = new Map<number, number>();
-  for (let i = 0; i <= cursor; i++) {
-    const line = steps[i].line;
-    if (line !== undefined) {
-      hitCounts.set(line, (hitCounts.get(line) ?? 0) + 1);
+  const { hitCounts, executedLines } = useMemo(() => {
+    const hitCounts = new Map<number, number>();
+    for (let i = 0; i <= cursor; i++) {
+      const line = steps[i]?.line;
+      if (line !== undefined) {
+        hitCounts.set(line, (hitCounts.get(line) ?? 0) + 1);
+      }
     }
-  }
-
-  // Lines executed before the current step (trail)
-  const executedLines = new Set<number>();
-  for (let i = 0; i < cursor; i++) {
-    const line = steps[i].line;
-    if (line !== undefined) executedLines.add(line);
-  }
+    // Lines executed before the current step (trail)
+    const executedLines = new Set<number>();
+    for (let i = 0; i < cursor; i++) {
+      const line = steps[i]?.line;
+      if (line !== undefined) executedLines.add(line);
+    }
+    return { hitCounts, executedLines };
+  }, [steps, cursor]);
 
   // Active loop info
   const activeLoop = currentStep?.loops?.[currentStep.loops.length - 1];
