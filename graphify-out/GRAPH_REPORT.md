@@ -1,16 +1,16 @@
 # Graph Report - code-and-algorithm-visualizer  (2026-09-23)
 
 ## Corpus Check
-- 82 files · ~35,304 words
+- 82 files · ~34,664 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 475 nodes · 1253 edges · 22 communities (17 shown, 5 thin omitted)
+- 474 nodes · 1252 edges · 22 communities (17 shown, 5 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 38 edges (avg confidence: 0.6)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6ccfc086`
+- Built from commit: `92a10d85`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -56,10 +56,10 @@
   src/components/panels/NarrationBar.tsx → src/core/types.ts
 - `VarsPanelProps` --references--> `Step`  [EXTRACTED]
   src/components/panels/VarsPanel.tsx → src/core/types.ts
+- `Sidebar()` --calls--> `getAlgorithmsByCategory()`  [EXTRACTED]
+  src/components/sidebar/Sidebar.tsx → src/core/registry.ts
 - `PlayerState` --references--> `Step`  [EXTRACTED]
   src/core/player.ts → src/core/types.ts
-- `CategoryInfo` --references--> `AlgorithmCategory`  [EXTRACTED]
-  src/core/registry.ts → src/core/types.ts
 
 ## Import Cycles
 - None detected.
@@ -68,7 +68,7 @@
 
 ### Community 0 - "Layout.tsx"
 Cohesion: 0.07
-Nodes (43): react, Layout(), parseLoops(), EditorToolbar(), GRAPH_TOOLS, GRID_TOOLS, PlayerControls(), SPEEDS (+35 more)
+Nodes (44): react, Layout(), parseLoops(), EditorToolbar(), GRAPH_TOOLS, GRID_TOOLS, PlayerControls(), SPEEDS (+36 more)
 
 ### Community 1 - "types.ts"
 Cohesion: 0.06
@@ -99,8 +99,8 @@ Cohesion: 0.17
 Nodes (26): fibonacci(), fibonacciDef, pseudocode, DEFAULT_VALUES, DEFAULT_WEIGHTS, knapsack(), knapsackDef, pseudocode (+18 more)
 
 ### Community 8 - "registry.ts"
-Cohesion: 0.13
-Nodes (14): App(), Sidebar(), algorithms, arrayPresets, categories, CATEGORY_NAMES, CategoryInfo, getAlgorithmsByCategory() (+6 more)
+Cohesion: 0.09
+Nodes (22): listNode(), makeListNodes(), makeListStep(), pseudocode, queueDemo(), queueDemoDef, pseudocode, stackDemo() (+14 more)
 
 ### Community 9 - "compilerOptions"
 Cohesion: 0.08
@@ -111,8 +111,8 @@ Cohesion: 0.10
 Nodes (19): node, vite.config.ts, compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection (+11 more)
 
 ### Community 11 - "Step"
-Cohesion: 0.09
-Nodes (20): listNode(), makeListNodes(), makeListStep(), pseudocode, queueDemo(), queueDemoDef, pseudocode, stackDemo() (+12 more)
+Cohesion: 0.16
+Nodes (11): CodePanel(), CodePanelProps, formatValue(), LoopScope, NarrationBar(), NarrationBarProps, formatValue(), VarsPanel() (+3 more)
 
 ### Community 12 - "Algorithms auto-register via side-effect imports in src/algos/<category>/index.ts"
 Cohesion: 0.17
@@ -140,15 +140,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Step` connect `Step` to `Layout.tsx`, `types.ts`, `AlgorithmDef`, `hanoi.ts`, `grid/bfs.ts`, `graph/bfs.ts`, `stepHelpers.ts`, `registry.ts`?**
   _High betweenness centrality (0.054) - this node is a cross-community bridge._
-- **Why does `AlgorithmInput` connect `AlgorithmDef` to `Layout.tsx`, `types.ts`, `hanoi.ts`, `grid/bfs.ts`, `graph/bfs.ts`, `stepHelpers.ts`, `Step`?**
+- **Why does `AlgorithmInput` connect `AlgorithmDef` to `Layout.tsx`, `types.ts`, `hanoi.ts`, `grid/bfs.ts`, `graph/bfs.ts`, `stepHelpers.ts`, `registry.ts`?**
   _High betweenness centrality (0.036) - this node is a cross-community bridge._
 - **Why does `react` connect `Layout.tsx` to `registry.ts`, `Step`, `plugins`?**
   _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **What connects `$schema`, `.opencode/plugins/graphify.js`, `$schema` to the rest of the system?**
   _165 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Layout.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.0706605222734255 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06994047619047619 - nodes in this community are weakly interconnected._
 - **Should `types.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.06387921022067364 - nodes in this community are weakly interconnected._
 - **Should `AlgorithmDef` be split into smaller, more focused modules?**
-  _Cohesion score 0.10492989597467209 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10357304387155133 - nodes in this community are weakly interconnected._

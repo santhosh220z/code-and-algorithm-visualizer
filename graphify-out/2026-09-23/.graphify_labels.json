@@ -1,1 +1,24 @@
-{"0": "UI Components & Player Core", "1": "Data Structures & Visualizers", "2": "Sorting & Search Algorithms", "3": "Recursion Algorithms & Visualization", "4": "Project Dependencies", "5": "Grid Pathfinding Algorithms", "6": "Graph Pathfinding Algorithms", "7": "Dynamic Programming Algorithms", "8": "App Shell & Routing", "9": "TypeScript App Config", "10": "TypeScript Node Config", "11": "UI Panels & Core Types", "12": "Project Documentation", "13": "Lint Configuration", "14": "Opencode Configuration", "15": "Graphify Plugin Config", "16": "Root TypeScript Config", "17": "Player Regeneration", "18": "Algorithm Registration", "19": "Step Definition", "20": "Vite Configuration"}
+{
+  "0": "Layout.tsx",
+  "1": "types.ts",
+  "2": "AlgorithmDef",
+  "3": "hanoi.ts",
+  "4": "devDependencies",
+  "5": "grid/bfs.ts",
+  "6": "graph/bfs.ts",
+  "7": "stepHelpers.ts",
+  "8": "registry.ts",
+  "9": "compilerOptions",
+  "10": "compilerOptions",
+  "11": "Step",
+  "12": "Algorithms auto-register via side-effect imports in src/algos/<category>/index.ts",
+  "13": "plugins",
+  "14": "Opencode Configuration",
+  "15": "graphify.js",
+  "16": "tsconfig.json",
+  "17": "regenerate() — fresh random data (respects custom grid dimensions)",
+  "18": "registerAlgorithm",
+  "19": "Step",
+  "20": "vite.config.ts",
+  "21": "React + TypeScript + Vite"
+}
