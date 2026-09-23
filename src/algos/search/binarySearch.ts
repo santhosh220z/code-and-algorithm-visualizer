@@ -5,7 +5,7 @@ import {
   highlightCompare,
   highlightSorted,
   makePointer,
-} from '../sorting/helpers';
+} from '../../core/stepHelpers';
 
 const pseudocode = [
   { text: 'procedure binarySearch(A, target)', indent: 0 },
