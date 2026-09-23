@@ -1,13 +1,8 @@
-import type { Step, TreeNode, TreeHighlight, ListNode, ListHighlight, TableCell, TableHighlight } from '../../core/types';
+import type { Step, TreeNode, TreeHighlight, ListNode, ListHighlight } from '../../core/types';
+import type { LoopInfo, StackFrame } from '../../core/stepHelpers';
 
-export interface LoopInfo {
-  label: string;
-  iteration: number;
-}
-export interface StackFrame {
-  fn: string;
-  args: Record<string, unknown>;
-}
+export type { LoopInfo, StackFrame } from '../../core/stepHelpers';
+export { makeTableStep, tableCell, tableCompute, tableRead, tableResult } from '../../core/stepHelpers';
 
 export function makeTreeStep(
   nodes: TreeNode[],
@@ -33,18 +28,6 @@ export function makeListStep(
   return { line, description, vars, loops, stack, viz: { type: 'list', nodes, highlights } };
 }
 
-export function makeTableStep(
-  table: TableCell[][],
-  highlights: TableHighlight[],
-  line: number,
-  description: string,
-  vars?: Record<string, unknown>,
-  loops?: LoopInfo[],
-  stack?: StackFrame[]
-): Step {
-  return { line, description, vars, loops, stack, viz: { type: 'table', table, highlights } };
-}
-
 export function treeNode(
   id: string,
   value: number | string,
@@ -68,20 +51,4 @@ export function makeListNodes(values: (number | string)[], y = 0): ListNode[] {
   return values.map((value, i) =>
     listNode(String(i), value, startX + i * spacing, y, i < n - 1 ? String(i + 1) : undefined)
   );
-}
-
-export function tableCell(row: number, col: number, value: number | string, computed = false): TableCell {
-  return { row, col, value, computed };
-}
-
-export function tableCompute(row: number, col: number): TableHighlight {
-  return { row, col, kind: 'compute' };
-}
-
-export function tableRead(row: number, col: number): TableHighlight {
-  return { row, col, kind: 'read' };
-}
-
-export function tableResult(row: number, col: number): TableHighlight {
-  return { row, col, kind: 'result' };
 }

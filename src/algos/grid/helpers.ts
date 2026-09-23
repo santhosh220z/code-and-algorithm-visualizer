@@ -1,9 +1,7 @@
 import type { Step, GridInputData, GridHighlight } from '../../core/types';
+import type { LoopInfo } from '../../core/stepHelpers';
 
-export interface LoopInfo {
-  label: string;
-  iteration: number;
-}
+export type { LoopInfo } from '../../core/stepHelpers';
 
 export function asGridInput(input: unknown): GridInputData {
   const wrapped = input as { grid?: GridInputData };

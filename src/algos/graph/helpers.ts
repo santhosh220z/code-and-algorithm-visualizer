@@ -1,9 +1,7 @@
 import type { Step, GraphInputData, GraphNodeHighlight, GraphEdgeHighlight } from '../../core/types';
+import type { LoopInfo } from '../../core/stepHelpers';
 
-export interface LoopInfo {
-  label: string;
-  iteration: number;
-}
+export type { LoopInfo } from '../../core/stepHelpers';
 
 export function asGraphInput(input: unknown): GraphInputData {
   // Input arrives wrapped as { graph: GraphInputData }
