@@ -1,20 +1,54 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #16171d;
-  --color-bg-elevated: #1e1f29;
-  --color-border: #2e303a;
-  --color-text: #e5e7eb;
-  --color-text-muted: #9ca3af;
-  --color-accent: #a855f7;
-  --color-accent-hover: #c084fc;
-  --color-accent-bg: rgba(168, 85, 247, 0.15);
-  --color-compare: #f87171;
+  /* ---------- Surfaces: elevation ladder (darkest → lightest) ---------- */
+  --color-bg: #0a0c12;
+  --color-bg-elevated: #11141b;
+  --color-surface-2: #181c25;
+  --color-surface-3: #202634;
+  --color-surface-4: #2a3040;
+  --color-code-bg: #0d1017;
+
+  /* ---------- Borders ---------- */
+  --color-border: #232837;
+  --color-border-strong: #2f3547;
+
+  /* ---------- Text ---------- */
+  --color-text: #e8ebf2;
+  --color-text-muted: #9aa3b8;
+  --color-text-dim: #7c8598;
+
+  /* ---------- Brand accent: teal, reserved for CHROME ONLY ----------
+     Never used for data marks — the data palette below owns those hues. */
+  --color-accent: #2dd4bf;
+  --color-accent-hover: #5eead4;
+  --color-accent-strong: #14b8a6;
+  --color-accent-ink: #052e2b;
+  --color-accent-bg: rgba(45, 212, 191, 0.13);
+  --color-accent-bg-hover: rgba(45, 212, 191, 0.22);
+  --color-accent-border: rgba(45, 212, 191, 0.42);
+  --color-accent-ring: rgba(45, 212, 191, 0.6);
+
+  /* ---------- Status ---------- */
+  --color-danger: #fb7185;
+  --color-danger-bg: rgba(251, 113, 133, 0.12);
+  --color-danger-border: rgba(251, 113, 133, 0.4);
+
+  /* ---------- Data visualization: semantic, never chrome ----------
+     Hues are separated in both hue and lightness so they stay distinct
+     for red/green color-blind viewers. */
+  --color-compare: #fb7185;
   --color-swap: #fbbf24;
   --color-sorted: #4ade80;
-  --color-active: #60a5fa;
-  --color-trail: rgba(96, 165, 250, 0.3);
-  --color-loop-rail: rgba(168, 85, 247, 0.4);
+  --color-active: #818cf8;
+  --color-pivot: #c084fc;
+  --color-trail: rgba(129, 140, 248, 0.28);
+  --color-loop-rail: rgba(45, 212, 191, 0.45);
+  --color-bar-idle: #333a4c;
+  --color-bar-idle-strong: #414a61;
+  --color-node-fill: #2b3446;
+  --color-node-stroke: #3f4a61;
+
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 }
@@ -45,20 +79,46 @@
   code, pre {
     font-family: var(--font-mono);
   }
+
+  /* Visible keyboard focus everywhere — never removed, only restyled. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* Interactive controls get a consistent resting cursor. */
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  a[href],
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-border);
-    border-radius: 4px;
+    background: var(--color-surface-4);
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text-muted);
+    background: var(--color-border-strong);
+    background-clip: content-box;
   }
+  ::selection {
+    background: var(--color-accent-bg-hover);
+    color: var(--color-text);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -70,7 +130,16 @@
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-border) transparent;
+    scrollbar-color: var(--color-surface-4) transparent;
+  }
+
+  /* Focus ring for controls that already carry their own visual border. */
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-accent-ring);
+    outline-offset: 2px;
   }
 
   /* Step narration slides in softly on every cursor change */
