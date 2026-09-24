@@ -23,7 +23,10 @@ interface FuncDef {
 }
 
 class ReturnSignal {
-  constructor(readonly value: PyValue) {}
+  readonly value: PyValue;
+  constructor(value: PyValue) {
+    this.value = value;
+  }
 }
 
 class StopSignal extends Error {}
@@ -200,8 +203,12 @@ export function interpretSource(src: string): InterpretResult {
         return args.length === 0 ? null : args.reduce((a, b) => (compare(a, b) <= 0 ? a : b));
       case 'max':
         return args.length === 0 ? null : args.reduce((a, b) => (compare(a, b) >= 0 ? a : b));
-      case 'sum':
-        return (Array.isArray(args[0]) ? args[0] : []).reduce((a, b) => a + toNum(b), 0);
+      case 'sum': {
+        const list = Array.isArray(args[0]) ? args[0] : [];
+        let total = 0;
+        for (const item of list) total += toNum(item);
+        return total;
+      }
       case 'round':
         return Math.round(toNum(args[0]));
       case 'sqrt':

@@ -24,6 +24,24 @@ export function HomePage() {
       </section>
 
       <div className="max-w-5xl mx-auto px-6 pb-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Link
+          to="/code"
+          className="group p-5 rounded-xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors sm:col-span-2 lg:col-span-3"
+        >
+          <div className="flex items-start gap-4">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-accent-hover)] mt-0.5 shrink-0">
+              <path d="m8 6-6 6 6 6M16 6l6 6-6 6" />
+            </svg>
+            <div>
+              <h3 className="font-semibold text-[15px] text-white">Code Visualizer</h3>
+              <p className="mt-1 text-[12.5px] text-[var(--color-text-muted)] leading-snug max-w-2xl">
+                Paste or type your own Python code and watch it execute — every line, variable,
+                loop iteration, and recursive call animated step by step.
+              </p>
+            </div>
+          </div>
+        </Link>
+
         {categories.map((cat) => {
           const algos = getAlgorithmsByCategory(cat.id);
           const ready = algos.length > 0;

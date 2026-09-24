@@ -18,7 +18,7 @@ import { usePlayerStore, useCurrentStep } from '../../core/player';
 import type { AlgorithmCategory, LoopScope } from '../../core/types';
 
 /** Derive loop scopes (for rails) from pseudocode indentation. */
-function parseLoops(pseudocode: { text: string; indent: number; isLoopHeader?: boolean; loopLabel?: string }[]): LoopScope[] {
+export function parseLoops(pseudocode: { text: string; indent: number; isLoopHeader?: boolean; loopLabel?: string }[]): LoopScope[] {
   const scopes: LoopScope[] = [];
   pseudocode.forEach((line, i) => {
     if (!line.isLoopHeader) return;

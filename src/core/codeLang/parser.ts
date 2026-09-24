@@ -3,8 +3,11 @@ import { LangError, tokenize, type Token } from './lexer';
 
 class Parser {
   private pos = 0;
+  private readonly toks: Token[];
 
-  constructor(private readonly toks: Token[]) {}
+  constructor(toks: Token[]) {
+    this.toks = toks;
+  }
 
   private peek(offset = 0): Token {
     return this.toks[Math.min(this.pos + offset, this.toks.length - 1)];
