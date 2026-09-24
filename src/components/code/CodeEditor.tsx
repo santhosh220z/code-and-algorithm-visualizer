@@ -14,9 +14,10 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
         <label className="flex items-center gap-2">
           <span className="text-[10.5px] uppercase tracking-wider text-[var(--color-text-muted)]">Language</span>
           <select
-            value="miniPython"
-            onChange={() => {}}
-            className="px-2.5 py-1.5 rounded-lg bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[12px] text-[var(--color-text)] focus:border-[var(--color-accent)] focus:outline-none"
+            defaultValue="miniPython"
+            disabled
+            title="Only one language is supported right now"
+            className="px-2.5 h-9 rounded-lg bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[12px] text-[var(--color-text)] cursor-not-allowed opacity-70"
             aria-label="Language"
           >
             <option value="miniPython">{CODE_LANGUAGE_LABEL}</option>
@@ -34,9 +35,13 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
       {error && (
         <div
           role="alert"
-          className="mb-3 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-[12px] font-mono text-red-300"
+          className="mb-3 flex items-start gap-2 px-3 py-2 rounded-lg bg-[var(--color-danger-bg)] border border-[var(--color-danger-border)] text-[12px] font-mono text-[var(--color-danger)]"
         >
-          {error}
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="shrink-0 mt-0.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v5M12 16.5v.01" />
+          </svg>
+          <span>{error}</span>
         </div>
       )}
 

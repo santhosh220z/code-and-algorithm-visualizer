@@ -70,7 +70,7 @@ export function PlayerControls() {
   }, [togglePlay, stepForward, stepBackward, jumpToStart, jumpToEnd]);
 
   const btn =
-    'flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)] hover:-translate-y-px active:scale-90 transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none';
+    'flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-4)] hover:border-[var(--color-border-strong)] hover:-translate-y-px active:scale-90 transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none';
 
   return (
     <div className="shrink-0 flex flex-col gap-2 px-4 py-3 bg-[var(--color-bg-elevated)] border-t border-[var(--color-border)]">
@@ -83,7 +83,7 @@ export function PlayerControls() {
           <Icon path="M15 6v12l-9-6z" />
         </button>
         <button
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-ink)] hover:bg-[var(--color-accent-hover)] hover:scale-105 active:scale-95 transition-all duration-150 shadow-[0_0_16px_var(--color-accent-ring)] disabled:opacity-40 disabled:pointer-events-none"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-ink)] hover:bg-[var(--color-accent-hover)] hover:scale-105 active:scale-95 transition-all duration-150 shadow-[0_0_16px_var(--color-accent-ring)] disabled:opacity-40 disabled:pointer-events-none"
           onClick={togglePlay}
           disabled={!steps.length}
           title={isPlaying ? 'Pause (Space)' : 'Play (Space)'}
@@ -107,13 +107,16 @@ export function PlayerControls() {
         </button>
 
         {/* Speed selector */}
-        <div className="ml-3 flex items-center rounded-lg overflow-hidden border border-[var(--color-border)]">
+        <div className="ml-3 flex items-center rounded-lg overflow-hidden border border-[var(--color-border)]" role="group" aria-label="Playback speed">
           {SPEEDS.map((s) => (
             <button
               key={s}
               onClick={() => setSpeed(s)}
-              className={`px-2.5 h-9 text-[11px] font-mono transition-colors ${
-                speed === s ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)]' : 'bg-[var(--color-surface-3)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+              aria-pressed={speed === s}
+              className={`px-3 h-10 text-[11px] font-mono transition-colors border-r border-[var(--color-border)] last:border-r-0 ${
+                speed === s
+                  ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold'
+                  : 'bg-[var(--color-surface-3)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-4)]'
               }`}
             >
               {s}×
@@ -130,8 +133,12 @@ export function PlayerControls() {
           max={steps.length - 1}
           value={cursor}
           onChange={(e) => setCursor(Number(e.target.value))}
-          className="w-full accent-[var(--color-accent)] cursor-pointer"
+          className="w-full accent-[var(--color-accent)] cursor-pointer h-1"
           aria-label="Scrub through steps"
+          aria-valuemin={0}
+          aria-valuemax={steps.length - 1}
+          aria-valuenow={cursor}
+          aria-valuetext={`Step ${cursor + 1} of ${steps.length}`}
         />
       )}
     </div>

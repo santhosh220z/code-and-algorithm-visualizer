@@ -29,10 +29,10 @@ export interface CategoryInfo {
 export const categories: CategoryInfo[] = [
   { id: 'sorting', name: 'Sorting', icon: 'bars', description: 'Rearrange elements into order' },
   { id: 'search', name: 'Searching', icon: 'magnifier', description: 'Find a target in a collection' },
-  { id: 'graph', name: 'Graph Traversal', icon: 'network', description: 'Explore nodes and edges (coming soon)' },
-  { id: 'grid', name: 'Pathfinding', icon: 'grid', description: 'Navigate grids around obstacles (coming soon)' },
-  { id: 'ds', name: 'Data Structures', icon: 'tree', description: 'Lists, trees, stacks and queues (coming soon)' },
-  { id: 'dp', name: 'Dynamic Programming', icon: 'table', description: 'Build up optimal solutions (coming soon)' },
+  { id: 'graph', name: 'Graph Traversal', icon: 'network', description: 'Explore nodes and edges across a graph' },
+  { id: 'grid', name: 'Pathfinding', icon: 'grid', description: 'Navigate grids around walls and weighted terrain' },
+  { id: 'ds', name: 'Data Structures', icon: 'tree', description: 'Lists, trees, stacks, queues and hash tables' },
+  { id: 'dp', name: 'Dynamic Programming', icon: 'table', description: 'Build up optimal solutions with tables' },
   { id: 'recursion', name: 'Recursion', icon: 'recurse', description: 'Functions that call themselves' },
 ];
 
