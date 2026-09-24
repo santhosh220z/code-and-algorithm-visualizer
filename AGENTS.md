@@ -33,7 +33,7 @@ Rules:
 **Stack**: React 19 + TypeScript + Vite + Zustand + TailwindCSS v4 + React Router 7
 
 **Entry points**:
-- `src/main.tsx` → `src/App.tsx` (routes: `/`, `/category/:id`, `/algorithm/:id`)
+- `src/main.tsx` → `src/App.tsx` (routes: `/`, `/algo/:category`, `/algo/:category/:id`, `/code`)
 - Algorithms auto-register via side-effect imports in `src/algos/<category>/index.ts`
 
 **Core types** (`src/core/types.ts`):
@@ -60,6 +60,20 @@ Rules:
 **Visualizers** (`src/components/viz/`):
 - `ArrayViz`, `GraphViz`, `GridViz` — render `Step.viz` payload
 
+**Shared step helpers** (`src/core/stepHelpers.ts`):
+- Single home for `LoopInfo`/`StackFrame` types plus `makeArrayStep`, `makeTableStep`,
+  `highlight*`, `makePointer`, `frame`, `table*` builders. Category `helpers.ts` files
+  re-export from here — import shared builders from `core/stepHelpers`, not from a
+  sibling category.
+
+**Code Visualizer** (`src/core/codeLang/`, `src/core/codeRunner.ts`):
+- `codeLang/` = miniPython lexer → recursive-descent parser → tree-walking interpreter
+- `interpretSource(src)` returns `{ steps, truncated, error, errorLine, loopLines, funcLines }`
+- Emits one `Step` per executed statement; `Step.line` is the 0-based source line
+- `codeRunner.ts` compiles a pasted program into a synthetic `AlgorithmDef` and pushes it
+  into `usePlayerStore`, so `/code` reuses PlayerControls/CodePanel/VarsPanel as-is
+- Step budget (5000) and call-depth cap (200) prevent runaway hangs
+
 ---
 
 ## Testing
@@ -71,6 +85,7 @@ Rules:
 - Graph/grid tests verify: path optimality, wall respect, cost matching, directed behavior, ID regeneration
 - Sorting tests verify: final sorted array, pseudocode line validity, semantic line matching, no duplicate values mid-trace
 - Search tests verify: correct index/pair finding
+- `codeLang.test.ts` verifies: lexer/parser, interpreter semantics (loops, recursion, lists, branching), step-line mapping, the step budget, and the codeRunner → player store integration
 
 **Note**: `graph.test.ts` — "bfs path has minimal hop count" was once flaky; it now computes the expected hop count dynamically from the deterministic `SAMPLE_GRAPH` (`directed: false`), so ordering is stable.
 
@@ -109,12 +124,16 @@ src/
 │   └── <category>/index.ts   # side-effect imports for registration
 ├── core/
 │   ├── types.ts     # all shared types
+│   ├── stepHelpers.ts # shared step builders
 │   ├── registry.ts  # algorithm registry + categories
 │   ├── player.ts    # Zustand store + step collection
-│   └── presets.ts   # random graph/grid generators
+│   ├── presets.ts   # random graph/grid generators
+│   ├── codeRunner.ts # Code Visualizer store + snippets
+│   └── codeLang/    # miniPython lexer, parser, interpreter
 ├── components/
 │   ├── viz/         # ArrayViz, GraphViz, GridViz
 │   ├── panels/      # CodePanel, VarsPanel, NarrationBar
+│   ├── code/        # CodeEditor, ConsolePanel
 │   ├── player/      # PlayerControls, EditorToolbar
 │   └── layout/      # Layout, Sidebar
 └── tests/           # vitest files
