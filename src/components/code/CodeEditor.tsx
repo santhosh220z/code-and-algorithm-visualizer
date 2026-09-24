@@ -99,6 +99,7 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
           <span>variables: a = 1, a += 2</span>
           <span>conditionals: if / elif / else</span>
           <span>loops: while, for x in range(n)</span>
+          <span>loop control: break, continue</span>
           <span>functions: def f(x): + return</span>
           <span>lists: [1, 2, 3], a[i], a.append(v)</span>
           <span>builtins: print, range, len, sum, min, max, abs, round, sqrt</span>

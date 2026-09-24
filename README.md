@@ -27,6 +27,7 @@ Supported constructs (a teaching subset of Python, interpreted in the browser �
 | Variables & compound assignment | `a = 1`, `a += 2` |
 | Conditionals | `if` / `elif` / `else` |
 | Loops | `while cond:`, `for x in range(n):` |
+| Loop control | `break`, `continue` |
 | Functions & recursion | `def f(n):` … `return` |
 | Lists | `[1, 2, 3]`, `a[i]`, `a.append(v)`, `a.pop()`, … |
 | Output | `print(...)` |

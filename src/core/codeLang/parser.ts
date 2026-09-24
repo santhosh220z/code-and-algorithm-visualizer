@@ -88,6 +88,10 @@ class Parser {
           return this.defStmt(loopLines, funcLines);
         case 'return':
           return this.returnStmt();
+        case 'break':
+          return this.jumpStmt('break');
+        case 'continue':
+          return this.jumpStmt('continue');
       }
     }
 
@@ -168,6 +172,12 @@ class Parser {
     }
     this.skipLineEnd();
     return { kind: 'return', value, line };
+  }
+
+  private jumpStmt(kind: 'break' | 'continue'): Stmt {
+    const line = this.expect('name', kind).line;
+    this.skipLineEnd();
+    return { kind, line };
   }
 
   private block(loopLines: Set<number>, funcLines: Set<number>): Stmt[] {

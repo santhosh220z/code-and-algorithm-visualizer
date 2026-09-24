@@ -53,6 +53,7 @@ found = -1
 for i in range(len(nums)):
     if nums[i] == target:
         found = i
+        break
 
 print("target at index", found)
 `,
@@ -81,6 +82,18 @@ for i in range(1, 6):
     squares.append(i * i)
 
 print(squares)
+`,
+  },
+  {
+    id: 'evens',
+    name: 'Skip Odds',
+    description: 'continue inside a for loop',
+    source: `nums = [1, 2, 3, 4, 5, 6, 7, 8]
+
+for n in nums:
+    if n % 2 == 1:
+        continue
+    print("even:", n)
 `,
   },
   {

@@ -22,6 +22,8 @@ export type Stmt =
   | { kind: 'for'; varName: string; iterable: Expr; body: Stmt[]; line: number }
   | { kind: 'def'; name: string; params: string[]; body: Stmt[]; line: number }
   | { kind: 'return'; value: Expr | null; line: number }
+  | { kind: 'break'; line: number }
+  | { kind: 'continue'; line: number }
   | { kind: 'expr'; value: Expr; line: number };
 
 export interface MiniProgram {

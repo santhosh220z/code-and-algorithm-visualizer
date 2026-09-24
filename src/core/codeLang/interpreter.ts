@@ -2,7 +2,7 @@ import type { Expr, Stmt } from './ast';
 import { parse } from './parser';
 import { LangError } from './lexer';
 import { toStepLine } from './toPseudocode';
-import type { Step } from '../types';
+import type { ArrayHighlight, Step } from '../types';
 
 export type PyValue = number | string | boolean | null | PyValue[];
 
@@ -30,6 +30,24 @@ class ReturnSignal {
 }
 
 class StopSignal extends Error {}
+
+/** Thrown by `break`; caught by the nearest enclosing loop only. */
+class BreakSignal extends Error {
+  readonly atLine: number;
+  constructor(atLine: number) {
+    super('break');
+    this.atLine = atLine;
+  }
+}
+
+/** Thrown by `continue`; caught by the nearest enclosing loop only. */
+class ContinueSignal extends Error {
+  readonly atLine: number;
+  constructor(atLine: number) {
+    super('continue');
+    this.atLine = atLine;
+  }
+}
 
 export interface InterpretResult {
   steps: Step[];
@@ -71,6 +89,17 @@ export function interpretSource(src: string): InterpretResult {
   const loops: LoopCtx[] = [];
   const funcs = new Map<string, FuncDef>();
   const arrayRefs = new Map<PyValue[], string>();
+  /** The list element most recently read or written, highlighted in the viz. */
+  const active: { array: PyValue[] | null; index: number; kind: ArrayHighlight['kind'] } = {
+    array: null,
+    index: -1,
+    kind: 'current',
+  };
+  const touch = (arr: PyValue[], index: number, kind: ArrayHighlight['kind']): void => {
+    active.array = arr;
+    active.index = index;
+    active.kind = kind;
+  };
   let truncated = false;
   let error: string | null = null;
   let errorLine: number | null = null;
@@ -104,7 +133,11 @@ export function interpretSource(src: string): InterpretResult {
     if (arrayRefs.size === 0) return { type: 'none' };
     const arr = [...arrayRefs.keys()].pop();
     if (!arr || arr.length === 0) return { type: 'none' };
-    return { type: 'array', array: arr.map(toNum), highlights: [], pointers: [] };
+    const highlights =
+      active.array === arr && active.index >= 0 && active.index < arr.length
+        ? [{ index: active.index, kind: active.kind }]
+        : [];
+    return { type: 'array', array: arr.map(toNum), highlights, pointers: [] };
   };
 
   const emit = (line: number, description: string): void => {
@@ -239,6 +272,13 @@ export function interpretSource(src: string): InterpretResult {
       return null;
     } catch (e) {
       if (e instanceof ReturnSignal) return e.value;
+      // break/continue only apply to loops in the current function.
+      if (e instanceof BreakSignal || e instanceof ContinueSignal) {
+        throw new LangError(
+          `${e.message} is only valid inside a loop in the same function`,
+          e.atLine
+        );
+      }
       throw e;
     } finally {
       scopes.pop();
@@ -295,6 +335,7 @@ export function interpretSource(src: string): InterpretResult {
         const idx = toNum(evalExpr(node.index));
         if (!Array.isArray(target)) throw new LangError('can only index lists', node.line);
         if (idx < 0 || idx >= target.length) throw new LangError(`list index out of range (${idx})`, node.line);
+        touch(target, idx, 'current');
         return target[idx];
       }
       case 'assignIndex':
@@ -355,6 +396,7 @@ export function interpretSource(src: string): InterpretResult {
           if (!Array.isArray(target)) throw new LangError('can only assign into lists', stmt.line);
           if (idx < 0 || idx >= target.length) throw new LangError(`list index out of range (${idx})`, stmt.line);
           target[idx] = value;
+          touch(target, idx, 'swap');
           const name = arrayRefs.get(target) ?? 'list';
           emit(stmt.line, `Set ${name}[${idx}] = ${format(value)}`);
           break;
@@ -376,6 +418,19 @@ export function interpretSource(src: string): InterpretResult {
       }
 
       case 'expr': {
+        // The parser folds `a[i] = v` into an expression statement.
+        if (stmt.value.kind === 'assignIndex') {
+          const target = evalExpr(stmt.value.target);
+          const idx = toNum(evalExpr(stmt.value.index));
+          const value = evalExpr(stmt.value.value);
+          if (!Array.isArray(target)) throw new LangError('can only assign into lists', stmt.line);
+          if (idx < 0 || idx >= target.length) throw new LangError(`list index out of range (${idx})`, stmt.line);
+          target[idx] = value;
+          touch(target, idx, 'swap');
+          const name = arrayRefs.get(target) ?? 'list';
+          emit(stmt.line, `Set ${name}[${idx}] = ${format(value)}`);
+          break;
+        }
         if (stmt.value.kind === 'methodCall') {
           const arr = evalExpr(stmt.value.target);
           const name = Array.isArray(arr) ? arrayRefs.get(arr) ?? 'list' : 'list';
@@ -416,6 +471,7 @@ export function interpretSource(src: string): InterpretResult {
 
       case 'while': {
         let iteration = 0;
+        let brokeOut = false;
         for (;;) {
           if (steps.length >= MAX_STEPS) {
             truncated = true;
@@ -430,33 +486,66 @@ export function interpretSource(src: string): InterpretResult {
           }
           loops.push({ label: 'while', iteration });
           emit(stmt.line, `while ${format(cond)} → iteration ${iteration}`);
-          execBlock(stmt.body);
+          try {
+            execBlock(stmt.body);
+          } catch (e) {
+            if (e instanceof BreakSignal) {
+              brokeOut = true;
+            } else if (!(e instanceof ContinueSignal)) {
+              loops.pop();
+              throw e;
+            }
+          }
           loops.pop();
+          if (brokeOut) {
+            emit(stmt.line, `while loop exited early via break after ${iteration} iteration(s)`);
+            break;
+          }
         }
         break;
       }
 
       case 'for': {
-        const iterable = evalExpr(stmt.iterable);
-        const items = Array.isArray(iterable) ? iterable : typeof iterable === 'string' ? iterable.split('') : [];
+        const sourceArray = evalExpr(stmt.iterable);
+        const items = Array.isArray(sourceArray) ? sourceArray : typeof sourceArray === 'string' ? sourceArray.split('') : [];
+        if (Array.isArray(sourceArray)) touch(sourceArray, 0, 'current');
         if (items.length === 0) {
           emit(stmt.line, `for loop has nothing to iterate over → skipped`);
           break;
         }
         loops.push({ label: 'for', iteration: 0 });
+        let brokeOut = false;
+        let ran = 0;
         for (let i = 0; i < items.length; i++) {
           if (steps.length >= MAX_STEPS) {
             truncated = true;
             emit(stmt.line, `Step limit of ${MAX_STEPS} reached → stopping`);
             throw new StopSignal();
           }
+          ran = i + 1;
           assign(stmt.varName, items[i]);
+          if (Array.isArray(sourceArray)) touch(sourceArray, i, 'current');
           loops[loops.length - 1] = { label: 'for', iteration: i + 1 };
           emit(stmt.line, `for ${stmt.varName} = ${format(items[i])} (iteration ${i + 1} of ${items.length})`);
-          execBlock(stmt.body);
+          try {
+            execBlock(stmt.body);
+          } catch (e) {
+            if (e instanceof BreakSignal) {
+              brokeOut = true;
+            } else if (!(e instanceof ContinueSignal)) {
+              loops.pop();
+              throw e;
+            }
+          }
+          if (brokeOut) break;
         }
         loops.pop();
-        emit(stmt.line, `for loop complete after ${items.length} iteration(s)`);
+        emit(
+          stmt.line,
+          brokeOut
+            ? `for loop exited early via break after ${ran} iteration(s)`
+            : `for loop complete after ${items.length} iteration(s)`
+        );
         break;
       }
 
@@ -465,6 +554,14 @@ export function interpretSource(src: string): InterpretResult {
         if (Array.isArray(value)) arrayRefs.set(value, 'return');
         throw new ReturnSignal(value);
       }
+
+      case 'break':
+        emit(stmt.line, 'break → exit the loop');
+        throw new BreakSignal(stmt.line);
+
+      case 'continue':
+        emit(stmt.line, 'continue → skip to the next iteration');
+        throw new ContinueSignal(stmt.line);
     }
   }
 
@@ -473,9 +570,14 @@ export function interpretSource(src: string): InterpretResult {
   try {
     execBlock(program.stmts);
   } catch (e) {
-    if (!(e instanceof StopSignal)) {
+    if (e instanceof BreakSignal || e instanceof ContinueSignal) {
+      error = `${e.message} is only valid inside a loop`;
+      errorLine = e.atLine;
+    } else if (!(e instanceof StopSignal)) {
       error = e instanceof Error ? e.message : 'Runtime error';
       errorLine = e instanceof LangError ? e.line : null;
+    }
+    if (error) {
       steps.push({
         line: errorLine !== null ? toStepLine(errorLine) : 0,
         description: `Runtime error: ${error}`,

@@ -142,6 +142,85 @@ describe('miniPython interpreter', () => {
   });
 });
 
+describe('break and continue', () => {
+  it('break exits a for loop early', () => {
+    const src = 'for i in range(10):\n    if i == 3:\n        break\n    print(i)';
+    const { steps, error } = interpretSource(src);
+    expect(error).toBeNull();
+    expect(lastConsole(src)).toEqual(['0', '1', '2']);
+    expect(steps.some((s) => s.description.includes('exited early via break'))).toBe(true);
+  });
+
+  it('break exits a while loop early', () => {
+    const src = 'i = 0\nwhile i < 100:\n    i = i + 1\n    if i == 2:\n        break\nprint(i)';
+    expect(lastConsole(src)).toEqual(['2']);
+  });
+
+  it('continue skips the rest of the iteration', () => {
+    const src = 'for i in range(5):\n    if i % 2 == 0:\n        continue\n    print(i)';
+    const { error } = interpretSource(src);
+    expect(error).toBeNull();
+    expect(lastConsole(src)).toEqual(['1', '3']);
+  });
+
+  it('continue in a while loop still advances the condition', () => {
+    const src = 'i = 0\nn = 0\nwhile i < 4:\n    i = i + 1\n    if i == 2:\n        continue\n    n = n + i\nprint(n)';
+    expect(lastConsole(src)).toEqual(['8']);
+  });
+
+  it('reports an error for break outside a loop', () => {
+    const { error } = interpretSource('break');
+    expect(error).toMatch(/only valid inside a loop/i);
+  });
+
+  it('reports an error for continue outside a loop', () => {
+    const { error } = interpretSource('continue');
+    expect(error).toMatch(/only valid inside a loop/i);
+  });
+
+  it('does not let break inside a function escape to the caller loop', () => {
+    const src = 'def f():\n    break\n\nfor i in range(3):\n    f()';
+    const { error } = interpretSource(src);
+    expect(error).toMatch(/only valid inside a loop/i);
+  });
+});
+
+describe('array visualization highlights', () => {
+  it('highlights the element being indexed', () => {
+    const src = 'nums = [4, 8, 15]\nprint(nums[1])';
+    const { steps } = interpretSource(src);
+    const indexed = steps.find(
+      (s) => s.viz.type === 'array' && s.viz.highlights.length > 0
+    );
+    expect(indexed).toBeDefined();
+    if (indexed?.viz.type === 'array') {
+      expect(indexed.viz.highlights[0].index).toBe(1);
+    }
+  });
+
+  it('highlights the position written by an indexed assignment', () => {
+    const src = 'nums = [1, 2, 3]\nnums[2] = 99';
+    const { steps } = interpretSource(src);
+    const write = steps.find((s) => s.description.includes('[2] ='));
+    expect(write).toBeDefined();
+    if (write?.viz.type === 'array') {
+      expect(write.viz.highlights[0].index).toBe(2);
+      expect(write.viz.array).toEqual([1, 2, 99]);
+    }
+  });
+
+  it('walks the highlight while iterating a list', () => {
+    const src = 'nums = [7, 8, 9]\nfor n in nums:\n    print(n)';
+    const { steps } = interpretSource(src);
+    const seen = new Set<number>();
+    for (const s of steps) {
+      if (s.viz.type !== 'array') continue;
+      for (const h of s.viz.highlights) seen.add(h.index);
+    }
+    expect([...seen].sort()).toEqual([0, 1, 2]);
+  });
+});
+
 describe('toPseudocode', () => {
   it('maps source lines to pseudocode lines preserving text', () => {
     const src = 'a = 1\nif a > 0:\n    print(a)';
