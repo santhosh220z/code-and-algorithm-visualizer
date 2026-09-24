@@ -13,6 +13,8 @@ export interface Step {
   vars?: Record<string, unknown>;
   loops?: { label: string; iteration: number }[];
   stack?: { fn: string; args: Record<string, unknown> }[];
+  /** Accumulated stdout snapshot — used by the code visualizer's console panel. */
+  console?: string[];
   viz: VizPayload;
 }
 
