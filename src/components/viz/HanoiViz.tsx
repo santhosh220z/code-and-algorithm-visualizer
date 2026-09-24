@@ -8,6 +8,7 @@ import {
   hanoiDiskWidth,
   hanoiRestY,
 } from '../../algos/recursion/hanoiGeometry';
+import { VIZ } from './palette';
 
 const PEG_LABELS: ('A' | 'B' | 'C')[] = ['A', 'B', 'C'];
 
@@ -23,10 +24,10 @@ const DISK_H = HANOI_DISK_H;
 const PEG_X = HANOI_PEG_X;
 
 const DISK_COLORS = [
-  '#f87171',
+  VIZ.compare,
   '#fb923c',
-  '#fbbf24',
-  '#4ade80',
+  VIZ.swap,
+  VIZ.sorted,
   '#38bdf8',
   '#a78bfa',
   '#f472b6',

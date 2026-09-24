@@ -3,27 +3,28 @@ import { usePlayerStore } from '../../core/player';
 import { useEditorStore } from '../../core/editorStore';
 import { nextNodeId } from '../../core/presets';
 import type { GraphEdgeBase, GraphInputData, GraphNodeHighlight, GraphEdgeHighlight, AlgorithmInput } from '../../core/types';
+import { VIZ } from './palette';
 
 const NODE_FILL: Record<string, string> = {
-  current: '#a855f7',
-  path: '#4ade80',
-  frontier: '#fbbf24',
-  visited: '#3b5b82',
-  default: '#23242f',
+  current: VIZ.pivot,
+  path: VIZ.sorted,
+  frontier: VIZ.swap,
+  visited: VIZ.nodeFill,
+  default: VIZ.idle,
 };
 
 const NODE_STROKE: Record<string, string> = {
-  current: '#c084fc',
-  path: '#86efac',
-  frontier: '#fcd34d',
-  visited: '#60a5fa',
-  default: '#3a3d49',
+  current: VIZ.pivot,
+  path: VIZ.sorted,
+  frontier: VIZ.swap,
+  visited: VIZ.active,
+  default: VIZ.idleStrong,
 };
 
 const EDGE_STROKE: Record<string, string> = {
-  path: '#4ade80',
-  comparing: '#f87171',
-  relaxed: '#fbbf24',
+  path: VIZ.sorted,
+  comparing: VIZ.compare,
+  relaxed: VIZ.swap,
   default: '#33364a',
 };
 
@@ -280,7 +281,7 @@ export function GraphViz() {
               <circle
                 cx={n.x} cy={n.y} r={r}
                 fill={fill}
-                stroke={isStart ? '#4ade80' : isEnd ? '#f87171' : ring}
+                stroke={isStart ? VIZ.sorted : isEnd ? VIZ.compare : ring}
                 strokeWidth={isStart || isEnd ? 0.8 : 0.45}
                 style={{
                   transition: 'fill 180ms ease, stroke 180ms ease',
@@ -309,7 +310,7 @@ export function GraphViz() {
               )}
               {distLabel !== '' && (
                 <text x={n.x} y={n.y + r + 2.8} textAnchor="middle" fontSize={2.4}
-                  fill={kind === 'frontier' ? '#fcd34d' : kind === 'current' ? '#c084fc' : '#8fa8c9'}
+                  fill={kind === 'frontier' ? VIZ.swap : kind === 'current' ? VIZ.pivot : '#8fa8c9'}
                   fontFamily="JetBrains Mono, monospace" fontWeight={600}
                   paintOrder="stroke" stroke="#16171d" strokeWidth={0.8} style={{ pointerEvents: 'none' }}>
                   d={distLabel}

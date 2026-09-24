@@ -1,4 +1,5 @@
 import type { ArrayHighlight, Pointer } from '../../core/types';
+import { VIZ, EASE, SPRING } from './palette';
 
 interface ArrayVizProps {
   array: number[];
@@ -7,16 +8,14 @@ interface ArrayVizProps {
 }
 
 const COLORS: Record<ArrayHighlight['kind'], string> = {
-  compare: '#f87171',
-  swap: '#fbbf24',
-  sorted: '#4ade80',
-  pivot: '#a855f7',
-  current: '#60a5fa',
-  trail: 'rgba(96,165,250,0.45)',
+  compare: VIZ.compare,
+  swap: VIZ.swap,
+  sorted: VIZ.sorted,
+  pivot: VIZ.pivot,
+  current: VIZ.active,
+  trail: VIZ.trail,
 };
 
-const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
-const SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 
 export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
   if (array.length === 0) {
@@ -66,7 +65,7 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
             >
               <span
                 className="text-[10px] font-mono font-semibold leading-tight whitespace-nowrap"
-                style={{ color: p.color ?? '#a855f7' }}
+                style={{ color: p.color ?? VIZ.pivot }}
               >
                 ▾{p.label}
               </span>
@@ -79,7 +78,7 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
       <div className="flex items-end mx-auto" style={{ gap: `${gap}px`, height: chartH + 24 }}>
         {array.map((value, i) => {
           const kind = kindOf.get(i);
-          const color = kind ? COLORS[kind] : '#374151';
+          const color = kind ? COLORS[kind] : VIZ.idle;
           const h = Math.max(6, (value / max) * chartH);
           const glowing = kind === 'compare' || kind === 'swap' || kind === 'current';
           return (

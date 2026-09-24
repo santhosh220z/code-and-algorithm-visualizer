@@ -1,21 +1,22 @@
 import type { TableCell, TableHighlight } from '../../core/types';
+import { VIZ } from './palette';
 
 const CELL_FILL: Record<TableHighlight['kind'], string> = {
-  compute: '#fbbf24',
-  read: '#60a5fa',
-  result: '#4ade80',
-  current: '#a855f7',
+  compute: VIZ.swap,
+  read: VIZ.active,
+  result: VIZ.sorted,
+  current: VIZ.pivot,
 };
 
 const CELL_STROKE: Record<TableHighlight['kind'], string> = {
-  compute: '#fcd34d',
-  read: '#93c5fd',
-  result: '#86efac',
-  current: '#c084fc',
+  compute: VIZ.swap,
+  read: VIZ.active,
+  result: VIZ.sorted,
+  current: VIZ.pivot,
 };
 
 const DEFAULT_FILL = '#1c1d26';
-const DEFAULT_STROKE = '#3a3d49';
+const DEFAULT_STROKE = VIZ.idleStrong;
 const COMPUTED_FILL = '#2a2d3e';
 
 export function TableViz({ table, highlights }: { table: TableCell[][]; highlights: TableHighlight[] }) {
@@ -137,7 +138,7 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
                   fontSize={13}
                   fontFamily="JetBrains Mono, monospace"
                   fontWeight={cell.computed ? 600 : 400}
-                  fill={kind ? '#0f1015' : cell.computed ? '#4ade80' : '#c8ccd8'}
+                  fill={kind ? '#0f1015' : cell.computed ? VIZ.sorted : '#c8ccd8'}
                   style={{ pointerEvents: 'none', userSelect: 'none' }}
                 >
                   {cell.value}

@@ -1,19 +1,20 @@
 import type { ListNode, ListHighlight } from '../../core/types';
+import { VIZ } from './palette';
 
 const NODE_FILL: Record<ListHighlight['kind'], string> = {
-  visit: '#3b5b82',
-  insert: '#4ade80',
-  delete: '#f87171',
-  current: '#a855f7',
-  trail: '#60a5fa',
+  visit: VIZ.nodeFill,
+  insert: VIZ.sorted,
+  delete: VIZ.compare,
+  current: VIZ.pivot,
+  trail: VIZ.active,
 };
 
 const NODE_STROKE: Record<ListHighlight['kind'], string> = {
-  visit: '#60a5fa',
-  insert: '#86efac',
+  visit: VIZ.active,
+  insert: VIZ.sorted,
   delete: '#fca5a5',
-  current: '#c084fc',
-  trail: '#93c5fd',
+  current: VIZ.pivot,
+  trail: VIZ.active,
 };
 
 const NODE_WIDTH = 60;
@@ -71,8 +72,8 @@ export function ListViz({ nodes, highlights }: { nodes: ListNode[]; highlights: 
         {orderedNodes.map((node, i) => {
           const hi = hiMap.get(node.id);
           const kind = hi?.kind;
-          const fill = kind ? NODE_FILL[kind] : '#23242f';
-          const stroke = kind ? NODE_STROKE[kind] : '#3a3d49';
+          const fill = kind ? NODE_FILL[kind] : VIZ.idle;
+          const stroke = kind ? NODE_STROKE[kind] : VIZ.idleStrong;
 
           const x = i * (NODE_WIDTH + GAP);
           const y = 0;

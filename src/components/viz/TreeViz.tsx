@@ -1,21 +1,22 @@
 import type { TreeNode, TreeHighlight } from '../../core/types';
+import { VIZ } from './palette';
 
 const NODE_FILL: Record<TreeHighlight['kind'], string> = {
-  visit: '#3b5b82',
-  insert: '#4ade80',
-  delete: '#f87171',
-  search: '#fbbf24',
-  current: '#a855f7',
-  trail: '#60a5fa',
+  visit: VIZ.nodeFill,
+  insert: VIZ.sorted,
+  delete: VIZ.compare,
+  search: VIZ.swap,
+  current: VIZ.pivot,
+  trail: VIZ.active,
 };
 
 const NODE_STROKE: Record<TreeHighlight['kind'], string> = {
-  visit: '#60a5fa',
-  insert: '#86efac',
+  visit: VIZ.active,
+  insert: VIZ.sorted,
   delete: '#fca5a5',
-  search: '#fcd34d',
-  current: '#c084fc',
-  trail: '#93c5fd',
+  search: VIZ.swap,
+  current: VIZ.pivot,
+  trail: VIZ.active,
 };
 
 const NODE_RADIUS = 18;
@@ -117,8 +118,8 @@ export function TreeViz({ nodes, highlights }: { nodes: TreeNode[]; highlights: 
         {positionedNodes.map((node) => {
           const hi = hiMap.get(node.id);
           const kind = hi?.kind;
-          const fill = kind ? NODE_FILL[kind] : '#23242f';
-          const stroke = kind ? NODE_STROKE[kind] : '#3a3d49';
+          const fill = kind ? NODE_FILL[kind] : VIZ.idle;
+          const stroke = kind ? NODE_STROKE[kind] : VIZ.idleStrong;
 
           return (
             <g key={node.id} style={{ transition: 'all 200ms ease' }}>

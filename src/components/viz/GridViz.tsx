@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { usePlayerStore } from '../../core/player';
 import { useEditorStore } from '../../core/editorStore';
 import type { AlgorithmInput, GridHighlight, GridInputData } from '../../core/types';
+import { VIZ } from './palette';
 
 const CELL = 10;
 
@@ -10,7 +11,7 @@ const FILL = {
   wall: '#0b0c11',
   visited: '#31465f',
   frontier: '#8a6a15',
-  current: '#a855f7',
+  current: VIZ.pivot,
   path: '#2f7d4f',
 };
 
@@ -214,7 +215,7 @@ export function GridViz() {
               fontSize={2.8}
               fontFamily="JetBrains Mono, monospace"
               fontWeight={600}
-              fill={h.kind === 'frontier' ? '#fcd34d' : h.kind === 'current' ? '#e9d5ff' : '#9db4d0'}
+              fill={h.kind === 'frontier' ? VIZ.swap : h.kind === 'current' ? '#e9d5ff' : '#9db4d0'}
               style={{ pointerEvents: 'none', userSelect: 'none' }}
             >
               {Math.round(h.g! * 100) / 100}
@@ -225,7 +226,7 @@ export function GridViz() {
               <rect
                 x={c * CELL + 1.2} y={r * CELL + 1.2} width={CELL - 2.4} height={CELL - 2.4} rx={1.6}
                 fill={isStart ? '#14532d' : '#7f1d1d'}
-                stroke={isStart ? '#4ade80' : '#f87171'}
+                stroke={isStart ? VIZ.sorted : VIZ.compare}
                 strokeWidth={0.45}
                 style={{ pointerEvents: 'none', transition: 'x 120ms ease, y 120ms ease' }}
               />
@@ -233,7 +234,7 @@ export function GridViz() {
                 x={c * CELL + CELL / 2} y={r * CELL + CELL / 2 + 1}
                 textAnchor="middle" fontSize={4} fontWeight={700}
                 fontFamily="Inter, sans-serif"
-                fill={isStart ? '#4ade80' : '#f87171'}
+                fill={isStart ? VIZ.sorted : VIZ.compare}
                 style={{ pointerEvents: 'none', userSelect: 'none' }}
               >
                 {isStart ? 'S' : 'E'}
