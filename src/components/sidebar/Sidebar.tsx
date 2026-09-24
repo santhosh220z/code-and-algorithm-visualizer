@@ -10,9 +10,9 @@ export function Sidebar() {
     <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-[var(--color-bg-elevated)] border-r border-[var(--color-border)] flex flex-col">
       <NavLink
         to="/"
-        className="flex items-center gap-2.5 px-4 h-14 border-b border-[var(--color-border)] shrink-0 hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200"
+        className="flex items-center gap-2.5 px-4 h-14 border-b border-[var(--color-border)] shrink-0 hover:bg-[var(--color-surface-2)] transition-colors duration-200"
       >
-        <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--color-accent)] text-white font-bold text-sm">A</span>
+        <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-bold text-sm">A</span>
         <span className="font-semibold text-[15px] text-white">AlgoViz</span>
       </NavLink>
 
@@ -22,8 +22,8 @@ export function Sidebar() {
           className={({ isActive }) =>
             `flex items-center gap-2.5 px-2.5 py-2 rounded-lg transition-colors duration-200 ${
               isActive
-                ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)]'
-                : 'text-[var(--color-text-muted)] hover:bg-[rgba(255,255,255,0.03)] hover:text-white'
+                ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent)]'
+                : 'text-[var(--color-text-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text)]'
             }`
           }
         >
@@ -33,7 +33,7 @@ export function Sidebar() {
           <span className="text-[12.5px] font-medium">Code Visualizer</span>
         </NavLink>
 
-        <div className="px-2.5 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wider text-[#4a4d5a]">
+        <div className="px-2.5 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-dim)]">
           Algorithms
         </div>
 
@@ -47,7 +47,7 @@ export function Sidebar() {
                 className="flex items-center justify-between px-2.5 py-2 rounded-lg opacity-45 cursor-not-allowed select-none"
               >
                 <span className="text-[12.5px] font-medium text-[var(--color-text-muted)]">{cat.name}</span>
-                <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wide bg-[#20222f] border border-[var(--color-border)] text-[#4a4d5a]">
+                <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wide bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-dim)]">
                   Soon
                 </span>
               </div>
@@ -61,7 +61,7 @@ export function Sidebar() {
                 onClick={() => toggle(cat.id)}
                 aria-expanded={isOpen}
                 className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg transition-colors duration-200 group ${
-                  isOpen ? 'bg-[rgba(255,255,255,0.04)]' : 'hover:bg-[rgba(255,255,255,0.03)]'
+                  isOpen ? 'bg-[var(--color-surface-2)]' : 'hover:bg-[var(--color-surface-2)]'
                 }`}
               >
                 <span
@@ -72,7 +72,7 @@ export function Sidebar() {
                   {cat.name}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="text-[9.5px] font-mono text-[#4a4d5a]">{algos.length}</span>
+                  <span className="text-[9.5px] font-mono text-[var(--color-text-dim)]">{algos.length}</span>
                   <svg
                     viewBox="0 0 24 24"
                     width={13}
@@ -82,7 +82,7 @@ export function Sidebar() {
                     strokeWidth={2.5}
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`text-[#4a4d5a] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                    className={`text-[var(--color-text-dim)] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
                     style={{ transitionTimingFunction: 'var(--ease-smooth)' }}
                     aria-hidden="true"
                   >
@@ -110,7 +110,7 @@ export function Sidebar() {
                             isOpen ? 'anim-item-in' : ''
                           } ${isActive
                             ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)] font-medium'
-                            : 'text-[var(--color-text-muted)] hover:bg-[rgba(255,255,255,0.04)] hover:text-white'
+                            : 'text-[var(--color-text-muted)] hover:bg-[var(--color-surface-2)] hover:text-white'
                           }`
                         }
                         style={{ animationDelay: `${idx * 35}ms` }}
@@ -126,7 +126,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="shrink-0 px-3 py-2.5 border-t border-[var(--color-border)] text-[9.5px] leading-relaxed text-[#4a4d5a] font-mono">
+      <div className="shrink-0 px-3 py-2.5 border-t border-[var(--color-border)] text-[9.5px] leading-relaxed text-[var(--color-text-dim)] font-mono">
         SPACE play/pause · ←/→ step<br />HOME/END jump
       </div>
     </aside>

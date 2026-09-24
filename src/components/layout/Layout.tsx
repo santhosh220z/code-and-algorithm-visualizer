@@ -76,7 +76,7 @@ export function Layout() {
     }
     return (
       <div className="h-full flex items-center justify-center">
-        <p className="text-sm text-[#4a4d5a] italic">Press Play or → to step through the trace.</p>
+        <p className="text-sm text-[var(--color-text-dim)] italic">Press Play or → to step through the trace.</p>
       </div>
     );
   };
@@ -95,15 +95,15 @@ export function Layout() {
           <>
             {/* Top bar */}
             <header className="shrink-0 flex items-center gap-3 px-4 py-2.5 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]">
-              <span className="text-[13px] font-semibold text-white">{algorithm?.name ?? 'Loading…'}</span>
+              <span className="text-[13px] font-semibold text-[var(--color-text)]">{algorithm?.name ?? 'Loading…'}</span>
               {algorithm && (
                 <div className="ml-auto hidden md:flex items-center gap-2 text-[10.5px] font-mono text-[var(--color-text-muted)]">
-                  <span className="px-1.5 py-0.5 rounded bg-[#20222f]">time {algorithm.complexity.time}</span>
-                  <span className="px-1.5 py-0.5 rounded bg-[#20222f]">space {algorithm.complexity.space}</span>
+                  <span className="px-1.5 py-0.5 rounded bg-[var(--color-surface-3)]">time {algorithm.complexity.time}</span>
+                  <span className="px-1.5 py-0.5 rounded bg-[var(--color-surface-3)]">space {algorithm.complexity.space}</span>
                   <button
                     onClick={() => usePlayerStore.getState().regenerate()}
                     disabled={!steps.length}
-                    className="ml-2 px-3 py-1 rounded-md text-[11px] font-sans font-medium bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)] border border-[var(--color-accent-border,#5b21b6)] hover:bg-[rgba(168,85,247,0.28)] transition-colors disabled:opacity-30"
+                    className="ml-2 px-3 py-1 rounded-md text-[11px] font-sans font-medium bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent-bg-hover)] transition-colors disabled:opacity-30"
                   >
                     ⟲ New data
                   </button>
@@ -142,7 +142,7 @@ export function Layout() {
                   </>
                 ) : (
                   <div className="h-full flex items-center justify-center">
-                    <p className="text-sm text-[#4a4d5a] italic">No algorithm selected.</p>
+                    <p className="text-sm text-[var(--color-text-dim)] italic">No algorithm selected.</p>
                   </div>
                 )}
               </aside>

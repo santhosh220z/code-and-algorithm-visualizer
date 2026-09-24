@@ -22,7 +22,7 @@ export function CodeVisualizerPage() {
     return (
       <div className="h-full min-h-0 flex flex-col">
         <header className="shrink-0 flex items-center gap-3 px-6 pt-6 pb-1">
-          <h1 className="text-xl font-bold text-white">Code Visualizer</h1>
+          <h1 className="text-xl font-bold text-[var(--color-text)]">Code Visualizer</h1>
           <p className="text-[12.5px] text-[var(--color-text-muted)]">
             Write or paste code, then step through its execution.
           </p>
@@ -48,13 +48,13 @@ function TraceStudio({ onEdit }: { onEdit: () => void }) {
   return (
     <div className="h-full min-h-0 flex flex-col">
       <header className="shrink-0 flex items-center gap-3 px-4 py-2.5 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]">
-        <span className="text-[13px] font-semibold text-white">{algorithm?.name ?? 'Code Visualizer'}</span>
+        <span className="text-[13px] font-semibold text-[var(--color-text)]">{algorithm?.name ?? 'Code Visualizer'}</span>
         <span className="text-[10.5px] font-mono text-[var(--color-text-muted)]">
           {steps.length} step{steps.length !== 1 ? 's' : ''}
         </span>
         <button
           onClick={onEdit}
-          className="ml-auto px-3 py-1 rounded-md text-[11px] font-medium bg-[#20222f] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-white hover:border-[var(--color-accent)] transition-colors"
+          className="ml-auto px-3 py-1 rounded-md text-[11px] font-medium bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)] transition-colors"
         >
           ← Edit code
         </button>
@@ -83,7 +83,7 @@ function TraceStudio({ onEdit }: { onEdit: () => void }) {
               />
             ) : (
               <div className="h-full flex items-center justify-center">
-                <p className="text-sm text-[#4a4d5a] italic">Press Play to run your code.</p>
+                <p className="text-sm text-[var(--color-text-dim)] italic">Press Play to run your code.</p>
               </div>
             )}
           </div>

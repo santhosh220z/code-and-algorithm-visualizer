@@ -63,7 +63,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
   };
 
   return (
-    <div className="flex flex-col h-full min-h-0 bg-[#14151c]">
+    <div className="flex flex-col h-full min-h-0 bg-[var(--color-code-bg)]">
       <div className="px-4 pt-3 pb-2 border-b border-[var(--color-border)] flex items-center justify-between shrink-0">
         <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           {title}
@@ -84,7 +84,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
               <div
                 key={rail.label}
                 className={`absolute w-[3px] rounded-full ${
-                  iter !== null ? 'bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent)]' : 'bg-[var(--color-border)]'
+                  iter !== null ? 'bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-ring)]' : 'bg-[var(--color-border)]'
                 }`}
                 style={{
                   top: `${(rail.startLine + 1) * 26}px`,
@@ -113,13 +113,13 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
             >
               {/* Active-line accent bar */}
               {isActive && (
-                <span className="absolute left-2 top-0 bottom-0 w-[3px] rounded-full bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent)]" />
+                <span className="absolute left-2 top-0 bottom-0 w-[3px] rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent-ring)]" />
               )}
 
               {/* Line number */}
               <span
                 className={`w-7 shrink-0 text-right font-mono text-[10px] select-none mr-2 ${
-                  isActive ? 'text-[var(--color-accent)] font-semibold' : 'text-[#4a4d5a]'
+                  isActive ? 'text-[var(--color-accent)] font-semibold' : 'text-[var(--color-text-dim)]'
                 }`}
               >
                 {index + 1}
@@ -129,7 +129,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
               <span className="w-4 shrink-0 text-center">
                 {isActive ? (
                   <svg viewBox="0 0 12 12" width={10} height={10} className="inline-block">
-                    <path d="M3 1 L9 6 L3 11 Z" fill="#c084fc" />
+                    <path d="M3 1 L9 6 L3 11 Z" fill="var(--color-accent)" />
                   </svg>
                 ) : wasExecuted ? (
                   <span className="block w-1 h-1 mx-auto rounded-full bg-[var(--color-trail)]" />
@@ -139,7 +139,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
               {/* Code text */}
               <span
                 className={`flex-1 font-mono text-[12.5px] leading-[26px] truncate ${
-                  isActive ? 'text-white font-medium' : wasExecuted ? 'text-[#b8bcc8]' : 'text-[var(--color-text-muted)]'
+                  isActive ? 'text-[var(--color-text)] font-medium' : wasExecuted ? 'text-[var(--color-text-muted)]' : 'text-[var(--color-text-muted)]'
                 }`}
               >
                 {line.text}
@@ -151,8 +151,8 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
                   key={`${index}-${hits}`}
                   className={`anim-badge-pop ml-2 px-1.5 py-0 rounded-full text-[9px] font-mono shrink-0 ${
                     isActive
-                      ? 'bg-[var(--color-accent)] text-white font-bold'
-                      : 'bg-[#262838] text-[var(--color-text-muted)]'
+                      ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-bold'
+                      : 'bg-[var(--color-surface-3)] text-[var(--color-text-muted)]'
                   }`}
                   title={`Executed ${hits}×`}
                 >
@@ -168,15 +168,15 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
       {currentStep?.vars && Object.keys(currentStep.vars).length > 0 && (
         <div className="border-t border-[var(--color-border)] px-4 py-2 shrink-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[10px] uppercase tracking-wide text-[#4a4d5a] mr-1">live</span>
+            <span className="text-[10px] uppercase tracking-wide text-[var(--color-text-dim)] mr-1">live</span>
             {Object.entries(currentStep.vars).map(([key, value]) => (
               <span
                 key={key}
-                className="px-2 py-0.5 rounded-md text-[10.5px] font-mono bg-[#20222f] border border-[var(--color-border)] text-[var(--color-active)]"
+                className="px-2 py-0.5 rounded-md text-[10.5px] font-mono bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-active)]"
               >
                 {key}
-                <span className="text-[#4a4d5a]"> = </span>
-                <span className="text-white">{formatValue(value)}</span>
+                <span className="text-[var(--color-text-dim)]"> = </span>
+                <span className="text-[var(--color-text)]">{formatValue(value)}</span>
               </span>
             ))}
           </div>
@@ -192,8 +192,8 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
                 key={`${frame.fn}-${idx}`}
                 className={`px-2 py-0.5 rounded-md text-[10px] font-mono border ${
                   idx === 0
-                    ? 'bg-[var(--color-accent-bg)] border-[var(--color-accent-border,#5b21b6)] text-[var(--color-accent-hover)]'
-                    : 'bg-[#20222f] border-[var(--color-border)] text-[var(--color-text-muted)]'
+                    ? 'bg-[var(--color-accent-bg)] border-[var(--color-accent-border)] text-[var(--color-accent-hover)]'
+                    : 'bg-[var(--color-surface-3)] border-[var(--color-border)] text-[var(--color-text-muted)]'
                 }`}
               >
                 {frame.fn}({Object.entries(frame.args).map(([k, v]) => `${k}=${v}`).join(', ')})

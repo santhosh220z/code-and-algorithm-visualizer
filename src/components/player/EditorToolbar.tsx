@@ -22,7 +22,7 @@ const GRID_TOOLS = [
 ] as const;
 
 const numInput =
-  'w-14 px-1.5 py-1 rounded-md bg-[#20222f] border border-[var(--color-border)] text-[11px] font-mono text-white focus:border-[var(--color-accent)] focus:outline-none text-center';
+  'w-14 px-1.5 py-1 rounded-md bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[11px] font-mono text-[var(--color-text)] focus:border-[var(--color-accent)] focus:outline-none text-center';
 
 export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
   const { tool, setTool } = useEditorStore();
@@ -59,8 +59,8 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
             aria-pressed={active}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium whitespace-nowrap transition-all duration-150 active:scale-95 ${
               active
-                ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)] border border-[var(--color-accent-border,#5b21b6)] shadow-[0_0_8px_rgba(168,85,247,0.25)]'
-                : 'bg-[#20222f] text-[var(--color-text-muted)] border border-transparent hover:text-white hover:border-[var(--color-border)]'
+                ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)] border border-[var(--color-accent-border)] shadow-[0_0_10px_var(--color-accent-ring)]'
+                : 'bg-[var(--color-surface-3)] text-[var(--color-text-muted)] border border-transparent hover:text-[var(--color-text)] hover:border-[var(--color-border)]'
             }`}
           >
             <svg viewBox="0 0 24 24" width={13} height={13} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -74,7 +74,7 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
       {/* Custom grid size — draft inputs, applied on OK */}
       {category === 'grid' && grid && (
         <div className="ml-auto flex items-center gap-1.5 shrink-0 pl-3 border-l border-[var(--color-border)]">
-          <span className="text-[10px] uppercase tracking-wider text-[#4a4d5a]">Grid</span>
+          <span className="text-[10px] uppercase tracking-wider text-[var(--color-text-dim)]">Grid</span>
           <input
             type="number"
             min={5}
@@ -86,7 +86,7 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
             aria-label="Grid rows (5–30)"
             title="Rows (5–30)"
           />
-          <span className="text-[#4a4d5a] text-xs">×</span>
+          <span className="text-[var(--color-text-dim)] text-xs">×</span>
           <input
             type="number"
             min={8}
@@ -104,8 +104,8 @@ export function EditorToolbar({ category }: { category: AlgorithmCategory }) {
             title="Apply new grid size"
             className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold whitespace-nowrap transition-all duration-150 active:scale-95 ${
               dirty
-                ? 'bg-[var(--color-accent)] text-white shadow-[0_0_10px_rgba(168,85,247,0.35)] hover:bg-[var(--color-accent-hover)]'
-                : 'bg-[#20222f] text-[#4a4d5a] border border-[var(--color-border)] cursor-not-allowed'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] shadow-[0_0_12px_var(--color-accent-ring)] hover:bg-[var(--color-accent-hover)]'
+                : 'bg-[var(--color-surface-3)] text-[var(--color-text-dim)] border border-[var(--color-border)] cursor-not-allowed'
             }`}
           >
             OK

@@ -14,7 +14,7 @@ export function HomePage() {
   return (
     <div className="min-h-full">
       <section className="px-6 pt-14 pb-10 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text)] tracking-tight">
           See algorithms <span className="text-[var(--color-accent-hover)]">think</span>.
         </h1>
         <p className="mt-4 text-[var(--color-text-muted)] max-w-xl mx-auto text-[15px] leading-relaxed">
@@ -33,7 +33,7 @@ export function HomePage() {
               <path d="m8 6-6 6 6 6M16 6l6 6-6 6" />
             </svg>
             <div>
-              <h3 className="font-semibold text-[15px] text-white">Code Visualizer</h3>
+              <h3 className="font-semibold text-[15px] text-[var(--color-text)]">Code Visualizer</h3>
               <p className="mt-1 text-[12.5px] text-[var(--color-text-muted)] leading-snug max-w-2xl">
                 Paste or type your own Python code and watch it execute — every line, variable,
                 loop iteration, and recursive call animated step by step.
@@ -50,12 +50,12 @@ export function HomePage() {
               <svg viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-accent-hover)]">
                 <path d={ICONS[cat.icon] ?? ICONS.bars} />
               </svg>
-              <h3 className="mt-3 font-semibold text-[15px] text-white">{cat.name}</h3>
+              <h3 className="mt-3 font-semibold text-[15px] text-[var(--color-text)]">{cat.name}</h3>
               <p className="mt-1 text-[12.5px] text-[var(--color-text-muted)] leading-snug">{cat.description}</p>
               {ready ? (
-                <p className="mt-3 text-[11px] font-mono text-[#5a5e6e]">{algos.length} algorithm{algos.length !== 1 ? 's' : ''}</p>
+                <p className="mt-3 text-[11px] font-mono text-[var(--color-text-dim)]">{algos.length} algorithm{algos.length !== 1 ? 's' : ''}</p>
               ) : (
-                <span className="mt-3 inline-block px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#20222f] text-[#4a4d5a]">soon</span>
+                <span className="mt-3 inline-block px-1.5 py-0.5 rounded text-[10px] font-mono bg-[var(--color-surface-3)] text-[var(--color-text-dim)]">soon</span>
               )}
             </>
           );

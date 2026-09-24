@@ -16,7 +16,7 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
           <select
             value="miniPython"
             onChange={() => {}}
-            className="px-2.5 py-1.5 rounded-lg bg-[#20222f] border border-[var(--color-border)] text-[12px] text-white focus:border-[var(--color-accent)] focus:outline-none"
+            className="px-2.5 py-1.5 rounded-lg bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[12px] text-[var(--color-text)] focus:border-[var(--color-accent)] focus:outline-none"
             aria-label="Language"
           >
             <option value="miniPython">{CODE_LANGUAGE_LABEL}</option>
@@ -24,7 +24,7 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
         </label>
         <button
           onClick={onRun}
-          className="ml-auto flex items-center gap-2 px-4 py-2 rounded-lg text-[12.5px] font-semibold bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] hover:shadow-[0_0_12px_rgba(168,85,247,0.4)] active:scale-95 transition-all"
+          className="ml-auto flex items-center gap-2 px-4 py-2 rounded-lg text-[12.5px] font-semibold bg-[var(--color-accent)] text-[var(--color-accent-ink)] hover:bg-[var(--color-accent-hover)] hover:shadow-[0_0_14px_var(--color-accent-ring)] active:scale-95 transition-all"
         >
           Visualize
           <span className="font-mono text-[10px] opacity-80">Ctrl+↵</span>
@@ -40,12 +40,12 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
         </div>
       )}
 
-      <div className="flex-1 min-h-0 flex flex-col rounded-xl bg-[#14151c] border border-[var(--color-border)] overflow-hidden">
+      <div className="flex-1 min-h-0 flex flex-col rounded-xl bg-[var(--color-code-bg)] border border-[var(--color-border)] overflow-hidden">
         <div className="px-3 py-2 border-b border-[var(--color-border)] flex items-center justify-between shrink-0">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
             main.py
           </span>
-          <span className="text-[10px] font-mono text-[#4a4d5a]">{source.split('\n').length} lines</span>
+          <span className="text-[10px] font-mono text-[var(--color-text-dim)]">{source.split('\n').length} lines</span>
         </div>
         <textarea
           value={source}
@@ -68,7 +68,7 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
           spellCheck={false}
           autoCapitalize="off"
           autoCorrect="off"
-          className="flex-1 min-h-0 w-full resize-none bg-transparent px-4 py-3 font-mono text-[13px] leading-[1.6] text-[#e8eaf0] focus:outline-none scrollbar-thin"
+          className="flex-1 min-h-0 w-full resize-none bg-transparent px-4 py-3 font-mono text-[13px] leading-[1.6] text-[var(--color-text)] focus:outline-none scrollbar-thin"
           aria-label="Code editor"
         />
       </div>
@@ -83,7 +83,7 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
               key={s.id}
               onClick={() => onChange(s.source)}
               title={s.description}
-              className="px-2.5 py-1.5 rounded-lg text-[11.5px] bg-[#20222f] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-white hover:border-[var(--color-accent)] active:scale-95 transition-all"
+              className="px-2.5 py-1.5 rounded-lg text-[11.5px] bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)] active:scale-95 transition-all"
             >
               {s.name}
             </button>
@@ -92,10 +92,10 @@ export function CodeEditor({ source, error, onChange, onRun }: CodeEditorProps) 
       </div>
 
       <details className="mt-4 shrink-0 text-[11.5px] text-[var(--color-text-muted)]">
-        <summary className="cursor-pointer hover:text-white transition-colors select-none">
+        <summary className="cursor-pointer hover:text-[var(--color-text)] transition-colors select-none">
           Supported constructs
         </summary>
-        <div className="mt-2 grid sm:grid-cols-2 gap-x-6 gap-y-1 font-mono text-[11px] text-[#7a7f90]">
+        <div className="mt-2 grid sm:grid-cols-2 gap-x-6 gap-y-1 font-mono text-[11px] text-[var(--color-text-dim)]">
           <span>variables: a = 1, a += 2</span>
           <span>conditionals: if / elif / else</span>
           <span>loops: while, for x in range(n)</span>

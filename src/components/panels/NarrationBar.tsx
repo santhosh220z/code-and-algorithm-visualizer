@@ -8,10 +8,10 @@ interface NarrationBarProps {
 
 export function NarrationBar({ step, cursor, total }: NarrationBarProps) {
   return (
-    <div className="shrink-0 h-14 px-4 py-2 bg-[#191b24] border-t border-[var(--color-border)] flex items-center gap-4">
+    <div className="shrink-0 h-14 px-4 py-2 bg-[var(--color-surface-2)] border-t border-[var(--color-border)] flex items-center gap-4">
       <span
         className={`shrink-0 px-2 py-0.5 rounded-md text-[11px] font-mono ${
-          step ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)]' : 'bg-[#20222f] text-[#4a4d5a]'
+          step ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)]' : 'bg-[var(--color-surface-3)] text-[var(--color-text-dim)]'
         }`}
       >
         {total > 0 ? `${cursor + 1}/${total}` : '0/0'}
