@@ -62,51 +62,40 @@ function TraceStudio({ onEdit }: { onEdit: () => void }) {
 
       <div className="flex-1 min-h-0 flex">
         <section className="flex-1 min-w-0 flex flex-col">
-          <div className="flex-1 min-h-0 p-4 pb-1">
-            {vizType === 'array' && currentStep?.viz.type === 'array' ? (
+          {vizType === 'array' && currentStep?.viz.type === 'array' && (
+            <div className="h-28 shrink-0 border-b border-[var(--color-border)] px-3 py-2">
               <ArrayViz
                 array={currentStep.viz.array}
                 highlights={currentStep.viz.highlights}
                 pointers={currentStep.viz.pointers}
               />
+            </div>
+          )}
+          <div className="flex-1 min-h-0">
+            {algorithm ? (
+              <CodePanel
+                pseudocode={algorithm.pseudocode}
+                currentStep={currentStep}
+                steps={steps}
+                cursor={cursor}
+                loops={loops}
+                title="Your code"
+              />
             ) : (
               <div className="h-full flex items-center justify-center">
-                <p className="text-sm text-[#4a4d5a] italic">
-                  {steps.length > 0
-                    ? 'Press Play or → to step through the execution.'
-                    : 'Press Play to run your code.'}
-                </p>
+                <p className="text-sm text-[#4a4d5a] italic">Press Play to run your code.</p>
               </div>
             )}
+          </div>
+          <div className="h-32 shrink-0 border-t border-[var(--color-border)] bg-[var(--color-bg-elevated)] overflow-hidden">
+            <VarsPanel step={currentStep} />
           </div>
           <NarrationBar step={currentStep} cursor={cursor} total={steps.length} />
           <PlayerControls />
         </section>
 
-        <aside className="hidden xl:flex w-[420px] shrink-0 border-l border-[var(--color-border)] flex-col min-h-0">
-          {algorithm ? (
-            <>
-              <div className="flex-1 min-h-0">
-                <CodePanel
-                  pseudocode={algorithm.pseudocode}
-                  currentStep={currentStep}
-                  steps={steps}
-                  cursor={cursor}
-                  loops={loops}
-                />
-              </div>
-              <div className="h-36 shrink-0 border-t border-[var(--color-border)] bg-[var(--color-bg-elevated)] overflow-hidden">
-                <VarsPanel step={currentStep} />
-              </div>
-              <div className="h-40 shrink-0 border-t border-[var(--color-border)] bg-[var(--color-bg-elevated)] overflow-hidden">
-                <ConsolePanel step={currentStep} />
-              </div>
-            </>
-          ) : (
-            <div className="h-full flex items-center justify-center">
-              <p className="text-sm text-[#4a4d5a] italic">Nothing running.</p>
-            </div>
-          )}
+        <aside className="hidden xl:flex w-[400px] shrink-0 border-l border-[var(--color-border)] flex-col min-h-0 bg-[var(--color-bg-elevated)]">
+          <ConsolePanel step={currentStep} />
         </aside>
       </div>
     </div>

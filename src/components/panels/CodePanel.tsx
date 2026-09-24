@@ -14,6 +14,7 @@ interface CodePanelProps {
   steps: Step[];
   cursor: number;
   loops: LoopScope[];
+  title?: string;
 }
 
 function formatValue(value: unknown): string {
@@ -24,7 +25,7 @@ function formatValue(value: unknown): string {
   return String(value);
 }
 
-export function CodePanel({ pseudocode, currentStep, steps, cursor, loops }: CodePanelProps) {
+export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title = 'Pseudocode' }: CodePanelProps) {
   const activeLine = currentStep?.line ?? -1;
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +66,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops }: Cod
     <div className="flex flex-col h-full min-h-0 bg-[#14151c]">
       <div className="px-4 pt-3 pb-2 border-b border-[var(--color-border)] flex items-center justify-between shrink-0">
         <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          Pseudocode
+          {title}
         </h3>
         {activeLoop && (
           <span className="text-[10px] font-mono text-[var(--color-accent)]">
