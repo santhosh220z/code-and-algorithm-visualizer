@@ -3,6 +3,8 @@ import { interpretSource } from '../core/codeLang/interpreter';
 import { tokenize } from '../core/codeLang/lexer';
 import { parse } from '../core/codeLang/parser';
 import { toPseudocode, toStepLine } from '../core/codeLang/toPseudocode';
+import { useCodeRunnerStore, SNIPPETS } from '../core/codeRunner';
+import { usePlayerStore } from '../core/player';
 
 function lastConsole(src: string): string[] {
   const { steps } = interpretSource(src);
@@ -120,6 +122,14 @@ describe('miniPython interpreter', () => {
     expect(error).toBeTruthy();
   });
 
+  it('evaluates an if condition exactly once', () => {
+    const src = 'def probe():\n    return True\n\nif probe():\n    print("yes")';
+    const { steps, error } = interpretSource(src);
+    expect(error).toBeNull();
+    const calls = steps.filter((s) => s.description.startsWith('Call probe')).length;
+    expect(calls).toBe(1);
+  });
+
   it('emits steps whose line indexes are valid source lines', () => {
     const src = 'a = 1\nb = 2\nprint(a + b)';
     const { steps } = interpretSource(src);
@@ -145,5 +155,75 @@ describe('toPseudocode', () => {
   it('converts 1-based source lines to 0-based step lines', () => {
     expect(toStepLine(1)).toBe(0);
     expect(toStepLine(5)).toBe(4);
+  });
+});
+
+describe('codeRunner store integration', () => {
+  it('starts in editor mode with a sample program loaded', () => {
+    const s = useCodeRunnerStore.getState();
+    expect(s.mode).toBe('editor');
+    expect(s.source).toBe(SNIPPETS[0].source);
+  });
+
+  it('running code loads the player store with pseudocode and steps', () => {
+    useCodeRunnerStore.getState().run('a = 1\nfor i in range(3):\n    a = a + i\n');
+    const runner = useCodeRunnerStore.getState();
+    const player = usePlayerStore.getState();
+
+    expect(runner.mode).toBe('trace');
+    expect(runner.error).toBeNull();
+    expect(player.algorithm?.id).toBe('code-visualizer');
+    expect(player.algorithm?.pseudocode.length).toBe(3);
+    expect(player.steps.length).toBeGreaterThan(0);
+    expect(player.cursor).toBe(0);
+  });
+
+  it('every player step line maps to a real pseudocode row', () => {
+    useCodeRunnerStore.getState().run('x = 1\nwhile x < 3:\n    x = x + 1\n');
+    const player = usePlayerStore.getState();
+    const lineCount = player.algorithm?.pseudocode.length ?? 0;
+    for (const s of player.steps) {
+      if (s.line === undefined) continue;
+      expect(s.line).toBeGreaterThanOrEqual(0);
+      expect(s.line).toBeLessThan(lineCount);
+    }
+  });
+
+  it('keeps the player trace ending on the expected console output', () => {
+    useCodeRunnerStore.getState().run('print("hello")\nprint("world")');
+    const player = usePlayerStore.getState();
+    const last = player.steps[player.steps.length - 1];
+    expect(last.console).toEqual(['hello', 'world']);
+  });
+
+  it('stays in editor mode and reports the error for invalid code', () => {
+    useCodeRunnerStore.getState().run('this is not valid @@@');
+    const runner = useCodeRunnerStore.getState();
+    expect(runner.mode).toBe('editor');
+    expect(runner.error).toBeTruthy();
+  });
+
+  it('flags loop headers so the code panel can draw loop rails', () => {
+    useCodeRunnerStore.getState().run('for i in range(2):\n    print(i)');
+    const player = usePlayerStore.getState();
+    expect(player.algorithm?.pseudocode[0].isLoopHeader).toBe(true);
+    expect(player.algorithm?.pseudocode[0].loopLabel).toBe('for');
+  });
+
+  it('every bundled sample runs without a runtime error', () => {
+    for (const snippet of SNIPPETS) {
+      const { error } = interpretSource(snippet.source);
+      expect(error, `snippet "${snippet.name}" failed`).toBeNull();
+    }
+  });
+
+  it('fizzbuzz picks the first matching branch and falls through to else', () => {
+    const fizzbuzz = SNIPPETS.find((s) => s.id === 'fizzbuzz')!;
+    const out = lastConsole(fizzbuzz.source);
+    expect(out).toEqual([
+      '1', '2', 'Fizz', '4', 'Buzz',
+      'Fizz', '7', '8', 'Fizz', 'Buzz',
+      '11', 'Fizz', '13', '14', 'FizzBuzz',
+    ]);
   });
 });

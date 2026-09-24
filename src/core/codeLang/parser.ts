@@ -99,18 +99,23 @@ class Parser {
     const line = this.expect('name', 'if').line;
     const branches: { cond: Expr; body: Stmt[]; line: number }[] = [];
 
-    let cond = this.expression();
+    const cond = this.expression();
     this.expect('op', ':');
-    const body = this.block(loopLines, funcLines);
-    branches.push({ cond, body, line });
+    branches.push({ cond, body: this.block(loopLines, funcLines), line });
+
+    // elif branches append to the same chain.
+    for (;;) {
+      this.skipNewlines();
+      if (!this.at('name', 'elif')) break;
+      const elifLine = this.next().line;
+      const elifCond = this.expression();
+      this.expect('op', ':');
+      branches.push({ cond: elifCond, body: this.block(loopLines, funcLines), line: elifLine });
+    }
 
     let orelse: Stmt[] = [];
     this.skipNewlines();
-    if (this.at('name', 'elif')) {
-      // Rewrite elif as a nested if in the else branch
-      const elifStmt = this.ifStmt(loopLines, funcLines);
-      orelse = [elifStmt];
-    } else if (this.at('name', 'else')) {
+    if (this.at('name', 'else')) {
       this.next();
       this.expect('op', ':');
       orelse = this.block(loopLines, funcLines);

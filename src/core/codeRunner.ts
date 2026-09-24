@@ -19,11 +19,13 @@ export const SNIPPETS: Snippet[] = [
     id: 'fizzbuzz',
     name: 'FizzBuzz',
     description: 'Branching with %, if/elif/else',
-    source: `for i in range(1, 11):
-    if i % 3 == 0:
+    source: `for i in range(1, 16):
+    if i % 15 == 0:
         print("FizzBuzz")
-    elif i % 5 == 0:
+    elif i % 3 == 0:
         print("Fizz")
+    elif i % 5 == 0:
+        print("Buzz")
     else:
         print(i)
 `,

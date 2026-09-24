@@ -391,13 +391,24 @@ export function interpretSource(src: string): InterpretResult {
       }
 
       case 'if': {
-        const firstCond = format(evalExpr(stmt.branches[0].cond));
-        const active = stmt.branches.find((b) => truthy(evalExpr(b.cond)));
-        if (active) {
-          emit(active.line, `Condition is true → enter branch (${firstCond})`);
-          execBlock(active.body);
+        // Evaluate each condition exactly once — conditions may call functions.
+        let matched: (typeof stmt.branches)[number] | null = null;
+        let condText = '';
+        for (const branch of stmt.branches) {
+          const value = evalExpr(branch.cond);
+          const text = format(value);
+          if (matched === null) condText = text;
+          if (truthy(value)) {
+            matched = branch;
+            condText = text;
+            break;
+          }
+        }
+        if (matched) {
+          emit(matched.line, `Condition is true → enter branch (${condText})`);
+          execBlock(matched.body);
         } else {
-          emit(stmt.line, `Condition is false → skip branch (${firstCond})`);
+          emit(stmt.line, `Condition is false → skip branch (${condText})`);
           if (stmt.orelse.length > 0) execBlock(stmt.orelse);
         }
         break;
