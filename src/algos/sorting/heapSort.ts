@@ -54,7 +54,7 @@ function* heapify(
   yield makeArrayStep(
     array,
     [],
-    [makePointer(idx, 'idx', '#a855f7'), makePointer(left, 'L', '#60a5fa'), makePointer(right, 'R', '#60a5fa')],
+    [makePointer(idx, 'idx', 'primary'), makePointer(left, 'L', 'secondary'), makePointer(right, 'R', 'secondary')],
     16,
     `Heapify at index ${idx}: left=${left < heapSize ? array[left] : '∅'}, right=${right < heapSize ? array[right] : '∅'}`,
     { idx, left, right, heapSize, largest, depth },
@@ -66,7 +66,7 @@ function* heapify(
     yield makeArrayStep(
       array,
       highlightCompare(left, idx),
-      [makePointer(idx, 'idx', '#a855f7'), makePointer(left, 'L', '#60a5fa'), makePointer(largest, 'largest', '#fbbf24')],
+      [makePointer(idx, 'idx', 'primary'), makePointer(left, 'L', 'secondary'), makePointer(largest, 'largest', 'target')],
       20,
       `Left child ${array[left]} > A[${idx}] ${array[idx]}, largest = ${largest}`,
       { idx, left, right, heapSize, largest, depth },
@@ -79,7 +79,7 @@ function* heapify(
     yield makeArrayStep(
       array,
       highlightCompare(right, largest === left ? left : idx),
-      [makePointer(idx, 'idx', '#a855f7'), makePointer(right, 'R', '#60a5fa'), makePointer(largest, 'largest', '#fbbf24')],
+      [makePointer(idx, 'idx', 'primary'), makePointer(right, 'R', 'secondary'), makePointer(largest, 'largest', 'target')],
       23,
       `Right child ${array[right]} > A[${largest}] ${array[largest]}, largest = ${largest}`,
       { idx, left, right, heapSize, largest, depth },
@@ -91,7 +91,7 @@ function* heapify(
     yield makeArrayStep(
       array,
       highlightSwap(idx, largest),
-      [makePointer(idx, 'idx', '#a855f7'), makePointer(largest, 'largest', '#fbbf24')],
+      [makePointer(idx, 'idx', 'primary'), makePointer(largest, 'largest', 'target')],
       26,
       `Swap A[${idx}] = ${array[idx]} with A[${largest}] = ${array[largest]}`,
       { idx, largest, swapped: true, depth },
@@ -108,7 +108,7 @@ function* buildMaxHeap(array: number[], n: number): Generator<Step> {
     yield makeArrayStep(
       array,
       [],
-      [makePointer(i, 'i', '#a855f7')],
+      [makePointer(i, 'i', 'primary')],
       11,
       `Build heap: heapify from index ${i}`,
       { i, n },
@@ -140,7 +140,7 @@ export function* heapSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       highlightSwap(0, i),
-      [makePointer(0, 'root', '#a855f7'), makePointer(i, 'i', '#fbbf24')],
+      [makePointer(0, 'root', 'primary'), makePointer(i, 'i', 'target')],
       4,
       `Extract max: swap root (${array[0]}) with A[${i}] (${array[i]})`,
       { i, root: array[0], last: array[i] },
@@ -151,7 +151,7 @@ export function* heapSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       highlightSorted(i),
-      [makePointer(0, 'root', '#a855f7')],
+      [makePointer(0, 'root', 'primary')],
       5,
       `Element ${array[i]} placed at sorted position ${i}`,
       { i, placed: array[i] },

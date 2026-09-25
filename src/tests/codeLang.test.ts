@@ -3,8 +3,10 @@ import { interpretSource } from '../core/codeLang/interpreter';
 import { tokenize } from '../core/codeLang/lexer';
 import { parse } from '../core/codeLang/parser';
 import { toPseudocode, toStepLine } from '../core/codeLang/toPseudocode';
-import { useCodeRunnerStore, SNIPPETS } from '../core/codeRunner';
+import { useCodeRunnerStore, SNIPPETS, resolveCodeViewMode, CODE_ALGORITHM_ID } from '../core/codeRunner';
 import { usePlayerStore } from '../core/player';
+import { getAlgorithm } from '../core/registry';
+import '../algos/sorting';
 
 function lastConsole(src: string): string[] {
   const { steps } = interpretSource(src);
@@ -244,6 +246,13 @@ describe('codeRunner store integration', () => {
     expect(s.source).toBe(SNIPPETS[0].source);
   });
 
+  it('marks safety-limited executions as truncated', () => {
+    useCodeRunnerStore.getState().run('while True:\n    x = 1');
+    const runner = useCodeRunnerStore.getState();
+    expect(runner.mode).toBe('trace');
+    expect(runner.truncated).toBe(true);
+  });
+
   it('running code loads the player store with pseudocode and steps', () => {
     useCodeRunnerStore.getState().run('a = 1\nfor i in range(3):\n    a = a + i\n');
     const runner = useCodeRunnerStore.getState();
@@ -255,6 +264,20 @@ describe('codeRunner store integration', () => {
     expect(player.algorithm?.pseudocode.length).toBe(3);
     expect(player.steps.length).toBeGreaterThan(0);
     expect(player.cursor).toBe(0);
+  });
+
+  it('claims the trace view only while the player store still owns the code trace', () => {
+    useCodeRunnerStore.getState().run('a = 1\nfor i in range(3):\n    a = a + i\n');
+    expect(useCodeRunnerStore.getState().mode).toBe('trace');
+    expect(resolveCodeViewMode('trace', CODE_ALGORITHM_ID)).toBe('trace');
+
+    const lesson = getAlgorithm('bubble-sort');
+    usePlayerStore.getState().setAlgorithm(lesson!, lesson!.defaultInput);
+    expect(usePlayerStore.getState().algorithm?.id).toBe('bubble-sort');
+
+    expect(resolveCodeViewMode('trace', usePlayerStore.getState().algorithm?.id)).toBe('editor');
+    expect(resolveCodeViewMode('editor', 'bubble-sort')).toBe('editor');
+    expect(resolveCodeViewMode('trace', null)).toBe('editor');
   });
 
   it('every player step line maps to a real pseudocode row', () => {

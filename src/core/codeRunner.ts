@@ -112,10 +112,12 @@ for i in range(1, 9):
   },
 ];
 
+export const CODE_ALGORITHM_ID = 'code-visualizer';
+
 /** Build a synthetic AlgorithmDef so the existing player store drives playback. */
 function buildDef(pseudocode: ReturnType<typeof toPseudocode>, steps: Step[]): AlgorithmDef {
   return {
-    id: 'code-visualizer',
+    id: CODE_ALGORITHM_ID,
     name: CODE_LANGUAGE_LABEL,
     category: 'recursion',
     description: 'Step-through execution of your own code',
@@ -128,10 +130,23 @@ function buildDef(pseudocode: ReturnType<typeof toPseudocode>, steps: Step[]): A
   };
 }
 
+/**
+ * The shared player store only holds one trace, so a lesson visited after running
+ * code can replace the synthetic trace. Only claim the trace view while the store
+ * still owns the code algorithm, otherwise fall back to the editor.
+ */
+export function resolveCodeViewMode(
+  mode: 'editor' | 'trace',
+  playerAlgorithmId: string | null | undefined
+): 'editor' | 'trace' {
+  return mode === 'trace' && playerAlgorithmId !== CODE_ALGORITHM_ID ? 'editor' : mode;
+}
+
 interface CodeRunnerState {
   source: string;
   mode: 'editor' | 'trace';
   error: string | null;
+  truncated: boolean;
   setSource: (source: string) => void;
   run: (source?: string) => void;
   backToEditor: () => void;
@@ -141,19 +156,20 @@ export const useCodeRunnerStore = create<CodeRunnerState>((set, get) => ({
   source: SNIPPETS[0].source,
   mode: 'editor',
   error: null,
+  truncated: false,
 
-  setSource: (source) => set({ source, error: null }),
+  setSource: (source) => set({ source, error: null, truncated: false }),
 
   run: (maybeSource) => {
     const src = trimSource(maybeSource ?? get().source);
     const result = interpretSource(src);
     if (result.error) {
-      set({ source: src, mode: 'editor', error: result.error });
+      set({ source: src, mode: 'editor', error: result.error, truncated: false });
       return;
     }
     const pseudocode = toPseudocode(src, result.loopLines);
     usePlayerStore.getState().setAlgorithm(buildDef(pseudocode, result.steps), {});
-    set({ source: src, mode: 'trace', error: null });
+    set({ source: src, mode: 'trace', error: null, truncated: result.truncated });
   },
 
   backToEditor: () => set({ mode: 'editor' }),

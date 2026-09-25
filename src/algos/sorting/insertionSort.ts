@@ -33,7 +33,7 @@ export function* insertionSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       [{ index: i, kind: 'current' }],
-      [makePointer(i, 'i', '#a855f7'), makePointer(i, 'key', '#fbbf24')],
+      [makePointer(i, 'i', 'primary'), makePointer(i, 'key', 'target')],
       3,
       `Pick key = ${key} at index ${i}; slide it left into the sorted region`,
       { i, key },
@@ -44,7 +44,7 @@ export function* insertionSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       [],
-      [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'key', '#fbbf24')],
+      [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'key', 'target')],
       4,
       `Set j = ${j} (element just left of the key)`,
       { i, j, key },
@@ -55,7 +55,7 @@ export function* insertionSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightCompare(j, j + 1),
-        [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'key', '#fbbf24')],
+        [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'key', 'target')],
         5,
         `Is A[${j}] (${array[j]}) > A[${j + 1}] (the key, ${key})? Yes — out of order`,
         { i, j, key, a: array[j], b: array[j + 1] },
@@ -67,7 +67,7 @@ export function* insertionSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightSwap(j, j + 1),
-        [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'key', '#fbbf24')],
+        [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'key', 'target')],
         6,
         `Out of order: exchange A[${j}] (${array[j]}) with A[${j + 1}] (${key})`,
         { i, j, key },
@@ -79,7 +79,7 @@ export function* insertionSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightSwap(j, j + 1),
-        [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'key', '#fbbf24')],
+        [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'key', 'target')],
         6,
         `Swapped: key ${key} moved left to index ${j}`,
         { i, j, key, movedTo: j },
@@ -88,8 +88,8 @@ export function* insertionSort(input: AlgorithmInput): Generator<Step> {
 
       j--;
 
-      const ptrs = [makePointer(i, 'i', '#a855f7'), makePointer(j + 1, 'key', '#fbbf24')];
-      if (j >= 0) ptrs.push(makePointer(j, 'j', '#60a5fa'));
+      const ptrs = [makePointer(i, 'i', 'primary'), makePointer(j + 1, 'key', 'target')];
+      if (j >= 0) ptrs.push(makePointer(j, 'j', 'secondary'));
       yield makeArrayStep(
         array,
         [],
@@ -110,7 +110,7 @@ export function* insertionSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       highlightSorted(...Array.from({ length: i + 1 }, (_, k) => k)),
-      [makePointer(i, 'i', '#a855f7')],
+      [makePointer(i, 'i', 'primary')],
       8,
       `${reason}. Key ${key} settled at index ${j + 1}; subarray [0..${i}] is sorted`,
       { i, key, settledAt: j + 1 },

@@ -1,7 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { getAlgorithm, getAllAlgorithms } from '../core/registry';
+import { getAlgorithm, getAllAlgorithms, supportsRegeneration } from '../core/registry';
 import '../algos/sorting';
 import '../algos/search';
+import '../algos/graph';
+import '../algos/recursion';
 
 const seededArray = [64, 34, 25, 12, 22, 11, 90, 5, 77, 1];
 
@@ -104,6 +106,50 @@ describe('search traces', () => {
     expect(found!.vars!.mid).toBe(7);
   });
 
+  it('binary search emits a search viz whose window never grows', () => {
+    const algo = getAlgorithm('binary-search')!;
+    const steps = Array.from(algo.run({ array: [11, 12, 22, 25, 34, 64, 90], target: 22 }));
+    expect(steps.every((s) => s.viz.type === 'search')).toBe(true);
+
+    const sizes = steps
+      .map((s) => (s.viz.type === 'search' ? s.viz.window : null))
+      .filter((w): w is { left: number; right: number } => w !== null)
+      .map((w) => w.right - w.left + 1);
+
+    expect(sizes.length).toBeGreaterThan(1);
+    expect(sizes[0]).toBe(7);
+    for (let i = 1; i < sizes.length; i += 1) {
+      expect(sizes[i]).toBeLessThanOrEqual(sizes[i - 1]);
+    }
+    // the range must actually shrink, which is the point of binary search
+    expect(Math.min(...sizes)).toBeLessThan(sizes[0]);
+
+    const windows = steps
+      .map((s) => (s.viz.type === 'search' ? s.viz.window : null))
+      .filter((w): w is { left: number; right: number } => w !== null);
+    for (const w of windows) {
+      expect(w.left).toBeGreaterThanOrEqual(0);
+      expect(w.right).toBeLessThan(7);
+      expect(w.left).toBeLessThanOrEqual(w.right);
+    }
+  });
+
+  it('binary search reports the found index and clears the range when absent', () => {
+    const algo = getAlgorithm('binary-search')!;
+    const foundSteps = Array.from(algo.run({ array: [11, 12, 22, 25, 34, 64, 90], target: 64 }));
+    const foundStep = foundSteps.find((s) => s.viz.type === 'search' && s.viz.found !== null);
+    expect(foundStep).toBeDefined();
+    if (foundStep?.viz.type === 'search') expect(foundStep.viz.found).toBe(5); // 64 sits at index 5
+
+    const missingSteps = Array.from(algo.run({ array: [11, 12, 22, 25, 34, 64, 90], target: 21 }));
+    const last = missingSteps[missingSteps.length - 1];
+    expect(last.vars?.found).toBe(false);
+    if (last.viz.type === 'search') {
+      expect(last.viz.window).toBeNull();
+      expect(last.viz.found).toBeNull();
+    }
+  });
+
   it('two pointers finds a valid pair summing to target', () => {
     const algo = getAlgorithm('two-pointers')!;
     const arr = [2, 7, 11, 15, 19, 25];
@@ -114,5 +160,30 @@ describe('search traces', () => {
     const { left, right } = found!.vars! as { left: number; right: number };
     const sortedArr = [...arr].sort((a, b) => a - b);
     expect(sortedArr[left] + sortedArr[right]).toBe(target);
+  });
+});
+
+describe('visualization capabilities', () => {
+  it('uses semantic pointer roles instead of ad hoc colors', () => {
+    const roles = new Set(['primary', 'secondary', 'target', 'pivot', 'complete']);
+    let pointerCount = 0;
+    for (const algorithm of getAllAlgorithms()) {
+      for (const step of algorithm.run(algorithm.defaultInput)) {
+        if (step.viz.type !== 'array') continue;
+        for (const pointer of step.viz.pointers) {
+          pointerCount++;
+          expect(pointer.color).toBeUndefined();
+          expect(pointer.role).toBeDefined();
+          expect(roles.has(pointer.role!)).toBe(true);
+        }
+      }
+    }
+    expect(pointerCount).toBeGreaterThan(0);
+  });
+
+  it('distinguishes randomized data from deterministic reset-only demos', () => {
+    expect(supportsRegeneration(getAlgorithm('bubble-sort')!)).toBe(true);
+    expect(supportsRegeneration(getAlgorithm('graph-bfs')!)).toBe(true);
+    expect(supportsRegeneration(getAlgorithm('rec-factorial')!)).toBe(false);
   });
 });

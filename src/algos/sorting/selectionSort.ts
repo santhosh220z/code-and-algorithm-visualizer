@@ -37,7 +37,7 @@ export function* selectionSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       [{ index: i, kind: 'current' }],
-      [makePointer(i, 'i', '#a855f7'), makePointer(minIdx, 'min', '#fbbf24')],
+      [makePointer(i, 'i', 'primary'), makePointer(minIdx, 'min', 'target')],
       3,
       `Outer loop: assume minimum is at index ${i} (value ${array[i]})`,
       { i, minIdx },
@@ -48,7 +48,7 @@ export function* selectionSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightCompare(j, minIdx),
-        [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(minIdx, 'min', '#fbbf24')],
+        [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(minIdx, 'min', 'target')],
         5,
         `Inner loop: compare A[${j}] = ${array[j]} with current min A[${minIdx}] = ${array[minIdx]}`,
         { i, j, minIdx, compareValue: array[j], minValue: array[minIdx] },
@@ -60,7 +60,7 @@ export function* selectionSort(input: AlgorithmInput): Generator<Step> {
         yield makeArrayStep(
           array,
           [{ index: minIdx, kind: 'current' }],
-          [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(minIdx, 'min', '#fbbf24')],
+          [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(minIdx, 'min', 'target')],
           6,
           `New minimum found: A[${minIdx}] = ${array[minIdx]}`,
           { i, j, minIdx, minValue: array[minIdx] },
@@ -73,7 +73,7 @@ export function* selectionSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightSwap(i, minIdx),
-        [makePointer(i, 'i', '#a855f7'), makePointer(minIdx, 'min', '#fbbf24')],
+        [makePointer(i, 'i', 'primary'), makePointer(minIdx, 'min', 'target')],
         10,
         `Swap A[${i}] = ${array[i]} with A[${minIdx}] = ${array[minIdx]}`,
         { i, minIdx, a: array[i], b: array[minIdx] },
@@ -85,7 +85,7 @@ export function* selectionSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightSorted(i),
-        [makePointer(i, 'i', '#a855f7')],
+        [makePointer(i, 'i', 'primary')],
         10,
         `Swapped: element ${array[i]} now at correct position ${i}`,
         { i, minIdx, placed: array[i] },
@@ -95,7 +95,7 @@ export function* selectionSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightSorted(i),
-        [makePointer(i, 'i', '#a855f7')],
+        [makePointer(i, 'i', 'primary')],
         9,
         `Minimum already at position ${i}, no swap needed`,
         { i, minIdx },

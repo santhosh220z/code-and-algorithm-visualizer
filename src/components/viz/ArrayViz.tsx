@@ -1,26 +1,35 @@
+import { useEffect, useRef, useState } from 'react';
 import type { ArrayHighlight, Pointer } from '../../core/types';
-import { VIZ, EASE, SPRING } from './palette';
+import { MOTION, POINTER_COLORS, VIZ, resolveVisualState, staggerDelay } from './palette';
 
 interface ArrayVizProps {
   array: number[];
   highlights: ArrayHighlight[];
   pointers: Pointer[];
+  compact?: boolean;
 }
 
-const COLORS: Record<ArrayHighlight['kind'], string> = {
-  compare: VIZ.compare,
-  swap: VIZ.swap,
-  sorted: VIZ.sorted,
-  pivot: VIZ.pivot,
-  current: VIZ.active,
-  trail: VIZ.trail,
-};
+/** Line box of the 11px mono value label, plus the gap kept above the row. */
+const VALUE_LINE_H = 17;
+const VALUE_HEADROOM = VALUE_LINE_H + 6;
 
+export function ArrayViz({ array, highlights, pointers, compact = false }: ArrayVizProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [availableWidth, setAvailableWidth] = useState(compact ? 420 : 760);
 
-export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
+  useEffect(() => {
+    const element = containerRef.current;
+    if (!element) return;
+    const update = () => setAvailableWidth(Math.max(160, element.clientWidth - 8));
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [array.length, compact]);
+
   if (array.length === 0) {
     return (
-      <div className="h-full flex items-center justify-center text-sm text-[#4a4d5a] italic">
+      <div className="flex h-full items-center justify-center text-sm italic" style={{ color: VIZ.textDim }}>
         No data to visualize
       </div>
     );
@@ -28,13 +37,14 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
 
   const max = Math.max(...array, 1);
   const n = array.length;
-  const gap = n > 40 ? 1 : 3;
-  const barW = Math.max(6, Math.min(48, 760 / n - gap));
-  const chartH = 260;
+  const gap = n > 40 ? 1 : compact ? 1 : 3;
+  const barW = Math.max(compact ? 3 : 5, Math.min(compact ? 7 : 48, (availableWidth - gap * (n - 1)) / n));
+  const chartH = compact ? 52 : availableWidth < 360 ? 120 : availableWidth < 520 ? 180 : 260;
 
   // Latest highlight wins per index
   const kindOf = new Map<number, ArrayHighlight['kind']>();
   for (const h of highlights) kindOf.set(h.index, h.kind);
+  const changedCount = kindOf.size;
 
   // Stack row per pointer at the same index; keyed by label so arrows GLIDE.
   const rowOf = new Map<string, number>();
@@ -46,11 +56,11 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
   }
 
   return (
-    <div className="w-full h-full flex flex-col justify-end overflow-hidden">
+    <div ref={containerRef} className="flex h-full w-full flex-col justify-end overflow-hidden">
       <div className="flex-1" />
 
       {/* Pointer labels — keyed by label + absolute left so they animate between indices */}
-      <div className="relative h-6 mx-auto" style={{ width: n * (barW + gap) }}>
+        <div className="relative mx-auto h-6" style={{ width: n * (barW + gap) }}>
         {pointers.map((p) => {
           const row = rowOf.get(p.label) ?? 0;
           return (
@@ -60,12 +70,12 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
               style={{
                 left: p.index * (barW + gap),
                 transform: `translateX(${barW / 2}px) translateY(-${row * 11}px)`,
-                transition: `left 260ms ${EASE}, transform 260ms ${EASE}`,
+                transition: MOTION.pointer,
               }}
             >
               <span
                 className="text-[10px] font-mono font-semibold leading-tight whitespace-nowrap"
-                style={{ color: p.color ?? VIZ.pivot }}
+                style={{ color: p.color ?? POINTER_COLORS[p.role ?? 'primary'] }}
               >
                 ▾{p.label}
               </span>
@@ -75,46 +85,59 @@ export function ArrayViz({ array, highlights, pointers }: ArrayVizProps) {
       </div>
 
       {/* Bars */}
-      <div className="flex items-end mx-auto" style={{ gap: `${gap}px`, height: chartH + 24 }}>
+      <div className="flex items-end mx-auto" style={{ gap: `${gap}px`, height: chartH + 24 + VALUE_HEADROOM }}>
         {array.map((value, i) => {
           const kind = kindOf.get(i);
-          const color = kind ? COLORS[kind] : VIZ.idle;
+          const state = resolveVisualState(kind);
+          const color = state.fill;
           const h = Math.max(6, (value / max) * chartH);
-          const glowing = kind === 'compare' || kind === 'swap' || kind === 'current';
+          // Sit the number inside the pillar when it fits, otherwise just above it.
+          const valueInside = h >= VALUE_LINE_H + 3;
+          const valueColor = kind ? state.text : valueInside ? VIZ.value : VIZ.valueCanvas;
+          const active = kind === 'current' || kind === 'compare' || kind === 'pivot';
+          const barTransition =
+            kind === 'swap'
+              ? `height ${MOTION.bar.height}, background-color ${MOTION.color}, transform ${MOTION.bar.height} var(--ease-emphasized), box-shadow ${MOTION.bar.height}`
+              : `${MOTION.bar.size}, box-shadow ${MOTION.bar.height}`;
           return (
             <div key={i} className="relative shrink-0" style={{ width: barW }}>
-              {/* Value label rides the bar top smoothly */}
-              {n <= 30 && (
+              {/* Value label rides the pillar and never sits on the canvas grid */}
+              {!compact && n <= 30 && (
                 <span
-                  className={`absolute left-1/2 -translate-x-1/2 text-center font-mono text-[10px] ${
-                    kind ? 'text-white font-bold' : 'text-[#5a5e6e]'
+                  className={`absolute left-1/2 z-10 -translate-x-1/2 text-center font-mono text-[11px] leading-none ${
+                    kind ? 'font-bold' : ''
                   }`}
                   style={{
-                    top: `${chartH - h - 16}px`,
+                    top: valueInside ? 4 : -(VALUE_LINE_H + 2),
                     width: barW * 2,
-                    transition: `top 220ms ${EASE}, color 150ms linear`,
+                    color: valueColor,
+                    transition: `top ${MOTION.bar.height}, color ${MOTION.color}`,
                   }}
                 >
                   {value}
                 </span>
               )}
-              <div
-                className="rounded-t-[3px]"
-                style={{
-                  height: `${h}px`,
-                  background: color,
-                  boxShadow: glowing ? `0 0 12px ${color}` : '0 0 0 rgba(0,0,0,0)',
-                  transform:
-                    kind === 'swap'
-                      ? 'scaleY(1.07)'
-                      : kind === 'compare' || kind === 'current'
-                      ? 'translateY(-3px)'
-                      : 'none',
-                  transition: `height 200ms ${EASE}, background-color 160ms linear, box-shadow 200ms ${EASE}, transform 220ms ${kind === 'swap' ? SPRING : EASE}`,
-                }}
-              />
-              {n <= 20 && (
-                <span className="block text-center font-mono text-[8px] text-[#3a3d49] mt-0.5 select-none">
+              {/* Pulse lives on a wrapper: an animation on `transform` would override
+                  the inline lift/scale transform on the pillar itself. */}
+              <div className={active ? 'anim-viz-pulse' : undefined} style={{ height: `${h}px` }}>
+                <div
+                  className="h-full w-full rounded-t-[var(--radius-control)]"
+                  style={{
+                    background: color,
+                    boxShadow: state.glow ? `0 0 ${VIZ.glowMd} ${color}` : 'none',
+                    transform:
+                      kind === 'swap'
+                        ? 'scaleY(1.07)'
+                        : kind === 'compare' || kind === 'current'
+                        ? 'translateY(-3px)'
+                        : 'none',
+                    transition: barTransition,
+                    transitionDelay: staggerDelay(i, changedCount),
+                  }}
+                />
+              </div>
+              {!compact && n <= 20 && (
+                <span className="mt-0.5 block select-none text-center font-mono text-[10px]" style={{ color: VIZ.valueCanvas }}>
                   {i}
                 </span>
               )}

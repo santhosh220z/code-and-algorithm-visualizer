@@ -29,7 +29,7 @@ export function* linearSearch(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       highlightCompare(i, i),
-      [makePointer(i, 'i', '#a855f7')],
+      [makePointer(i, 'i', 'primary')],
       2,
       `Check index ${i}: A[${i}] = ${array[i]}`,
       { i, target, current: array[i] },
@@ -40,7 +40,7 @@ export function* linearSearch(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightSorted(i),
-        [makePointer(i, 'i', '#a855f7')],
+        [makePointer(i, 'i', 'primary')],
         3,
         `Found target ${target} at index ${i}!`,
         { i, target, found: true },

@@ -43,7 +43,7 @@ export function* permutations(input: AlgorithmInput): Generator<Step> {
         yield makeArrayStep(
           a,
           highlightSwap(l, r),
-          [makePointer(l, 'l', '#a855f7'), makePointer(r, 'r', '#60a5fa')],
+          [makePointer(l, 'l', 'primary'), makePointer(r, 'r', 'secondary')],
           5,
           `Swap A[${l}]="${a[l]}" with A[${r}]="${a[r]}"`,
           { l, r, a: a[l], b: a[r] },
@@ -54,7 +54,7 @@ export function* permutations(input: AlgorithmInput): Generator<Step> {
         yield makeArrayStep(
           a,
           highlightSwap(l, r),
-          [makePointer(l, 'l', '#a855f7'), makePointer(r, 'r', '#60a5fa')],
+          [makePointer(l, 'l', 'primary'), makePointer(r, 'r', 'secondary')],
           5,
           `Swapped: A=[${a.join(', ')}]`,
           { l, r },
@@ -66,7 +66,7 @@ export function* permutations(input: AlgorithmInput): Generator<Step> {
         yield makeArrayStep(
           a,
           highlightSwap(l, r),
-          [makePointer(l, 'l', '#a855f7'), makePointer(r, 'r', '#60a5fa')],
+          [makePointer(l, 'l', 'primary'), makePointer(r, 'r', 'secondary')],
           7,
           `Backtrack: restore A=[${a.join(', ')}]`,
           { l, r },
@@ -81,7 +81,7 @@ export function* permutations(input: AlgorithmInput): Generator<Step> {
   yield makeArrayStep(
     a,
     [],
-    [makePointer(0, 'l', '#a855f7')],
+    [makePointer(0, 'l', 'primary')],
     0,
     `Generate all ${fact(a.length)} permutations of [${a.join(', ')}]`,
     { n: a.length },

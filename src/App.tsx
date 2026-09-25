@@ -1,7 +1,7 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { HomePage } from './pages/HomePage';
-import { CategoryPage } from './pages/CategoryPage';
+import { CategoryPage, NotFoundPage } from './pages/CategoryPage';
 import { CodeVisualizerPage } from './pages/CodeVisualizerPage';
 import './algos/sorting';
 import './algos/search';
@@ -20,7 +20,7 @@ function App() {
           <Route path="/algo/:category" element={<CategoryPage />} />
           <Route path="/algo/:category/:id" element={null} />
           <Route path="/code" element={<CodeVisualizerPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </HashRouter>

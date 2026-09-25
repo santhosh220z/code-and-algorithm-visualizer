@@ -1,6 +1,6 @@
 import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
 import { registerAlgorithm } from '../../core/registry';
-import { makeListStep, makeListNodes, listNode } from './helpers';
+import { makeContainerStep } from './helpers';
 
 const pseudocode = [
   { text: 'procedure stackDemo(ops)', indent: 0 },
@@ -29,7 +29,7 @@ export function* stackDemo(input: AlgorithmInput): Generator<Step> {
       { op: 'push', value: 9 },
     ];
 
-  yield makeListStep(makeListNodes([]), [], 1, 'Initialize empty stack', { size: 0 });
+  yield makeContainerStep('stack', [], [], 1, 'Initialize empty stack', { size: 0 });
 
   let pushCounter = 0;
   for (let i = 0; i < ops.length; i++) {
@@ -37,43 +37,47 @@ export function* stackDemo(input: AlgorithmInput): Generator<Step> {
     if (op.op === 'push') {
       const value = op.value ?? (pushCounter += 1);
       stack.push(value);
-      const nodeLabels = stack;
-      const nodes = nodeLabels.map((val, idx) =>
-        listNode(String(idx), val, (idx - (stack.length - 1) / 2) * 80, 0, idx < stack.length - 1 ? String(idx + 1) : undefined)
-      );
       const topIdx = stack.length - 1;
-      yield makeListStep(
-        nodes,
+      yield makeContainerStep(
+        'stack',
+        stack,
         [{ nodeId: String(topIdx), kind: 'insert' }],
         4,
-        `Push ${value} onto the stack (new top)`,
+        `Push ${value} onto the stack — it becomes the new top`,
         { size: stack.length, top: value, operation: 'push' },
         [{ label: 'ops', iteration: i + 1 }]
       );
     } else {
       const popped = stack.pop();
-      const nodeLabels = stack;
-      const nodes = nodeLabels.map((val, idx) =>
-        listNode(String(idx), val, (idx - (stack.length - 1) / 2) * 80, 0, idx < stack.length - 1 ? String(idx + 1) : undefined)
-      );
-      yield makeListStep(
-        nodes,
-        [],
+      const newTop = stack.length - 1;
+      yield makeContainerStep(
+        'stack',
+        stack,
+        newTop >= 0 ? [{ nodeId: String(newTop), kind: 'current' }] : [],
         6,
-        `Pop ${popped} off the stack (LIFO) — top removed`,
+        `Pop ${popped} off the stack (LIFO) — the top is removed${
+          stack.length ? `, ${stack[newTop]} is now the top` : ', leaving the stack empty'
+        }`,
         { size: stack.length, popped, operation: 'pop' },
         [{ label: 'ops', iteration: i + 1 }]
       );
     }
   }
 
-  const finalNodes = stack.map((val, idx) =>
-    listNode(String(idx), val, (idx - (stack.length - 1) / 2) * 80, 0, idx < stack.length - 1 ? String(idx + 1) : undefined)
+  const finalTop = stack.length - 1;
+  yield makeContainerStep(
+    'stack',
+    stack,
+    finalTop >= 0 ? [{ nodeId: String(finalTop), kind: 'current' }] : [],
+    9,
+    `All operations complete — stack holds ${stack.length} element${stack.length === 1 ? '' : 's'}${
+      stack.length ? `, top is ${stack[finalTop]}` : ''
+    }`,
+    {
+      size: stack.length,
+      top: stack.length ? stack[finalTop] : undefined,
+    }
   );
-  yield makeListStep(finalNodes, [], 9, `All operations complete — stack has ${stack.length} element(s)`, {
-    size: stack.length,
-    top: stack.length ? stack[stack.length - 1] : undefined,
-  });
 }
 
 const stackDemoDef: AlgorithmDef = {

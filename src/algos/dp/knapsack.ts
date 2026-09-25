@@ -20,13 +20,44 @@ const pseudocode = [
 
 const DEFAULT_WEIGHTS = [2, 3, 4, 5];
 const DEFAULT_VALUES = [3, 4, 5, 6];
+const MAX_ITEMS = 12;
+const MAX_CAPACITY = 20;
+
+/**
+ * Weights and values are sanitized pairwise so a dropped item can never leave its
+ * partner attached to the wrong weight, which would silently corrupt the result.
+ */
+function sanitizeItems(input: AlgorithmInput): { weights: number[]; values: number[] } {
+  const rawWeights = Array.isArray(input.weights) ? input.weights : null;
+  const rawValues = Array.isArray(input.values) ? input.values : null;
+  const length = Math.min(rawWeights?.length ?? 0, rawValues?.length ?? 0, MAX_ITEMS);
+  const weights: number[] = [];
+  const values: number[] = [];
+
+  for (let i = 0; i < length; i++) {
+    const weight = Number(rawWeights![i]);
+    const value = Number(rawValues![i]);
+    if (!Number.isFinite(weight) || weight <= 0 || !Number.isFinite(value) || value <= 0) continue;
+    const safeWeight = Math.floor(weight);
+    if (safeWeight <= 0) continue;
+    weights.push(safeWeight);
+    values.push(Math.floor(value));
+  }
+
+  if (weights.length === 0) return { weights: DEFAULT_WEIGHTS, values: DEFAULT_VALUES };
+  return { weights, values };
+}
 
 export function* knapsack(input: AlgorithmInput): Generator<Step> {
-  const weights = (input.weights as number[]) ?? DEFAULT_WEIGHTS;
-  const values = (input.values as number[]) ?? DEFAULT_VALUES;
-  const capacity = Number(input.capacity ?? 8);
+  const items = sanitizeItems(input);
+  const weights = items.weights;
+  const values = items.values;
   const n = weights.length;
-  const safeCap = Math.min(Math.max(1, Math.floor(capacity)), 20);
+  const capacity = Number(input.capacity ?? 8);
+  const safeCap = Math.min(
+    Math.max(1, Number.isFinite(capacity) ? Math.floor(capacity) : 8),
+    MAX_CAPACITY
+  );
 
   // dp[i][c]: max value using first i items with capacity c (0-indexed item rows)
   const dp: number[][] = Array.from({ length: n + 1 }, () => new Array(safeCap + 1).fill(0));
@@ -36,7 +67,13 @@ export function* knapsack(input: AlgorithmInput): Generator<Step> {
       row.map((cell, c) => tableCell(r, c, cell === 0 && r > 0 && c > 0 ? '' : cell, r > 0 && c > 0))
     );
 
-  yield makeTableStep(toCells(), [], 1, `Initialize DP table (${n}+1 items × ${safeCap}+1 capacity)`, { n, safeCap });
+  yield makeTableStep(
+    toCells(),
+    [],
+    1,
+    `Initialize DP table (${n}+1 items × ${safeCap}+1 capacity)`,
+    { n, safeCap, weights: weights.join(','), values: values.join(',') }
+  );
 
   for (let i = 1; i <= n; i++) {
     for (let c = 1; c <= safeCap; c++) {

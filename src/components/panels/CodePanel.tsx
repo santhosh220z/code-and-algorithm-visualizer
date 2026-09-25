@@ -52,8 +52,10 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
 
   // Auto-scroll to keep the active line visible
   useEffect(() => {
-    if (activeLine < 0 || !containerRef.current) return;
-    const el = containerRef.current.querySelector(`[data-line="${activeLine}"]`);
+    if (activeLine < 0) return;
+    const container = containerRef.current;
+    if (!container || container.closest('[hidden]') || container.getClientRects().length === 0) return;
+    const el = container.querySelector(`[data-line="${activeLine}"]`);
     el?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }, [activeLine]);
 
@@ -132,7 +134,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
                     <path d="M3 1 L9 6 L3 11 Z" fill="var(--color-accent)" />
                   </svg>
                 ) : wasExecuted ? (
-                  <span className="block w-1 h-1 mx-auto rounded-full bg-[var(--color-trail)]" />
+                  <span className="block w-1 h-1 mx-auto rounded-full bg-[var(--color-success)]" />
                 ) : null}
               </span>
 
@@ -172,7 +174,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
             {Object.entries(currentStep.vars).map(([key, value]) => (
               <span
                 key={key}
-                className="px-2 py-0.5 rounded-md text-[10.5px] font-mono bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-active)]"
+                className="px-2 py-0.5 rounded-[var(--radius-control)] text-[10.5px] font-mono bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-code-key)]"
               >
                 {key}
                 <span className="text-[var(--color-text-dim)]"> = </span>
@@ -190,7 +192,7 @@ export function CodePanel({ pseudocode, currentStep, steps, cursor, loops, title
             {[...currentStep.stack].reverse().map((frame, idx) => (
               <span
                 key={`${frame.fn}-${idx}`}
-                className={`px-2 py-0.5 rounded-md text-[10px] font-mono border ${
+                className={`px-2 py-0.5 rounded-[var(--radius-control)] text-[10px] font-mono border ${
                   idx === 0
                     ? 'bg-[var(--color-accent-bg)] border-[var(--color-accent-border)] text-[var(--color-accent-hover)]'
                     : 'bg-[var(--color-surface-3)] border-[var(--color-border)] text-[var(--color-text-muted)]'

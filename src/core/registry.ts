@@ -19,6 +19,14 @@ export function getAllAlgorithms(): AlgorithmDef[] {
   return [...algorithms];
 }
 
+export function supportsRegeneration(algorithm: AlgorithmDef): boolean {
+  return (
+    algorithm.category === 'graph' ||
+    algorithm.category === 'grid' ||
+    Array.isArray(algorithm.defaultInput.array)
+  );
+}
+
 export interface CategoryInfo {
   id: AlgorithmCategory;
   name: string;

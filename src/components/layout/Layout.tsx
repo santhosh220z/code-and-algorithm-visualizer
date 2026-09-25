@@ -1,153 +1,204 @@
-import { useMemo } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { AlgorithmLoader } from '../../pages/AlgorithmLoader';
+import { NotFoundPage } from '../../pages/CategoryPage';
 import { Sidebar } from '../sidebar/Sidebar';
-import { PlayerControls } from '../player/PlayerControls';
 import { CodePanel } from '../panels/CodePanel';
 import { VarsPanel } from '../panels/VarsPanel';
-import { NarrationBar } from '../panels/NarrationBar';
-import { ArrayViz } from '../viz/ArrayViz';
-import { GraphViz } from '../viz/GraphViz';
-import { GridViz } from '../viz/GridViz';
-import { TreeViz } from '../viz/TreeViz';
-import { ListViz } from '../viz/ListViz';
-import { TableViz } from '../viz/TableViz';
-import { HanoiViz } from '../viz/HanoiViz';
+import { AlgorithmControls } from '../player/AlgorithmControls';
 import { EditorToolbar } from '../player/EditorToolbar';
-import { usePlayerStore, useCurrentStep } from '../../core/player';
-import type { AlgorithmCategory, LoopScope } from '../../core/types';
-
-/** Derive loop scopes (for rails) from pseudocode indentation. */
-export function parseLoops(pseudocode: { text: string; indent: number; isLoopHeader?: boolean; loopLabel?: string }[]): LoopScope[] {
-  const scopes: LoopScope[] = [];
-  pseudocode.forEach((line, i) => {
-    if (!line.isLoopHeader) return;
-    let end = i;
-    for (let j = i + 1; j < pseudocode.length; j++) {
-      const next = pseudocode[j];
-      if (next.text.trim() === '') continue;
-      if (next.indent <= line.indent) break;
-      end = j;
-    }
-    scopes.push({ label: line.loopLabel ?? `loop${i}`, startLine: i, endLine: end, depth: line.indent });
-  });
-  return scopes;
-}
+import { VisualizationCanvas } from '../viz/VisualizationCanvas';
+import { useCurrentStep, usePlayerStore } from '../../core/player';
+import { CATEGORY_NAMES, getAlgorithm, supportsRegeneration } from '../../core/registry';
+import { parseLoops } from '../../core/loopScopes';
+import type { AlgorithmCategory } from '../../core/types';
+import { Badge } from '../ui/Badge';
+import { Button } from '../ui/Button';
+import { LearningStudio } from './LearningStudio';
 
 export function Layout() {
   const location = useLocation();
-  const algorithm = usePlayerStore((s) => s.algorithm);
-  const steps = usePlayerStore((s) => s.steps);
-  const cursor = usePlayerStore((s) => s.cursor);
+  const algorithm = usePlayerStore((state) => state.algorithm);
+  const storeInput = usePlayerStore((state) => state.input);
+  const steps = usePlayerStore((state) => state.steps);
+  const cursor = usePlayerStore((state) => state.cursor);
   const currentStep = useCurrentStep();
+  const [guideState, setGuideState] = useState({ open: false, path: location.pathname });
 
+  const routeMatch = location.pathname.match(/^\/algo\/([^/]+)\/([^/]+)$/);
+  const onAlgorithmRoute = routeMatch !== null;
+  const currentCategory = routeMatch?.[1] as AlgorithmCategory | undefined;
+  const routeAlgorithm = routeMatch ? getAlgorithm(routeMatch[2]) : undefined;
+  const validAlgorithmRoute = Boolean(
+    routeAlgorithm && currentCategory && routeAlgorithm.category === currentCategory
+  );
+  const activeAlgorithm =
+    validAlgorithmRoute && algorithm?.id === routeAlgorithm?.id ? algorithm : null;
+  const input =
+    algorithm?.id === activeAlgorithm?.id ? storeInput : activeAlgorithm?.defaultInput ?? {};
+  const canRegenerate = activeAlgorithm ? supportsRegeneration(activeAlgorithm) : false;
   const loops = useMemo(
-    () => (algorithm ? parseLoops(algorithm.pseudocode) : []),
-    [algorithm]
+    () => (activeAlgorithm ? parseLoops(activeAlgorithm.pseudocode) : []),
+    [activeAlgorithm]
   );
 
-  const onAlgorithmRoute = /\/algo\/[^/]+\/[^/]+$/.test(location.pathname);
-  const currentCategory = location.pathname.split('/')[2] as AlgorithmCategory;
-  const vizType = currentStep?.viz.type;
+  useEffect(() => {
+    const categoryTitle = currentCategory ? CATEGORY_NAMES[currentCategory] : null;
+    document.title = activeAlgorithm
+      ? `${activeAlgorithm.name} · AlgoViz`
+      : location.pathname === '/code'
+        ? 'Code Visualizer · AlgoViz'
+        : categoryTitle && location.pathname === `/algo/${currentCategory}`
+          ? `${categoryTitle} · AlgoViz`
+          : 'AlgoViz · Algorithm Visualizer';
 
-  const renderViz = () => {
-    if (vizType === 'array' && currentStep?.viz.type === 'array') {
-      return (
-        <ArrayViz
-          array={currentStep.viz.array}
-          highlights={currentStep.viz.highlights}
-          pointers={currentStep.viz.pointers}
-        />
-      );
-    }
-    if (vizType === 'graph') return <GraphViz />;
-    if (vizType === 'grid') return <GridViz />;
-    if (vizType === 'tree' && currentStep?.viz.type === 'tree') {
-      return <TreeViz nodes={currentStep.viz.nodes} highlights={currentStep.viz.highlights} />;
-    }
-    if (vizType === 'list' && currentStep?.viz.type === 'list') {
-      return <ListViz nodes={currentStep.viz.nodes} highlights={currentStep.viz.highlights} />;
-    }
-    if (vizType === 'table' && currentStep?.viz.type === 'table') {
-      return <TableViz table={currentStep.viz.table} highlights={currentStep.viz.highlights} />;
-    }
-    if (vizType === 'hanoi' && currentStep?.viz.type === 'hanoi') {
-      return <HanoiViz pegs={currentStep.viz.pegs} highlights={currentStep.viz.highlights} moving={currentStep.viz.moving} />;
-    }
-    return (
-      <div className="h-full flex items-center justify-center">
-        <p className="text-sm text-[var(--color-text-dim)] italic">Press Play or → to step through the trace.</p>
+    if (location.pathname === '/code') return;
+    const frame = window.requestAnimationFrame(() => {
+      const target = document.getElementById('route-focus') ?? document.getElementById('main-content');
+      target?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeAlgorithm, currentCategory, location.pathname]);
+
+  const guideOpen = guideState.open && guideState.path === location.pathname;
+
+  const hasSetup =
+    Boolean(activeAlgorithm) &&
+    (currentCategory === 'graph' ||
+      currentCategory === 'grid' ||
+      activeAlgorithm?.id === 'ds-stack' ||
+      activeAlgorithm?.id === 'ds-queue' ||
+      activeAlgorithm?.id === 'ds-bst' ||
+      Array.isArray(input.array) ||
+      typeof input.target === 'number' ||
+      typeof input.n === 'number' ||
+      typeof input.capacity === 'number' ||
+      typeof input.a === 'string' ||
+      typeof input.b === 'string');
+
+  const setupContent = !activeAlgorithm ? null : currentCategory === 'graph' || currentCategory === 'grid' ? (
+    <div className="h-full overflow-auto">
+      <EditorToolbar category={currentCategory} />
+    </div>
+  ) : (
+    <div className="h-full overflow-auto p-3">
+      <AlgorithmControls algorithm={activeAlgorithm} input={input} />
+    </div>
+  );
+
+  const algorithmHeader = activeAlgorithm ? (
+    <header className="shrink-0 border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-3 py-3 sm:px-4">
+      <div className="flex items-center gap-3">
+        <div className="min-w-0">
+          {currentCategory && (
+            <nav aria-label="Breadcrumb" className="mb-1 flex items-center gap-1 text-[11px] text-[var(--color-text-dim)]">
+              <Link to={`/algo/${currentCategory}`} className="rounded hover:text-[var(--color-accent-hover)]">
+                {CATEGORY_NAMES[currentCategory]}
+              </Link>
+              <span aria-hidden="true">/</span>
+              <span className="truncate">{activeAlgorithm.name}</span>
+            </nav>
+          )}
+          <h1 id="page-heading" tabIndex={-1} className="truncate text-base font-semibold text-[var(--color-text)]">
+            {activeAlgorithm.name}
+          </h1>
+        </div>
+        <div className="ml-auto flex items-center gap-2">
+          <div className="hidden items-center gap-2 lg:flex">
+            <Badge>Time {activeAlgorithm.complexity.time}</Badge>
+            <Badge>Space {activeAlgorithm.complexity.space}</Badge>
+          </div>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => setGuideState({ open: !guideOpen, path: location.pathname })}
+            aria-expanded={guideOpen}
+          >
+            Guide
+          </Button>
+          <Button
+            size="sm"
+            onClick={() => {
+              if (canRegenerate) usePlayerStore.getState().regenerate();
+              else usePlayerStore.getState().setAlgorithm(activeAlgorithm, activeAlgorithm.defaultInput);
+            }}
+            disabled={!steps.length}
+          >
+            <span className="sm:hidden">{canRegenerate ? 'New' : 'Reset'}</span>
+            <span className="hidden sm:inline">{canRegenerate ? 'New data' : 'Reset demo'}</span>
+          </Button>
+        </div>
       </div>
-    );
-  };
+      {guideOpen && (
+        <div className="mt-3 grid gap-3 rounded-[var(--radius-panel)] border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 text-sm leading-relaxed text-[var(--color-text-muted)] md:grid-cols-2">
+          <p>{activeAlgorithm.description}</p>
+          <p className="text-[var(--color-text-dim)]">Use Play to advance automatically, or step through one operation at a time. The legend explains each visual state and the inspector stays synchronized with the canvas.</p>
+        </div>
+      )}
+    </header>
+  ) : null;
 
   return (
-    <div className="h-full flex bg-[var(--color-bg)]">
+    <div className="flex h-dvh bg-[var(--color-bg)]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-[var(--radius-control)] focus:bg-[var(--color-accent)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-[var(--color-accent-ink)]"
+      >
+        Skip to main content
+      </a>
       <Sidebar />
-      <main className="flex-1 min-w-0 ml-64 flex flex-col h-full">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex h-full min-w-0 max-w-full flex-1 flex-col overflow-x-hidden pt-[var(--topbar-height)] xl:ml-[var(--navigation-width)] xl:pt-0"
+      >
+        <span id="route-focus" tabIndex={-1} className="sr-only" />
         <AlgorithmLoader />
 
         {!onAlgorithmRoute ? (
-          <div className="flex-1 min-h-0 overflow-y-auto scrollbar-thin">
+          <div className={`min-h-0 flex-1 overflow-x-hidden ${location.pathname === '/code' ? '' : 'scrollbar-thin overflow-y-auto'}`}>
             <Outlet />
           </div>
+        ) : !validAlgorithmRoute ? (
+          <div className="scrollbar-thin min-h-0 flex-1 overflow-y-auto">
+            <NotFoundPage
+              title="Algorithm not found"
+              message="This algorithm does not exist or does not belong to the selected category."
+            />
+          </div>
         ) : (
-          <>
-            {/* Top bar */}
-            <header className="shrink-0 flex items-center gap-3 px-4 py-2.5 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]">
-              <span className="text-[13px] font-semibold text-[var(--color-text)]">{algorithm?.name ?? 'Loading…'}</span>
-              {algorithm && (
-                <div className="ml-auto hidden md:flex items-center gap-2 text-[10.5px] font-mono text-[var(--color-text-muted)]">
-                  <span className="px-1.5 py-0.5 rounded bg-[var(--color-surface-3)]">time {algorithm.complexity.time}</span>
-                  <span className="px-1.5 py-0.5 rounded bg-[var(--color-surface-3)]">space {algorithm.complexity.space}</span>
-                  <button
-                    onClick={() => usePlayerStore.getState().regenerate()}
-                    disabled={!steps.length}
-                    className="ml-2 px-3 py-1 rounded-md text-[11px] font-sans font-medium bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)] border border-[var(--color-accent-border)] hover:bg-[var(--color-accent-bg-hover)] transition-colors disabled:opacity-30"
-                  >
-                    ⟲ New data
-                  </button>
-                </div>
-              )}
-            </header>
-
-            {/* Studio */}
-            <div className="flex-1 min-h-0 flex">
-              {/* Left column */}
-              <section className="flex-1 min-w-0 flex flex-col">
-                {(currentCategory === 'graph' || currentCategory === 'grid') && (
-                  <EditorToolbar category={currentCategory} />
-                )}
-                <div className="flex-1 min-h-0 p-4 pb-1">{renderViz()}</div>
-                <NarrationBar step={currentStep} cursor={cursor} total={steps.length} />
-                <PlayerControls />
-              </section>
-
-              {/* Right column */}
-              <aside className="hidden xl:flex w-[420px] shrink-0 border-l border-[var(--color-border)] flex-col min-h-0">
-                {algorithm ? (
-                  <>
-                    <div className="flex-1 min-h-0">
-                      <CodePanel
-                        pseudocode={algorithm.pseudocode}
-                        currentStep={currentStep}
-                        steps={steps}
-                        cursor={cursor}
-                        loops={loops}
-                      />
-                    </div>
-                    <div className="h-40 shrink-0 border-t border-[var(--color-border)] bg-[var(--color-bg-elevated)] overflow-hidden">
-                      <VarsPanel step={currentStep} />
-                    </div>
-                  </>
-                ) : (
-                  <div className="h-full flex items-center justify-center">
-                    <p className="text-sm text-[var(--color-text-dim)] italic">No algorithm selected.</p>
+          <LearningStudio
+            header={algorithmHeader}
+            canvas={<VisualizationCanvas step={currentStep} />}
+            inspectorLabel="Code, state, and setup"
+            inspectorTabs={[
+              {
+                id: 'code',
+                label: 'Code',
+                content: activeAlgorithm ? (
+                  <CodePanel
+                    pseudocode={activeAlgorithm.pseudocode}
+                    currentStep={currentStep}
+                    steps={steps}
+                    cursor={cursor}
+                    loops={loops}
+                  />
+                ) : null,
+              },
+              {
+                id: 'state',
+                label: 'State',
+                content: (
+                  <div className="h-full overflow-auto bg-[var(--color-bg-elevated)]">
+                    <VarsPanel step={currentStep} />
                   </div>
-                )}
-              </aside>
-            </div>
-          </>
+                ),
+              },
+              ...(hasSetup
+                ? [{ id: 'setup', label: 'Setup', content: setupContent }]
+                : []),
+            ]}
+          />
         )}
       </main>
     </div>

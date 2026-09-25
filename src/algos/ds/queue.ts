@@ -1,6 +1,6 @@
 import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
 import { registerAlgorithm } from '../../core/registry';
-import { makeListStep, listNode } from './helpers';
+import { makeContainerStep } from './helpers';
 
 const pseudocode = [
   { text: 'procedure queueDemo(ops)', indent: 0 },
@@ -29,7 +29,7 @@ export function* queueDemo(input: AlgorithmInput): Generator<Step> {
       { op: 'enqueue', value: 9 },
     ];
 
-  yield makeListStep([], [], 1, 'Initialize empty queue (FIFO)', { size: 0 });
+  yield makeContainerStep('queue', [], [], 1, 'Initialize empty queue (FIFO)', { size: 0 });
 
   let enqueueCounter = 0;
   for (let i = 0; i < ops.length; i++) {
@@ -37,40 +37,44 @@ export function* queueDemo(input: AlgorithmInput): Generator<Step> {
     if (op.op === 'enqueue') {
       const value = op.value ?? (enqueueCounter += 1);
       queue.push(value);
-      const nodes = queue.map((val, idx) =>
-        listNode(String(idx), val, (idx - (queue.length - 1) / 2) * 80, 0, idx < queue.length - 1 ? String(idx + 1) : undefined)
-      );
-      yield makeListStep(
-        nodes,
+      yield makeContainerStep(
+        'queue',
+        queue,
         [{ nodeId: String(queue.length - 1), kind: 'insert' }],
         4,
-        `Enqueue ${value} at the tail of the queue`,
-        { size: queue.length, tail: value, operation: 'enqueue' },
+        `Enqueue ${value} at the rear of the queue`,
+        { size: queue.length, rear: value, operation: 'enqueue' },
         [{ label: 'ops', iteration: i + 1 }]
       );
     } else {
       const dequeued = queue.shift();
-      const nodes = queue.map((val, idx) =>
-        listNode(String(idx), val, (idx - (queue.length - 1) / 2) * 80, 0, idx < queue.length - 1 ? String(idx + 1) : undefined)
-      );
-      yield makeListStep(
-        nodes,
-        [],
+      yield makeContainerStep(
+        'queue',
+        queue,
+        queue.length ? [{ nodeId: '0', kind: 'current' }] : [],
         6,
-        `Dequeue ${dequeued} from the front (FIFO)`,
+        `Dequeue ${dequeued} from the front (FIFO)${
+          queue.length ? ` — ${queue[0]} is now at the front` : ', leaving the queue empty'
+        }`,
         { size: queue.length, dequeued, operation: 'dequeue' },
         [{ label: 'ops', iteration: i + 1 }]
       );
     }
   }
 
-  const finalNodes = queue.map((val, idx) =>
-    listNode(String(idx), val, (idx - (queue.length - 1) / 2) * 80, 0, idx < queue.length - 1 ? String(idx + 1) : undefined)
+  yield makeContainerStep(
+    'queue',
+    queue,
+    queue.length ? [{ nodeId: '0', kind: 'current' }] : [],
+    9,
+    `All operations complete — queue holds ${queue.length} element${queue.length === 1 ? '' : 's'}${
+      queue.length ? `, front is ${queue[0]}` : ''
+    }`,
+    {
+      size: queue.length,
+      front: queue.length ? queue[0] : undefined,
+    }
   );
-  yield makeListStep(finalNodes, [], 9, `All operations complete — queue holds ${queue.length} element(s)`, {
-    size: queue.length,
-    front: queue.length ? queue[0] : undefined,
-  });
 }
 
 const queueDemoDef: AlgorithmDef = {

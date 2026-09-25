@@ -49,7 +49,7 @@ function* merge(
   yield makeArrayStep(
     array,
     [],
-    [makePointer(left, 'L', '#a855f7'), makePointer(mid + 1, 'R', '#fbbf24'), makePointer(left, 'k', '#60a5fa')],
+    [makePointer(left, 'L', 'primary'), makePointer(mid + 1, 'R', 'target'), makePointer(left, 'k', 'secondary')],
     10,
     `Merge: create L[${n1}] and R[${n2}] from indices [${left}..${mid}] and [${mid + 1}..${right}]`,
     { left, mid, right, L, R, depth },
@@ -66,7 +66,7 @@ function* merge(
     yield makeArrayStep(
       array,
       highlightCompare(leftIdx, rightIdx),
-      [makePointer(leftIdx, 'L[i]', '#a855f7'), makePointer(rightIdx, 'R[j]', '#fbbf24'), makePointer(k, 'k', '#60a5fa')],
+      [makePointer(leftIdx, 'L[i]', 'primary'), makePointer(rightIdx, 'R[j]', 'target'), makePointer(k, 'k', 'secondary')],
       13,
       `Compare L[${i}] = ${L[i]} with R[${j}] = ${R[j]}`,
       { left, mid, right, i, j, k, leftVal: L[i], rightVal: R[j], depth },
@@ -77,7 +77,7 @@ function* merge(
       yield makeArrayStep(
         array,
         [{ index: k, kind: 'current' }],
-        [makePointer(leftIdx, 'L[i]', '#a855f7'), makePointer(rightIdx, 'R[j]', '#fbbf24'), makePointer(k, 'k', '#60a5fa')],
+        [makePointer(leftIdx, 'L[i]', 'primary'), makePointer(rightIdx, 'R[j]', 'target'), makePointer(k, 'k', 'secondary')],
         14,
         `L[${i}] ≤ R[${j}], place ${L[i]} at A[${k}]`,
         { left, mid, right, i, j, k, placed: L[i], depth },
@@ -89,7 +89,7 @@ function* merge(
       yield makeArrayStep(
         array,
         [{ index: k, kind: 'current' }],
-        [makePointer(leftIdx, 'L[i]', '#a855f7'), makePointer(rightIdx, 'R[j]', '#fbbf24'), makePointer(k, 'k', '#60a5fa')],
+        [makePointer(leftIdx, 'L[i]', 'primary'), makePointer(rightIdx, 'R[j]', 'target'), makePointer(k, 'k', 'secondary')],
         16,
         `L[${i}] > R[${j}], place ${R[j]} at A[${k}]`,
         { left, mid, right, i, j, k, placed: R[j], depth },
@@ -105,7 +105,7 @@ function* merge(
     yield makeArrayStep(
       array,
       [{ index: k, kind: 'current' }],
-      [makePointer(left + i, 'L[i]', '#a855f7'), makePointer(k, 'k', '#60a5fa')],
+      [makePointer(left + i, 'L[i]', 'primary'), makePointer(k, 'k', 'secondary')],
       20,
       `Copy remaining L[${i}] = ${L[i]} to A[${k}]`,
       { left, mid, right, i, j, k, placed: L[i], depth },
@@ -120,7 +120,7 @@ function* merge(
     yield makeArrayStep(
       array,
       [{ index: k, kind: 'current' }],
-      [makePointer(mid + 1 + j, 'R[j]', '#fbbf24'), makePointer(k, 'k', '#60a5fa')],
+      [makePointer(mid + 1 + j, 'R[j]', 'target'), makePointer(k, 'k', 'secondary')],
       21,
       `Copy remaining R[${j}] = ${R[j]} to A[${k}]`,
       { left, mid, right, i, j, k, placed: R[j], depth },
@@ -154,7 +154,7 @@ function* mergeSortRec(
     yield makeArrayStep(
       array,
       [],
-      [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24'), makePointer(mid, 'mid', '#60a5fa')],
+      [makePointer(left, 'left', 'primary'), makePointer(right, 'right', 'target'), makePointer(mid, 'mid', 'secondary')],
       1,
       `Recursive call: sort range [${left}..${right}], mid = ${mid}`,
       { left, mid, right, depth },

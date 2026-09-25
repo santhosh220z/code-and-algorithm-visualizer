@@ -44,7 +44,7 @@ function* partition(
   yield makeArrayStep(
     array,
     highlightPivot(high),
-    [makePointer(low, 'low', '#a855f7'), makePointer(high, 'pivot', '#f87171'), makePointer(i, 'i', '#60a5fa')],
+    [makePointer(low, 'low', 'primary'), makePointer(high, 'pivot', 'pivot'), makePointer(i, 'i', 'secondary')],
     9,
     `Partition [${low}..${high}]: pivot = A[${high}] = ${pivot}, i = ${i}`,
     { low, high, pivot, i, depth },
@@ -55,7 +55,7 @@ function* partition(
     yield makeArrayStep(
       array,
       highlightCompare(j, high),
-      [makePointer(low, 'low', '#a855f7'), makePointer(high, 'pivot', '#f87171'), makePointer(j, 'j', '#60a5fa'), makePointer(i, 'i', '#fbbf24')],
+      [makePointer(low, 'low', 'primary'), makePointer(high, 'pivot', 'pivot'), makePointer(j, 'j', 'secondary'), makePointer(i, 'i', 'target')],
       12,
       `Compare A[${j}] = ${array[j]} with pivot ${pivot}`,
       { low, high, pivot, i, j, compareValue: array[j], depth },
@@ -68,7 +68,7 @@ function* partition(
         yield makeArrayStep(
           array,
           highlightSwap(i, j),
-          [makePointer(low, 'low', '#a855f7'), makePointer(high, 'pivot', '#f87171'), makePointer(j, 'j', '#60a5fa'), makePointer(i, 'i', '#fbbf24')],
+          [makePointer(low, 'low', 'primary'), makePointer(high, 'pivot', 'pivot'), makePointer(j, 'j', 'secondary'), makePointer(i, 'i', 'target')],
           14,
           `A[${j}] ≤ pivot: increment i to ${i}, swap A[${i}] and A[${j}]`,
           { low, high, pivot, i, j, swapped: true, depth },
@@ -79,7 +79,7 @@ function* partition(
         yield makeArrayStep(
           array,
           [{ index: i, kind: 'current' }],
-          [makePointer(low, 'low', '#a855f7'), makePointer(high, 'pivot', '#f87171'), makePointer(j, 'j', '#60a5fa'), makePointer(i, 'i', '#fbbf24')],
+          [makePointer(low, 'low', 'primary'), makePointer(high, 'pivot', 'pivot'), makePointer(j, 'j', 'secondary'), makePointer(i, 'i', 'target')],
           13,
           `A[${j}] ≤ pivot: increment i to ${i} (no swap needed)`,
           { low, high, pivot, i, j, swapped: false, depth },
@@ -90,7 +90,7 @@ function* partition(
       yield makeArrayStep(
         array,
         highlightCompare(j, high),
-        [makePointer(low, 'low', '#a855f7'), makePointer(high, 'pivot', '#f87171'), makePointer(j, 'j', '#60a5fa'), makePointer(i, 'i', '#fbbf24')],
+        [makePointer(low, 'low', 'primary'), makePointer(high, 'pivot', 'pivot'), makePointer(j, 'j', 'secondary'), makePointer(i, 'i', 'target')],
       12,
       `A[${j}] > pivot: no action, continue`,
         { low, high, pivot, i, j, compareValue: array[j], depth },
@@ -103,7 +103,7 @@ function* partition(
   yield makeArrayStep(
     array,
     highlightSwap(pivotFinal, high),
-    [makePointer(low, 'low', '#a855f7'), makePointer(high, 'pivot', '#f87171'), makePointer(pivotFinal, 'i+1', '#fbbf24')],
+    [makePointer(low, 'low', 'primary'), makePointer(high, 'pivot', 'pivot'), makePointer(pivotFinal, 'i+1', 'target')],
     17,
     `Partition done: swap pivot A[${high}] with A[${pivotFinal}]`,
     { low, high, pivot, i, pivotFinal, depth },
@@ -114,7 +114,7 @@ function* partition(
   yield makeArrayStep(
     array,
     highlightSorted(pivotFinal),
-    [makePointer(pivotFinal, 'pivot', '#4ade80')],
+    [makePointer(pivotFinal, 'pivot', 'complete')],
     18,
     `Pivot ${pivot} placed at final position ${pivotFinal}`,
     { low, high, pivot, pivotFinal, depth },
@@ -134,7 +134,7 @@ function* quickSortRec(
     yield makeArrayStep(
       array,
       [],
-      [makePointer(low, 'low', '#a855f7'), makePointer(high, 'high', '#fbbf24')],
+      [makePointer(low, 'low', 'primary'), makePointer(high, 'high', 'target')],
       1,
       `QuickSort range [${low}..${high}]`,
       { low, high, depth },

@@ -1,85 +1,110 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { categories, getAlgorithmsByCategory } from '../../core/registry';
+import { Sheet } from '../ui/Sheet';
+import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 
-export function Sidebar() {
-  const [open, setOpen] = useState<Record<string, boolean>>({ sorting: true });
-  const toggle = (id: string) => setOpen((o) => ({ ...o, [id]: !o[id] }));
+interface SidebarContentProps {
+  closed: Record<string, boolean>;
+  setClosed: Dispatch<SetStateAction<Record<string, boolean>>>;
+  onNavigate?: () => void;
+  showBrand?: boolean;
+}
 
+function SidebarContent({
+  closed,
+  setClosed,
+  onNavigate,
+  showBrand = true,
+}: SidebarContentProps) {
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-[var(--color-bg-elevated)] border-r border-[var(--color-border)] flex flex-col">
-      <NavLink
-        to="/"
-        className="flex items-center gap-2.5 px-4 h-14 border-b border-[var(--color-border)] shrink-0 hover:bg-[var(--color-surface-2)] transition-colors duration-200"
-      >
-        <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-bold text-sm">A</span>
-        <span className="font-semibold text-[15px] text-white">AlgoViz</span>
-      </NavLink>
+    <>
+      {showBrand && (
+        <NavLink
+          to="/"
+          onClick={onNavigate}
+          className="flex min-h-16 items-center gap-3 border-b border-[var(--color-border)] px-4 transition-colors duration-200 hover:bg-[var(--color-surface-2)]"
+        >
+          <span className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-control)] bg-[var(--color-accent)] text-sm font-bold text-[var(--color-accent-ink)]">A</span>
+          <span>
+            <span className="block text-[15px] font-semibold text-[var(--color-text)]">AlgoViz</span>
+            <span className="block text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--color-text-dim)]">Learning canvas</span>
+          </span>
+        </NavLink>
+      )}
 
-      <nav className="flex-1 overflow-y-auto scrollbar-thin p-2 space-y-1" aria-label="Algorithm categories">
+      <nav className="scrollbar-thin flex-1 space-y-1 overflow-y-auto p-3" aria-label="Learning paths">
         <NavLink
           to="/code"
+          onClick={onNavigate}
           className={({ isActive }) =>
-            `flex items-center gap-2.5 px-2.5 py-2 rounded-lg transition-colors duration-200 ${
+            `flex min-h-11 items-center gap-3 rounded-[var(--radius-control)] px-3 py-2 transition-colors duration-200 ${
               isActive
-                ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent)]'
+                ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)]'
                 : 'text-[var(--color-text-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text)]'
             }`
           }
         >
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="m8 6-6 6 6 6M16 6l6 6-6 6" />
           </svg>
-          <span className="text-[12.5px] font-medium">Code Visualizer</span>
+          <span className="text-sm font-medium">Code Visualizer</span>
         </NavLink>
 
-        <div className="px-2.5 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-dim)]">
-          Algorithms
+        <div className="px-3 pb-1 pt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-dim)]">
+          Learning paths
         </div>
 
-        {categories.map((cat) => {
-          const algos = getAlgorithmsByCategory(cat.id);
-          if (algos.length === 0) {
+        {categories.map((category) => {
+          const algorithms = getAlgorithmsByCategory(category.id);
+          if (algorithms.length === 0) {
             return (
               <div
-                key={cat.id}
-                title="Scheduled for a later milestone"
-                className="flex items-center justify-between px-2.5 py-2 rounded-lg opacity-45 cursor-not-allowed select-none"
+                key={category.id}
+                className="flex min-h-11 select-none items-center justify-between rounded-[var(--radius-control)] px-3 py-2 opacity-55"
               >
-                <span className="text-[12.5px] font-medium text-[var(--color-text-muted)]">{cat.name}</span>
-                <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wide bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-dim)]">
+                <span className="min-w-0 flex-1 text-left text-sm font-medium text-[var(--color-text-muted)]">{category.name}</span>
+                <span className="shrink-0 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-3)] px-1.5 py-0.5 text-[10px] font-mono uppercase tracking-wide text-[var(--color-text-dim)]">
                   Soon
                 </span>
               </div>
             );
           }
 
-          const isOpen = open[cat.id] ?? false;
+          const isOpen = !closed[category.id];
+          const panelId = `category-${category.id}-algorithms`;
+
           return (
-            <div key={cat.id}>
+            <div key={category.id}>
               <button
-                onClick={() => toggle(cat.id)}
+                type="button"
+                onClick={() =>
+                  setClosed((current) => ({ ...current, [category.id]: isOpen }))
+                }
                 aria-expanded={isOpen}
-                className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg transition-colors duration-200 group ${
+                aria-controls={panelId}
+                className={`group flex min-h-11 w-full items-center justify-between rounded-[var(--radius-control)] px-3 py-2 transition-colors duration-200 ${
                   isOpen ? 'bg-[var(--color-surface-2)]' : 'hover:bg-[var(--color-surface-2)]'
                 }`}
               >
                 <span
-                  className={`text-[10.5px] font-semibold uppercase tracking-wider transition-colors duration-200 ${
-                    isOpen ? 'text-[var(--color-accent-hover)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text)]'
+                  className={`min-w-0 flex-1 text-left text-[11px] font-semibold uppercase leading-tight tracking-[0.12em] transition-colors duration-200 ${
+                    isOpen
+                      ? 'text-[var(--color-accent-hover)]'
+                      : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text)]'
                   }`}
                 >
-                  {cat.name}
+                  {category.name}
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="text-[9.5px] font-mono text-[var(--color-text-dim)]">{algos.length}</span>
+                <span className="flex shrink-0 items-center gap-1.5">
+                  <span className="font-mono text-[10px] text-[var(--color-text-dim)]">{algorithms.length}</span>
                   <svg
                     viewBox="0 0 24 24"
-                    width={13}
-                    height={13}
+                    width="14"
+                    height="14"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth={2.5}
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className={`text-[var(--color-text-dim)] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
@@ -91,44 +116,138 @@ export function Sidebar() {
                 </span>
               </button>
 
-              {/* Smooth height via the 0fr → 1fr grid trick */}
-              <div
-                className="grid transition-[grid-template-rows] duration-300"
-                style={{
-                  gridTemplateRows: isOpen ? '1fr' : '0fr',
-                  transitionTimingFunction: 'var(--ease-smooth)',
-                }}
-              >
-                <div className="overflow-hidden min-h-0">
-                  <div className="space-y-0.5 pt-0.5 pb-1 pl-1">
-                    {algos.map((algo, idx) => (
-                      <NavLink
-                        key={algo.id}
-                        to={`/algo/${cat.id}/${algo.id}`}
-                        className={({ isActive }) =>
-                          `block px-2.5 py-1.5 rounded-lg text-[13px] transition-colors duration-200 ${
-                            isOpen ? 'anim-item-in' : ''
-                          } ${isActive
-                            ? 'bg-[var(--color-accent-bg)] text-[var(--color-accent-hover)] font-medium'
-                            : 'text-[var(--color-text-muted)] hover:bg-[var(--color-surface-2)] hover:text-white'
-                          }`
-                        }
-                        style={{ animationDelay: `${idx * 35}ms` }}
-                      >
-                        {algo.name}
-                      </NavLink>
-                    ))}
-                  </div>
+              {isOpen && (
+                <div id={panelId} className="space-y-1 pb-1 pl-1 pt-1">
+                  {algorithms.map((algorithm, index) => (
+                    <NavLink
+                      key={algorithm.id}
+                      to={`/algo/${category.id}/${algorithm.id}`}
+                      onClick={onNavigate}
+                      className={({ isActive }) =>
+                        `anim-item-in block min-h-11 rounded-[var(--radius-control)] px-3 py-2 text-sm transition-colors duration-200 ${
+                          isActive
+                            ? 'bg-[var(--color-accent-bg)] font-medium text-[var(--color-accent-hover)]'
+                            : 'text-[var(--color-text-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text)]'
+                        }`
+                      }
+                      style={{ animationDelay: `${Math.min(index * 35, 175)}ms` }}
+                    >
+                      {algorithm.name}
+                    </NavLink>
+                  ))}
                 </div>
-              </div>
+              )}
             </div>
           );
         })}
       </nav>
 
-      <div className="shrink-0 px-3 py-2.5 border-t border-[var(--color-border)] text-[9.5px] leading-relaxed text-[var(--color-text-dim)] font-mono">
-        SPACE play/pause · ←/→ step<br />HOME/END jump
+      <div className="shrink-0 space-y-3 border-t border-[var(--color-border)] p-3">
+        <ThemeSwitcher />
+        <p className="font-mono text-[10px] leading-relaxed text-[var(--color-text-dim)]">
+          <kbd className="rounded border border-[var(--color-border)] px-1">Space</kbd> play/pause ·{' '}
+          <kbd className="rounded border border-[var(--color-border)] px-1">←</kbd>/<kbd className="rounded border border-[var(--color-border)] px-1">→</kbd> step
+        </p>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export function Sidebar() {
+  const location = useLocation();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const routeCategory = location.pathname.match(/^\/algo\/([^/]+)/)?.[1];
+  const [desktop, setDesktop] = useState(() =>
+    typeof window === 'undefined' ? false : window.matchMedia('(min-width: 1280px)').matches
+  );
+  const [navigationState, setNavigationState] = useState(() => ({
+    routeCategory,
+    closed: Object.fromEntries(
+      categories.map((category) => [category.id, category.id !== 'sorting'])
+    ) as Record<string, boolean>,
+  }));
+  const closed =
+    navigationState.routeCategory === routeCategory
+      ? navigationState.closed
+      : {
+          ...navigationState.closed,
+          ...(routeCategory ? { [routeCategory]: false } : {}),
+        };
+  const setClosed: Dispatch<SetStateAction<Record<string, boolean>>> = (update) => {
+    setNavigationState((current) => {
+      const base =
+        current.routeCategory === routeCategory
+          ? current.closed
+          : {
+              ...current.closed,
+              ...(routeCategory ? { [routeCategory]: false } : {}),
+            };
+      return {
+        routeCategory,
+        closed: typeof update === 'function' ? update(base) : update,
+      };
+    });
+  };
+  const [drawer, setDrawer] = useState({ open: false, path: location.pathname });
+  const mobileOpen = !desktop && drawer.open && drawer.path === location.pathname;
+
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 1280px)');
+    const onChange = (event: MediaQueryListEvent) => {
+      setDesktop(event.matches);
+      if (event.matches) setDrawer((current) => ({ ...current, open: false }));
+    };
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
+  }, []);
+
+  const closeDrawer = () => {
+    setDrawer({ open: false, path: location.pathname });
+  };
+
+  return (
+    <>
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[var(--navigation-width)] flex-col border-r border-[var(--color-border)] bg-[var(--color-bg-elevated)] xl:flex">
+        <SidebarContent closed={closed} setClosed={setClosed} />
+      </aside>
+
+      <header className="fixed inset-x-0 top-0 z-50 flex h-[var(--topbar-height)] w-screen max-w-[100vw] items-center justify-between gap-3 overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-3 xl:hidden">
+        <NavLink to="/" className="flex min-h-11 items-center gap-2.5 rounded-[var(--radius-control)] px-1">
+          <span className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-control)] bg-[var(--color-accent)] text-sm font-bold text-[var(--color-accent-ink)]">A</span>
+          <span className="hidden text-[15px] font-semibold text-[var(--color-text)] sm:inline">AlgoViz</span>
+        </NavLink>
+        <div className="flex shrink-0 items-center gap-2">
+          <ThemeSwitcher />
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={() => setDrawer({ open: true, path: location.pathname })}
+            aria-expanded={mobileOpen}
+            aria-label="Open navigation"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-border)] bg-[var(--color-surface-3)] text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface-4)]"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <Sheet
+        open={mobileOpen}
+        onClose={closeDrawer}
+        label="Learning paths"
+        placement="left"
+        bodyClassName="p-0"
+      >
+        <div className="flex h-full min-h-0 flex-col">
+          <SidebarContent
+            closed={closed}
+            setClosed={setClosed}
+            onNavigate={closeDrawer}
+          />
+        </div>
+      </Sheet>
+    </>
   );
 }

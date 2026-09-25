@@ -1,6 +1,6 @@
-import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
+import type { AlgorithmDef, AlgorithmInput, CallFrame, Step } from '../../core/types';
 import { registerAlgorithm } from '../../core/registry';
-import { makeArrayStep, highlightCurrent, makePointer, frame } from './helpers';
+import { makeCallStackStep } from './helpers';
 
 const pseudocode = [
   { text: 'function factorial(n)', indent: 0 },
@@ -11,87 +11,93 @@ const pseudocode = [
   { text: 'end function', indent: 0 },
 ];
 
+const MAX_N = 12;
+
 export function* factorialAlgo(input: AlgorithmInput): Generator<Step> {
   const n = Number(input.n ?? 6);
-  const safeN = Math.min(Math.max(0, Math.floor(n)), 15);
+  const safeN = Math.min(Math.max(0, Math.floor(n)), MAX_N);
 
-  yield makeArrayStep(
-    [safeN],
-    highlightCurrent(0),
-    [makePointer(0, 'call factorial')],
+  /** Outermost call first; the innermost frame is the one currently running. */
+  const frames: CallFrame[] = [];
+
+  const callFrame = (k: number): CallFrame => {
+    const frame: CallFrame = { id: `n=${k}`, fn: 'factorial', label: `factorial(${k})` };
+    frames.push(frame);
+    return frame;
+  };
+
+  const asStack = () => frames.map((frame) => ({ fn: frame.fn, args: { n: frame.label.match(/\d+/)![0] } }));
+
+  // ---- descend -----------------------------------------------------------
+  let current = callFrame(safeN);
+  yield makeCallStackStep(
+    frames,
+    current.id,
+    undefined,
     0,
-    `Call factorial(${safeN})`,
-    { n: safeN },
-    [],
-    [frame('factorial', { n: safeN })]
+    safeN <= 1
+      ? `Call factorial(${safeN}) — the base case is checked first`
+      : `Call factorial(${safeN}) → waiting for factorial(${safeN - 1})`,
+    { n: safeN, depth: frames.length },
+    asStack()
   );
 
-  const results: number[] = [];
-  const stack: { fn: string; args: Record<string, unknown> }[] = [frame('factorial', { n: safeN })];
-
-  for (let k = safeN; k >= 1; k--) {
-    if (k <= 1) {
-      yield makeArrayStep(
-        [k],
-        highlightCurrent(0),
-        [makePointer(0, `n=${k}`)],
-        1,
-        `Base case reached: n=${k} ≤ 1`,
-        { n: k, isBaseCase: true },
-        [],
-        stack
-      );
-    } else {
-      yield makeArrayStep(
-        [k],
-        highlightCurrent(0),
-        [makePointer(0, `n=${k}`)],
-        0,
-        `Call factorial(${k}) → waiting for factorial(${k - 1})`,
-        { n: k },
-        [],
-        stack
-      );
-      stack.push(frame('factorial', { n: k - 1 }));
-      yield makeArrayStep(
-        [k - 1],
-        highlightCurrent(0),
-        [makePointer(0, `n=${k - 1}`)],
-        0,
-        `Recurse into factorial(${k - 1})`,
-        { n: k - 1, depth: stack.length },
-        [],
-        [...stack]
-      );
-    }
+  for (let k = safeN; k >= 2; k--) {
+    const next = k - 1;
+    current = callFrame(next);
+    yield makeCallStackStep(
+      frames,
+      current.id,
+      undefined,
+      0,
+      next <= 1
+        ? `Call factorial(${next}) — n ≤ 1, so this is the base case and it stops recursing`
+        : `Call factorial(${next}) → waiting for factorial(${next - 1})`,
+      { n: next, depth: frames.length },
+      asStack()
+    );
   }
 
-  // Unwind back up computing results
+  // base case: factorial(1) returns 1 without recursing
+  current.returned = 1;
+  yield makeCallStackStep(
+    frames,
+    current.id,
+    undefined,
+    1,
+    `Base case reached: n=1 ≤ 1, so it returns 1`,
+    { n: 1, isBaseCase: true, depth: frames.length },
+    asStack()
+  );
+
+  // ---- unwind ------------------------------------------------------------
   let result = 1;
   for (let k = 1; k <= safeN; k++) {
     result *= k;
-    stack.pop();
-    yield makeArrayStep(
-      [k],
-      highlightCurrent(0),
-      [makePointer(0, `n=${k}`)],
+    const frame = frames.find((f) => f.id === `n=${k}`);
+    if (frame) frame.returned = result;
+    yield makeCallStackStep(
+      frames,
+      frame?.id ?? null,
+      undefined,
       4,
-      `Return ${result} from factorial(${k}) = ${k} × factorial(${k - 1})`,
-      { n: k, result },
-      [],
-      [...stack]
+      k === 1
+        ? `Return 1 from factorial(1) — the base case feeds the chain`
+        : `Return ${result} from factorial(${k}) = ${k} × factorial(${k - 1})`,
+      { n: k, result, running: result },
+      asStack()
     );
-    results.push(result);
+    // the frame that just returned leaves the stack, freeing the caller
+    if (k < safeN) frames.pop();
   }
 
-  yield makeArrayStep(
-    [safeN],
-    highlightCurrent(0),
+  yield makeCallStackStep(
     [],
+    null,
+    result,
     5,
-    `factorial(${safeN}) = ${result}`,
+    `factorial(${safeN}) = ${result} — every frame has returned`,
     { result, n: safeN },
-    [],
     []
   );
 }

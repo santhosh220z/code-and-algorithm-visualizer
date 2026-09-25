@@ -1,11 +1,6 @@
 import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
 import { registerAlgorithm } from '../../core/registry';
-import {
-  makeArrayStep,
-  highlightCompare,
-  highlightSorted,
-  makePointer,
-} from '../../core/stepHelpers';
+import { makeSearchStep, highlightCompare, highlightSorted } from '../../core/stepHelpers';
 
 const pseudocode = [
   { text: 'procedure binarySearch(A, target)', indent: 0 },
@@ -33,10 +28,11 @@ export function* binarySearch(input: AlgorithmInput): Generator<Step> {
   let left = 0;
   let right = n - 1;
 
-  yield makeArrayStep(
+  yield makeSearchStep(
     array,
     [],
-    [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24')],
+    { left, right },
+    null,
     1,
     `Binary search for ${target} in sorted array of length ${n}`,
     { n, target, left, right }
@@ -47,20 +43,22 @@ export function* binarySearch(input: AlgorithmInput): Generator<Step> {
     iteration++;
     const mid = Math.floor((left + right) / 2);
 
-    yield makeArrayStep(
+    yield makeSearchStep(
       array,
       [],
-      [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24'), makePointer(mid, 'mid', '#60a5fa')],
-    4,
-    `Search range [${left}..${right}], mid = ${mid}`,
+      { left, right },
+      null,
+      4,
+      `Search range [${left}..${right}] (${right - left + 1} candidate${right - left === 0 ? '' : 's'}), mid = ${mid}`,
       { left, right, mid, iteration },
       [{ label: 'search', iteration }]
     );
 
-    yield makeArrayStep(
+    yield makeSearchStep(
       array,
-      highlightCompare(mid, mid),
-      [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24'), makePointer(mid, 'mid', '#60a5fa')],
+      highlightCompare(mid),
+      { left, right },
+      null,
       5,
       `Compare A[${mid}] = ${array[mid]} with target ${target}`,
       { left, right, mid, midValue: array[mid], target, iteration },
@@ -68,10 +66,11 @@ export function* binarySearch(input: AlgorithmInput): Generator<Step> {
     );
 
     if (array[mid] === target) {
-      yield makeArrayStep(
+      yield makeSearchStep(
         array,
         highlightSorted(mid),
-        [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24'), makePointer(mid, 'mid', '#60a5fa')],
+        { left, right },
+        mid,
         6,
         `Found target ${target} at index ${mid}!`,
         { left, right, mid, target, found: true },
@@ -79,23 +78,25 @@ export function* binarySearch(input: AlgorithmInput): Generator<Step> {
       );
       return;
     } else if (array[mid] < target) {
-      yield makeArrayStep(
+      yield makeSearchStep(
         array,
         [],
-        [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24'), makePointer(mid, 'mid', '#60a5fa')],
+        { left: mid + 1, right },
+        null,
         8,
-        `A[${mid}] (${array[mid]}) < target, search right half: left = ${mid + 1}`,
+        `A[${mid}] (${array[mid]}) < target, so the left half is discarded: left = ${mid + 1}`,
         { left, right, mid, newLeft: mid + 1, iteration },
         [{ label: 'search', iteration }]
       );
       left = mid + 1;
     } else {
-      yield makeArrayStep(
+      yield makeSearchStep(
         array,
         [],
-        [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24'), makePointer(mid, 'mid', '#60a5fa')],
+        { left, right: mid - 1 },
+        null,
         10,
-        `A[${mid}] (${array[mid]}) > target, search left half: right = ${mid - 1}`,
+        `A[${mid}] (${array[mid]}) > target, so the right half is discarded: right = ${mid - 1}`,
         { left, right, mid, newRight: mid - 1, iteration },
         [{ label: 'search', iteration }]
       );
@@ -103,12 +104,13 @@ export function* binarySearch(input: AlgorithmInput): Generator<Step> {
     }
   }
 
-  yield makeArrayStep(
+  yield makeSearchStep(
     array,
     [],
-    [],
+    null,
+    null,
     13,
-    `Target ${target} not found (search space exhausted)`,
+    `Target ${target} not found — the search range became empty`,
     { target, found: false },
     []
   );

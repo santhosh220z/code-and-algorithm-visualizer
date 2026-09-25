@@ -41,7 +41,22 @@ export function PlayerControls() {
   // Global keyboard shortcuts
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) return;
+      const target = e.target instanceof HTMLElement ? e.target : null;
+      if (
+        e.defaultPrevented ||
+        e.altKey ||
+        e.ctrlKey ||
+        e.metaKey ||
+        e.shiftKey ||
+        target?.isContentEditable
+      ) {
+        return;
+      }
+      const activationTarget = target?.closest('button, a, summary, input, textarea, select, [role="button"]');
+      const directionalTarget = target?.closest('input, textarea, select, [role="slider"], [role="tab"]');
+      if (e.key === ' ' && activationTarget) return;
+      if (['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(e.key) && directionalTarget) return;
+      if (e.key === ' ' && e.repeat) return;
       switch (e.key) {
         case ' ':
           e.preventDefault();
@@ -70,12 +85,12 @@ export function PlayerControls() {
   }, [togglePlay, stepForward, stepBackward, jumpToStart, jumpToEnd]);
 
   const btn =
-    'flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-4)] hover:border-[var(--color-border-strong)] hover:-translate-y-px active:scale-90 transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none';
+    'flex items-center justify-center w-11 h-11 rounded-[var(--radius-control)] bg-[var(--color-surface-3)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-4)] hover:border-[var(--color-border-strong)] hover:-translate-y-px active:scale-90 transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none';
 
   return (
     <div className="shrink-0 flex flex-col gap-2 px-4 py-3 bg-[var(--color-bg-elevated)] border-t border-[var(--color-border)]">
       {/* Transport */}
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         <button className={btn} onClick={jumpToStart} disabled={!steps.length} title="Jump to start (Home)" aria-label="Jump to start">
           <Icon path="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
         </button>
@@ -107,13 +122,13 @@ export function PlayerControls() {
         </button>
 
         {/* Speed selector */}
-        <div className="ml-3 flex items-center rounded-lg overflow-hidden border border-[var(--color-border)]" role="group" aria-label="Playback speed">
+        <div className="flex items-center overflow-hidden rounded-[var(--radius-control)] border border-[var(--color-border)] sm:ml-3" role="group" aria-label="Playback speed">
           {SPEEDS.map((s) => (
             <button
               key={s}
               onClick={() => setSpeed(s)}
               aria-pressed={speed === s}
-              className={`px-3 h-10 text-[11px] font-mono transition-colors border-r border-[var(--color-border)] last:border-r-0 ${
+              className={`h-11 min-w-11 px-2 text-[11px] font-mono transition-colors border-r border-[var(--color-border)] last:border-r-0 ${
                 speed === s
                   ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold'
                   : 'bg-[var(--color-surface-3)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-4)]'
@@ -133,7 +148,7 @@ export function PlayerControls() {
           max={steps.length - 1}
           value={cursor}
           onChange={(e) => setCursor(Number(e.target.value))}
-          className="w-full accent-[var(--color-accent)] cursor-pointer h-1"
+          className="h-11 w-full cursor-pointer accent-[var(--color-accent)]"
           aria-label="Scrub through steps"
           aria-valuemin={0}
           aria-valuemax={steps.length - 1}

@@ -1,0 +1,240 @@
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+
+  html {
+    color-scheme: var(--theme-color-scheme);
+    background: var(--canvas);
+  }
+
+  body {
+    overflow: hidden;
+    background: var(--canvas);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  code,
+  pre {
+    font-family: var(--font-code);
+  }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  a[href],
+  select:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: 4px;
+  }
+
+  svg [tabindex='0']:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  input,
+  textarea,
+  select {
+    color: var(--text-primary);
+  }
+
+  option {
+    background: var(--surface-raised);
+    color: var(--text-primary);
+  }
+
+  ::selection {
+    background: var(--brand-soft-hover);
+    color: var(--text-primary);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-strong);
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--border-strong);
+    background-clip: content-box;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-strong) transparent;
+  }
+
+  .focus-ring {
+    outline: none;
+  }
+
+  .focus-ring:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .anim-step-in {
+    animation: stepIn var(--motion-normal) var(--ease-smooth) both;
+  }
+
+  .anim-badge-pop {
+    animation: badgePop 240ms var(--ease-out-back) both;
+  }
+
+  .anim-item-in {
+    animation: itemIn 260ms var(--ease-smooth) both;
+  }
+
+  /* Mount-only: React keys are stable, so this plays when an element is genuinely new. */
+  .anim-viz-pop {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: vizPopIn var(--viz-motion-normal) var(--ease-emphasized) both;
+  }
+
+  /* One-shot pulse on whatever just became active. */
+  .anim-viz-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: vizPulse var(--viz-motion-slow) var(--ease-standard) both;
+  }
+
+  @keyframes vizPopIn {
+    from {
+      opacity: 0;
+      transform: scale(0.86);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes vizPulse {
+    0% {
+      transform: scale(1);
+    }
+    38% {
+      transform: scale(1.09);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .canvas-grid {
+    background-color: var(--canvas-grid-bg, var(--canvas));
+    background-image:
+      linear-gradient(var(--canvas-grid-line, var(--border)) 1px, transparent 1px),
+      linear-gradient(90deg, var(--canvas-grid-line, var(--border)) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
+  }
+
+  .canvas-grid-stage {
+    --canvas-grid-bg: var(--viz-canvas);
+    --canvas-grid-line: var(--viz-canvas-line);
+  }
+
+  .surface-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .surface-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+  }
+
+  @keyframes stepIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes badgePop {
+    0% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.18);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes itemIn {
+    from {
+      opacity: 0;
+      transform: translateX(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

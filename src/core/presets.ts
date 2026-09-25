@@ -153,27 +153,112 @@ export function emptyGrid(rows = 12, cols = 20): GridInputData {
   };
 }
 
-export function randomWalls(rows = 12, cols = 20, density = 0.28): GridInputData {
-  const base = emptyGrid(rows, cols);
+/** Deterministic PRNG so a seeded board is identical on every load. */
+function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * A monotone staircase from start to end. Reserving it before scattering walls
+ * guarantees the goal stays reachable no matter how the dice fall.
+ */
+function carveRoute(
+  rand: () => number,
+  start: [number, number],
+  end: [number, number]
+): Set<string> {
+  const reserved = new Set<string>([`${start[0]},${start[1]}`]);
+  let [r, c] = start;
+  let guard = 0;
+  while ((r !== end[0] || c !== end[1]) && guard++ < 500) {
+    const rowLeft = r !== end[0];
+    const colLeft = c !== end[1];
+    if (rowLeft && (!colLeft || rand() < 0.5)) r += Math.sign(end[0] - r);
+    else c += Math.sign(end[1] - c);
+    reserved.add(`${r},${c}`);
+  }
+  return reserved;
+}
+
+const TERRAIN_COSTS = [2, 3, 4, 6];
+
+function buildWalls(
+  rand: () => number,
+  rows: number,
+  cols: number,
+  density: number,
+  start: [number, number],
+  end: [number, number]
+): string[] {
+  const reserved = carveRoute(rand, start, end);
+  // Keep the cells touching each endpoint clear so neither is boxed in.
+  reserved.add(`${start[0]},${start[1] + 1}`);
+  reserved.add(`${start[0] + 1},${start[1]}`);
+  reserved.add(`${end[0]},${end[1] - 1}`);
+  reserved.add(`${end[0] - 1},${end[1]}`);
+
   const walls: string[] = [];
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      const isEndpoint =
-        (r === base.start[0] && c === base.start[1]) || (r === base.end[0] && c === base.end[1]);
-      if (!isEndpoint && Math.random() < density) walls.push(`${r},${c}`);
+      const k = `${r},${c}`;
+      if (reserved.has(k)) continue;
+      if (rand() < density) walls.push(k);
     }
   }
-  // Guarantee endpoints aren't walled in by their immediate ring
-  for (const [r, c] of [
-    [base.start[0], base.start[1] + 1],
-    [base.start[0] + 1, base.start[1]],
-    [base.end[0], base.end[1] - 1],
-    [base.end[0] - 1, base.end[1]],
-  ]) {
-    const idx = walls.indexOf(`${r},${c}`);
-    if (idx !== -1) walls.splice(idx, 1);
+  return walls;
+}
+
+export function randomWalls(rows = 12, cols = 20, density = 0.28): GridInputData {
+  const base = emptyGrid(rows, cols);
+  return { ...base, walls: buildWalls(Math.random, rows, cols, density, base.start, base.end) };
+}
+
+/** Same generator, but reproducible for a given seed. */
+export function seededRandomWalls(
+  rows = 12,
+  cols = 20,
+  density = 0.28,
+  seed = 20260925
+): GridInputData {
+  const base = emptyGrid(rows, cols);
+  return {
+    ...base,
+    walls: buildWalls(mulberry32(seed), rows, cols, density, base.start, base.end),
+  };
+}
+
+const SEED_BOARD = seededRandomWalls(12, 20, 0.26, 20260925);
+
+// A light scattering of terrain cost, so Dijkstra/A* have something to optimise
+// against and BFS's "ignores terrain weights" note actually refers to something.
+for (const [r, c] of [
+  [2, 5], [2, 9], [4, 14], [6, 6], [7, 11], [9, 4], [9, 16], [3, 17], [8, 8],
+]) {
+  if (r < SEED_BOARD.rows && c < SEED_BOARD.cols) {
+    const k = `${r},${c}`;
+    if (!SEED_BOARD.walls.includes(k)) {
+      SEED_BOARD.weights[k] = TERRAIN_COSTS[(r * 7 + c * 3) % TERRAIN_COSTS.length];
+    }
   }
-  return { ...base, walls };
+}
+
+/**
+ * Opening board shared by every pathfinding lesson, so BFS, DFS, Dijkstra and
+ * A* can be compared on identical terrain. A fresh copy each call keeps the
+ * shared source immutable.
+ */
+export function defaultPathfindingGrid(): GridInputData {
+  return {
+    ...SEED_BOARD,
+    walls: [...SEED_BOARD.walls],
+    weights: { ...SEED_BOARD.weights },
+  };
 }
 
 /** Resize a grid to custom dimensions, preserving everything that still fits.

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import type { AlgorithmDef, Step, GridInputData } from '../core/types';
 import { getAlgorithm } from '../core/registry';
-import { resizeGrid } from '../core/presets';
+import { resizeGrid, seededRandomWalls, defaultPathfindingGrid } from '../core/presets';
 import { usePlayerStore } from '../core/player';
 import '../algos/grid';
 
@@ -260,6 +260,83 @@ describe('custom grid sizing (resizeGrid)', () => {
     // Trace was rebuilt for the new layout
     expect(s.steps.length).toBeGreaterThan(0);
     expect(s.cursor).toBe(0);
+  });
+});
+
+describe('default pathfinding board', () => {
+  const IDS = ['grid-bfs', 'grid-dfs', 'grid-dijkstra', 'grid-astar'];
+
+  function reachableFromStart(g: GridInputData): Set<string> {
+    const walls = new Set(g.walls);
+    const seen = new Set<string>([`${g.start[0]},${g.start[1]}`]);
+    const queue: [number, number][] = [g.start];
+    while (queue.length > 0) {
+      const [r, c] = queue.shift()!;
+      for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]] as [number, number][]) {
+        const nr = r + dr, nc = c + dc;
+        const k = `${nr},${nc}`;
+        if (nr < 0 || nc < 0 || nr >= g.rows || nc >= g.cols) continue;
+        if (walls.has(k) || seen.has(k)) continue;
+        seen.add(k);
+        queue.push([nr, nc]);
+      }
+    }
+    return seen;
+  }
+
+  it('opens with walls and terrain instead of a clean board', () => {
+    const g = defaultPathfindingGrid();
+    expect(g.walls.length).toBeGreaterThan(20);
+    expect(Object.keys(g.weights).length).toBeGreaterThan(0);
+  });
+
+  it('is deterministic, so the lesson is reproducible across loads', () => {
+    expect(defaultPathfindingGrid().walls).toEqual(defaultPathfindingGrid().walls);
+    expect(seededRandomWalls(10, 12, 0.3, 7).walls).toEqual(seededRandomWalls(10, 12, 0.3, 7).walls);
+  });
+
+  it('hands each lesson its own copy rather than a shared mutable grid', () => {
+    const a = defaultPathfindingGrid();
+    const b = defaultPathfindingGrid();
+    expect(a).not.toBe(b);
+    expect(a.walls).not.toBe(b.walls);
+    a.walls.push('99,99');
+    expect(b.walls).not.toContain('99,99');
+  });
+
+  it('never places a wall on an endpoint', () => {
+    for (const g of [defaultPathfindingGrid(), seededRandomWalls(12, 20, 0.6, 5)]) {
+      expect(g.walls).not.toContain(`${g.start[0]},${g.start[1]}`);
+      expect(g.walls).not.toContain(`${g.end[0]},${g.end[1]}`);
+    }
+  });
+
+  it('stays solvable at any density, because a route is carved first', () => {
+    for (const density of [0, 0.28, 0.5, 0.75, 0.95]) {
+      for (const seed of [1, 7, 42, 2026]) {
+        const g = seededRandomWalls(12, 20, density, seed);
+        const seen = reachableFromStart(g);
+        expect(seen.has(`${g.end[0]},${g.end[1]}`), `density ${density} seed ${seed}`).toBe(true);
+      }
+    }
+  });
+
+  it('lets every pathfinding lesson find a path on the shared board', () => {
+    for (const id of IDS) {
+      const def = getAlgorithm(id)!;
+      const steps = runGrid(def, defaultPathfindingGrid());
+      const solved = steps.some((s) => s.vars?.found === true);
+      expect(solved, `${id} found no path on the default board`).toBe(true);
+      expect(pathCells(steps).size).toBeGreaterThan(1);
+    }
+  });
+
+  it('gives all four lessons identical starting terrain', () => {
+    const boards = IDS.map((id) => (getAlgorithm(id)!.defaultInput as { grid: GridInputData }).grid);
+    for (const b of boards) {
+      expect(b.walls).toEqual(boards[0].walls);
+      expect(b.weights).toEqual(boards[0].weights);
+    }
   });
 });
 

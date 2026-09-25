@@ -1,4 +1,11 @@
-import type { Step, TreeNode, TreeHighlight, ListNode, ListHighlight } from '../../core/types';
+import type {
+  Step,
+  TreeNode,
+  TreeHighlight,
+  ListNode,
+  ListHighlight,
+  ListVizVariant,
+} from '../../core/types';
 import type { LoopInfo, StackFrame } from '../../core/stepHelpers';
 
 export type { LoopInfo, StackFrame } from '../../core/stepHelpers';
@@ -14,6 +21,23 @@ export function makeTreeStep(
   stack?: StackFrame[]
 ): Step {
   return { line, description, vars, loops, stack, viz: { type: 'tree', nodes, highlights } };
+}
+
+/**
+ * A stack or queue is a container, not a chain, so no `next` pointers are emitted —
+ * `ListViz` draws the labelled container and treats the last/first value as top/front.
+ */
+export function makeContainerStep(
+  variant: Exclude<ListVizVariant, 'linked'>,
+  values: (number | string)[],
+  highlights: ListHighlight[],
+  line: number,
+  description: string,
+  vars?: Record<string, unknown>,
+  loops?: LoopInfo[]
+): Step {
+  const nodes = values.map((value, i) => listNode(String(i), value, 0, 0));
+  return { line, description, vars, loops, viz: { type: 'list', nodes, highlights, variant } };
 }
 
 export function makeListStep(

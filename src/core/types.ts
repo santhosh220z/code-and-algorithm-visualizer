@@ -25,9 +25,12 @@ export interface ArrayHighlight {
   kind: 'compare' | 'swap' | 'sorted' | 'pivot' | 'current' | 'trail';
 }
 
+export type PointerRole = 'primary' | 'secondary' | 'target' | 'pivot' | 'complete';
+
 export interface Pointer {
   index: number;
   label: string;
+  role?: PointerRole;
   color?: string;
 }
 
@@ -103,15 +106,39 @@ export interface GridHighlight {
 
 /* ------------------------------ Step payloads ----------------------------- */
 
+export interface SearchWindow {
+  left: number;
+  right: number;
+}
+
 export type VizPayload =
   | { type: 'array'; array: number[]; highlights: ArrayHighlight[]; pointers: Pointer[] }
+  | { type: 'search'; array: number[]; highlights: ArrayHighlight[]; window: SearchWindow | null; found: number | null }
   | { type: 'graph'; highlights: GraphNodeHighlight[]; edgeHighlights: GraphEdgeHighlight[] }
   | { type: 'grid'; highlights: GridHighlight[] }
   | { type: 'tree'; nodes: TreeNode[]; highlights: TreeHighlight[] }
-  | { type: 'list'; nodes: ListNode[]; highlights: ListHighlight[] }
+  | {
+      type: 'list';
+      nodes: ListNode[];
+      highlights: ListHighlight[];
+      /** `linked` draws a horizontal chain; `stack`/`queue` draw a labelled container. */
+      variant?: ListVizVariant;
+    }
   | { type: 'table'; table: TableCell[][]; highlights: TableHighlight[] }
   | { type: 'hanoi'; pegs: HanoiPegs; highlights: HanoiHighlight[]; moving: HanoiMovingDisk | null }
+  | { type: 'callstack'; frames: CallFrame[]; currentId: string | null; result?: number }
   | { type: 'none' };
+
+export type ListVizVariant = 'linked' | 'stack' | 'queue';
+
+/** One activation record of the call stack, outermost first. */
+export interface CallFrame {
+  id: string;
+  fn: string;
+  label: string;
+  /** Present once the frame has produced its return value. */
+  returned?: number;
+}
 
 /* --------------------- Reserved for later milestones ---------------------- */
 

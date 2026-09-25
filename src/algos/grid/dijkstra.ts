@@ -1,6 +1,6 @@
-﻿import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
+import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
 import { registerAlgorithm } from '../../core/registry';
-import { emptyGrid } from '../../core/presets';
+import { defaultPathfindingGrid } from '../../core/presets';
 import { asGridInput, makeGridStep, key, neighbors4, costOf, revealGridPath, noPathStep } from './helpers';
 import { rcHi } from './bfs';
 
@@ -15,7 +15,7 @@ const pseudocode = [
   { text: 'for each walkable neighbor v of u', indent: 2, isLoopHeader: true, loopLabel: 'nbr' },
   { text: 'alt = dist[u] + cost(v)', indent: 3 },
   { text: 'if alt < dist[v]', indent: 3 },
-  { text: 'dist[v] = alt; parent[v] = u; open âˆª= {v}', indent: 4 },
+  { text: 'dist[v] = alt; parent[v] = u; open ∪= {v}', indent: 4 },
   { text: 'return "no path"', indent: 1 },
   { text: 'end procedure', indent: 0 },
 ];
@@ -53,7 +53,7 @@ export function* gridDijkstra(input: AlgorithmInput): Generator<Step> {
       yield makeGridStep(
         [...closedHi(closed), ...frontierHi(open, dist, u), { row: ur, col: uc, kind: 'current', g: best }],
         5,
-        `${u} has min dist (${best}) and is the goal â€” done!`,
+        `${u} has min dist (${best}) and is the goal — done!`,
         { u, dist: best },
         [{ label: 'dijkstra', iteration: steps }]
       );
@@ -90,8 +90,8 @@ export function* gridDijkstra(input: AlgorithmInput): Generator<Step> {
             { row: ur, col: uc, kind: 'current' },
           ],
           10,
-          `${v}: ${best} + cost ${costOf(g, nr, nc)} = ${alt} ${oldDist === undefined ? '(first reach)' : `beats ${oldDist}`} â†’ update`,
-          { u, v, alt, cost: costOf(g, nr, nc), previous: oldDist ?? 'âˆž' },
+          `${v}: ${best} + cost ${costOf(g, nr, nc)} = ${alt} ${oldDist === undefined ? '(first reach)' : `beats ${oldDist}`} → update`,
+          { u, v, alt, cost: costOf(g, nr, nc), previous: oldDist ?? '∞' },
           [{ label: 'dijkstra', iteration: steps }, { label: 'nbr', iteration: steps }]
         );
       }
@@ -120,8 +120,8 @@ const gridDijkstraDef: AlgorithmDef = {
   category: 'grid',
   description: 'Expands cells in order of total movement cost, honoring weighted terrain. Guarantees the cheapest path through weights and walls.',
   pseudocode,
-  complexity: { time: 'O((RÃ—C)Â²) naive scan', space: 'O(RÃ—C)' },
-  defaultInput: { grid: emptyGrid() },
+  complexity: { time: 'O((R×C)²) naive scan', space: 'O(R×C)' },
+  defaultInput: { grid: defaultPathfindingGrid() },
   run: gridDijkstra,
 };
 

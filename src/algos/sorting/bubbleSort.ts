@@ -31,7 +31,7 @@ export function* bubbleSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       [],
-      [makePointer(i, 'i', '#a855f7')],
+      [makePointer(i, 'i', 'primary')],
       2,
       `Outer loop: pass ${i + 1} of ${n - 1}`,
       { i, n },
@@ -42,7 +42,7 @@ export function* bubbleSort(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightCompare(j, j + 1),
-        [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'j+1', '#60a5fa')],
+        [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'j+1', 'secondary')],
         4,
         `Inner loop: compare index ${j} (${array[j]}) with ${j + 1} (${array[j + 1]})`,
         { i, j, a: array[j], b: array[j + 1] },
@@ -53,7 +53,7 @@ export function* bubbleSort(input: AlgorithmInput): Generator<Step> {
         yield makeArrayStep(
           array,
           highlightSwap(j, j + 1),
-          [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'j+1', '#60a5fa')],
+          [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'j+1', 'secondary')],
         4,
         `Condition true: ${array[j]} > ${array[j + 1]}, entering the swap branch`,
           { i, j, a: array[j], b: array[j + 1] },
@@ -65,7 +65,7 @@ export function* bubbleSort(input: AlgorithmInput): Generator<Step> {
         yield makeArrayStep(
           array,
           highlightSwap(j, j + 1),
-          [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'j+1', '#60a5fa')],
+          [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'j+1', 'secondary')],
           5,
           `Swapped: array[${j}] = ${array[j]}, array[${j + 1}] = ${array[j + 1]}`,
           { i, j, a: array[j], b: array[j + 1] },
@@ -75,7 +75,7 @@ export function* bubbleSort(input: AlgorithmInput): Generator<Step> {
         yield makeArrayStep(
           array,
           highlightCompare(j, j + 1),
-          [makePointer(i, 'i', '#a855f7'), makePointer(j, 'j', '#60a5fa'), makePointer(j + 1, 'j+1', '#60a5fa')],
+          [makePointer(i, 'i', 'primary'), makePointer(j, 'j', 'secondary'), makePointer(j + 1, 'j+1', 'secondary')],
           4,
           `No swap needed: ${array[j]} ≤ ${array[j + 1]}`,
           { i, j, a: array[j], b: array[j + 1] },
@@ -87,7 +87,7 @@ export function* bubbleSort(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       highlightSorted(n - 1 - i),
-      [makePointer(i, 'i', '#a855f7')],
+      [makePointer(i, 'i', 'primary')],
       8,
       `Pass ${i + 1} complete: element at index ${n - 1 - i} (${array[n - 1 - i]}) is now sorted`,
       { i, sortedIndex: n - 1 - i, value: array[n - 1 - i] },

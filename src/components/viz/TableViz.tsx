@@ -1,28 +1,14 @@
 import type { TableCell, TableHighlight } from '../../core/types';
-import { VIZ } from './palette';
+import { MOTION, VIZ, resolveVisualState } from './palette';
 
-const CELL_FILL: Record<TableHighlight['kind'], string> = {
-  compute: VIZ.swap,
-  read: VIZ.active,
-  result: VIZ.sorted,
-  current: VIZ.pivot,
-};
-
-const CELL_STROKE: Record<TableHighlight['kind'], string> = {
-  compute: VIZ.swap,
-  read: VIZ.active,
-  result: VIZ.sorted,
-  current: VIZ.pivot,
-};
-
-const DEFAULT_FILL = '#1c1d26';
+const DEFAULT_FILL = VIZ.gridEmpty;
 const DEFAULT_STROKE = VIZ.idleStrong;
-const COMPUTED_FILL = '#2a2d3e';
+const COMPUTED_FILL = VIZ.nodeFill;
 
 export function TableViz({ table, highlights }: { table: TableCell[][]; highlights: TableHighlight[] }) {
   if (table.length === 0 || table[0].length === 0) {
     return (
-      <div className="h-full flex items-center justify-center text-sm text-[#4a4d5a] italic">
+      <div className="flex h-full items-center justify-center text-sm italic" style={{ color: VIZ.textDim }}>
         No table to visualize
       </div>
     );
@@ -43,8 +29,10 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
     <div className="w-full h-full flex items-center justify-center overflow-auto p-4">
       <svg
         viewBox={`0 0 ${width} ${height}`}
-        className="max-w-full max-h-full"
-        style={{ minWidth: '100%' }}
+        preserveAspectRatio="xMidYMid meet"
+        className="h-full w-full"
+        role="img"
+        aria-label="Dynamic programming table with highlighted computation states"
       >
         {/* Column headers */}
         {table[0].map((_, col) => (
@@ -55,9 +43,9 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
             textAnchor="middle"
             dominantBaseline="middle"
             fontSize={11}
-            fontFamily="JetBrains Mono, monospace"
+            fontFamily={VIZ.fontCode}
             fontWeight={600}
-            fill="#8fa8c9"
+            fill={VIZ.labelCanvas}
             style={{ pointerEvents: 'none', userSelect: 'none' }}
           >
             {col}
@@ -73,9 +61,9 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
             textAnchor="start"
             dominantBaseline="middle"
             fontSize={11}
-            fontFamily="JetBrains Mono, monospace"
+            fontFamily={VIZ.fontCode}
             fontWeight={600}
-            fill="#8fa8c9"
+            fill={VIZ.labelCanvas}
             style={{ pointerEvents: 'none', userSelect: 'none' }}
           >
             {row}
@@ -83,7 +71,7 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
         ))}
 
         {/* Grid lines */}
-        <g stroke="#3a3d49" strokeWidth={0.5} opacity={0.3}>
+        <g stroke={VIZ.edge} strokeWidth={0.5} opacity={0.45}>
           {Array.from({ length: cols + 1 }).map((_, i) => (
             <line
               key={`vline-${i}`}
@@ -109,15 +97,16 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
           row.map((cell, c) => {
             const hi = hiMap.get(`${r},${c}`);
             const kind = hi?.kind;
+            const state = resolveVisualState(kind);
             const fill = kind
-              ? CELL_FILL[kind]
+              ? state.fill
               : cell.computed
                 ? COMPUTED_FILL
                 : DEFAULT_FILL;
-            const stroke = kind ? CELL_STROKE[kind] : DEFAULT_STROKE;
+            const stroke = kind ? state.stroke : DEFAULT_STROKE;
 
             return (
-              <g key={`${r},${c}`} style={{ transition: 'all 150ms ease' }}>
+              <g key={`${r},${c}`}>
                 <rect
                   x={c * cellW}
                   y={headerH + r * cellH}
@@ -127,7 +116,8 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
                   stroke={stroke}
                   strokeWidth={kind ? 2 : 1}
                   style={{
-                    filter: kind === 'current' ? 'drop-shadow(0 0 3px #a855f7)' : undefined,
+                    filter: kind === 'current' ? `drop-shadow(0 0 ${VIZ.glowSm} ${VIZ.current})` : undefined,
+                    transition: MOTION.fill,
                   }}
                 />
                 <text
@@ -136,9 +126,9 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fontSize={13}
-                  fontFamily="JetBrains Mono, monospace"
+                  fontFamily={VIZ.fontCode}
                   fontWeight={cell.computed ? 600 : 400}
-                  fill={kind ? '#0f1015' : cell.computed ? VIZ.sorted : '#c8ccd8'}
+                  fill={kind ? state.text : VIZ.label}
                   style={{ pointerEvents: 'none', userSelect: 'none' }}
                 >
                   {cell.value}
@@ -148,7 +138,7 @@ export function TableViz({ table, highlights }: { table: TableCell[][]; highligh
                     cx={c * cellW + cellW - 8}
                     cy={headerH + r * cellH + 8}
                     r={4}
-                    fill="#4ade80"
+                    fill={VIZ.sorted}
                     opacity={0.7}
                   />
                 )}

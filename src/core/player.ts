@@ -11,6 +11,7 @@ interface PlayerState {
   speed: number;
 
   setAlgorithm: (algo: AlgorithmDef, input?: AlgorithmInput) => void;
+  clearAlgorithm: () => void;
   patchInput: (input: AlgorithmInput) => void;
   regenerate: () => void;
   setCursor: (cursor: number) => void;
@@ -49,6 +50,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       cursor: 0,
       isPlaying: false,
     });
+  },
+
+  clearAlgorithm: () => {
+    set({ algorithm: null, input: {}, steps: [], cursor: 0, isPlaying: false });
   },
 
   /** Regenerate the trace for edited input while preserving playback position.

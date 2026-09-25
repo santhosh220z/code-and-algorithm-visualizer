@@ -5,6 +5,7 @@ export type {
 
 export {
   makeArrayStep,
+  makeCallStackStep,
   highlightCurrent,
   highlightCompare,
   highlightSwap,

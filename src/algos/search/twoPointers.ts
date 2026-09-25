@@ -37,7 +37,7 @@ export function* twoPointers(input: AlgorithmInput): Generator<Step> {
   yield makeArrayStep(
     array,
     [],
-    [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24')],
+    [makePointer(left, 'left', 'primary'), makePointer(right, 'right', 'target')],
     2,
     `Two pointers for target ${target} in sorted array`,
     { n, target, left, right }
@@ -51,7 +51,7 @@ export function* twoPointers(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       [],
-      [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24')],
+      [makePointer(left, 'left', 'primary'), makePointer(right, 'right', 'target')],
       5,
       `left=${left} (${array[left]}), right=${right} (${array[right]}), sum=${sum}`,
       { left, right, sum, target, iteration },
@@ -61,7 +61,7 @@ export function* twoPointers(input: AlgorithmInput): Generator<Step> {
     yield makeArrayStep(
       array,
       highlightCompare(left, right),
-      [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24')],
+      [makePointer(left, 'left', 'primary'), makePointer(right, 'right', 'target')],
       6,
       `Compare sum ${sum} with target ${target}`,
       { left, right, sum, target, iteration },
@@ -72,7 +72,7 @@ export function* twoPointers(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         highlightSorted(left, right),
-        [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24')],
+        [makePointer(left, 'left', 'primary'), makePointer(right, 'right', 'target')],
         7,
         `Found pair: A[${left}] + A[${right}] = ${array[left]} + ${array[right]} = ${target}`,
         { left, right, sum, target, found: true },
@@ -83,7 +83,7 @@ export function* twoPointers(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         [],
-        [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24')],
+        [makePointer(left, 'left', 'primary'), makePointer(right, 'right', 'target')],
         9,
         `Sum ${sum} < target, move left++ to increase sum`,
         { left, right, sum, target, newLeft: left + 1, iteration },
@@ -94,7 +94,7 @@ export function* twoPointers(input: AlgorithmInput): Generator<Step> {
       yield makeArrayStep(
         array,
         [],
-        [makePointer(left, 'left', '#a855f7'), makePointer(right, 'right', '#fbbf24')],
+        [makePointer(left, 'left', 'primary'), makePointer(right, 'right', 'target')],
         11,
         `Sum ${sum} > target, move right-- to decrease sum`,
         { left, right, sum, target, newRight: right - 1, iteration },

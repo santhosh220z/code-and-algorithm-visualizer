@@ -1,6 +1,6 @@
-﻿import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
+import type { AlgorithmDef, AlgorithmInput, Step } from '../../core/types';
 import { registerAlgorithm } from '../../core/registry';
-import { emptyGrid } from '../../core/presets';
+import { defaultPathfindingGrid } from '../../core/presets';
 import { asGridInput, makeGridStep, key, neighbors4, costOf, revealGridPath, noPathStep } from './helpers';
 import { rcHi } from './bfs';
 
@@ -11,12 +11,12 @@ const pseudocode = [
   { text: 'u = open cell with min f[u]', indent: 2 },
   { text: 'if u == E', indent: 2 },
   { text: 'return path from parent', indent: 3 },
-  { text: 'open -= {u}; closed âˆª= {u}', indent: 2 },
+  { text: 'open -= {u}; closed ∪= {u}', indent: 2 },
   { text: 'for each walkable neighbor v of u', indent: 2, isLoopHeader: true, loopLabel: 'nbr' },
   { text: 'if v in closed: continue', indent: 3 },
   { text: 'tentative = g[u] + cost(v)', indent: 3 },
   { text: 'if tentative < g[v]', indent: 3 },
-  { text: 'g[v] = tentative; f[v] = g[v] + h(v); parent[v] = u; open âˆª= {v}', indent: 4 },
+  { text: 'g[v] = tentative; f[v] = g[v] + h(v); parent[v] = u; open ∪= {v}', indent: 4 },
   { text: 'return "no path"', indent: 1 },
   { text: 'end procedure', indent: 0 },
 ];
@@ -26,7 +26,7 @@ export function* gridAstar(input: AlgorithmInput): Generator<Step> {
   const startKey = key(g.start[0], g.start[1]);
   const endKey = key(g.end[0], g.end[1]);
 
-  // Manhattan heuristic with minimum terrain cost â€” admissible on this grid.
+  // Manhattan heuristic with minimum terrain cost — admissible on this grid.
   const [er, ec] = g.end;
   const minCost = Math.min(1, ...Object.values(g.weights), Number.POSITIVE_INFINITY) || 1;
   const h = (r: number, c: number) => (Math.abs(r - er) + Math.abs(c - ec)) * Math.min(1, minCost);
@@ -42,7 +42,7 @@ export function* gridAstar(input: AlgorithmInput): Generator<Step> {
   yield makeGridStep(
     [{ row: g.start[0], col: g.start[1], kind: 'frontier', g: 0 }],
     1,
-    `Initialize: g[S]=0, f = g + h. h = Manhattan distance Ã— ${fmt(Math.min(1, minCost))} (never overestimates)`,
+    `Initialize: g[S]=0, f = g + h. h = Manhattan distance × ${fmt(Math.min(1, minCost))} (never overestimates)`,
     { goal: endKey }
   );
 
@@ -66,7 +66,7 @@ export function* gridAstar(input: AlgorithmInput): Generator<Step> {
       yield makeGridStep(
         [...closedHi(closed), ...frontierHi(open, fs, u), { row: ur, col: uc, kind: 'current', g: bestF }],
         5,
-        `${u} has min f (${fmt(bestF)}) and is the goal â€” done!`,
+        `${u} has min f (${fmt(bestF)}) and is the goal — done!`,
         { u, f: fmt(bestF) },
         [{ label: 'astar', iteration: iter }]
       );
@@ -77,7 +77,7 @@ export function* gridAstar(input: AlgorithmInput): Generator<Step> {
     yield makeGridStep(
       [...closedHi(closed), ...frontierHi(open, fs, u), { row: ur, col: uc, kind: 'current', g: bestF }],
       4,
-      `Pick open cell ${u}: g=${fmt(gs.get(u)!)} + h=${fmt(h(ur, uc))} â†’ f=${fmt(bestF)} (smallest)`,
+      `Pick open cell ${u}: g=${fmt(gs.get(u)!)} + h=${fmt(h(ur, uc))} → f=${fmt(bestF)} (smallest)`,
       { u, g: fmt(gs.get(u)!), h: fmt(h(ur, uc)), f: fmt(bestF) },
       [{ label: 'astar', iteration: iter }]
     );
@@ -103,7 +103,7 @@ export function* gridAstar(input: AlgorithmInput): Generator<Step> {
             { row: ur, col: uc, kind: 'current' },
           ],
           12,
-          `${v}: g=${fmt(tentative)}, h=${fmt(h(nr, nc))} â†’ f=${fmt(fs.get(v)!)}; parent[${v}] = ${u}`,
+          `${v}: g=${fmt(tentative)}, h=${fmt(h(nr, nc))} → f=${fmt(fs.get(v)!)}; parent[${v}] = ${u}`,
           { v, g: fmt(tentative), h: fmt(h(nr, nc)), f: fmt(fs.get(v)!) },
           [{ label: 'astar', iteration: iter }, { label: 'nbr', iteration: iter }]
         );
@@ -111,7 +111,7 @@ export function* gridAstar(input: AlgorithmInput): Generator<Step> {
         yield makeGridStep(
           [...closedHi(closed), ...frontierHi(open, fs, ''), { row: ur, col: uc, kind: 'current' }],
           11,
-          `${v}: tentative g ${fmt(tentative)} â‰¥ existing ${fmt(gs.get(v)!)} â€” skip`,
+          `${v}: tentative g ${fmt(tentative)} ≤ existing ${fmt(gs.get(v)!)} — skip`,
           { v, tentative: fmt(tentative) },
           [{ label: 'astar', iteration: iter }, { label: 'nbr', iteration: iter }]
         );
@@ -141,8 +141,8 @@ const gridAstarDef: AlgorithmDef = {
   category: 'grid',
   description: 'Best-first search guided by a Manhattan heuristic toward the goal. Same optimal paths as Dijkstra while exploring far fewer cells.',
   pseudocode,
-  complexity: { time: 'O((RÃ—C) log(RÃ—C)) heap / naive scan here', space: 'O(RÃ—C)' },
-  defaultInput: { grid: emptyGrid() },
+  complexity: { time: 'O((R×C) log(R×C)) heap / naive scan here', space: 'O(R×C)' },
+  defaultInput: { grid: defaultPathfindingGrid() },
   run: gridAstar,
 };
 
