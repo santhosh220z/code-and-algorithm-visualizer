@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 
 import { NavLink, useLocation } from 'react-router-dom';
 import { categories, getAlgorithmsByCategory } from '../../core/registry';
 import { Sheet } from '../ui/Sheet';
-import { ThemeSwitcher } from '../ui/ThemeSwitcher';
+import { ModeToggle } from '../ui/ModeToggle';
 
 interface SidebarContentProps {
   closed: Record<string, boolean>;
@@ -142,11 +142,13 @@ function SidebarContent({
         })}
       </nav>
 
-      <div className="shrink-0 space-y-3 border-t border-[var(--color-border)] p-3">
-        <ThemeSwitcher />
-        <p className="font-mono text-[10px] leading-relaxed text-[var(--color-text-dim)]">
-          <kbd className="rounded border border-[var(--color-border)] px-1">Space</kbd> play/pause ·{' '}
-          <kbd className="rounded border border-[var(--color-border)] px-1">←</kbd>/<kbd className="rounded border border-[var(--color-border)] px-1">→</kbd> step
+      <div className="flex shrink-0 items-center justify-between gap-2 border-t border-[var(--color-border)] p-3">
+        <ModeToggle />
+        <p className="font-mono text-[10px] leading-tight text-[var(--color-text-dim)]">
+          <kbd className="rounded border border-[var(--color-border)] px-1">Space</kbd> play/pause
+          <br />
+          <kbd className="rounded border border-[var(--color-border)] px-1">←</kbd>/
+          <kbd className="rounded border border-[var(--color-border)] px-1">→</kbd> step
         </p>
       </div>
     </>
@@ -217,7 +219,7 @@ export function Sidebar() {
           <span className="hidden text-[15px] font-semibold text-[var(--color-text)] sm:inline">AlgoViz</span>
         </NavLink>
         <div className="flex shrink-0 items-center gap-2">
-          <ThemeSwitcher />
+          <ModeToggle />
           <button
             ref={triggerRef}
             type="button"

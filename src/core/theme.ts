@@ -1,55 +1,22 @@
 import { create } from 'zustand';
 
-export const THEME_IDS = [
-  'dark-aurora',
-  'light-editorial',
-  'retro-terminal',
-  'colorful-classroom',
-] as const;
+export const THEME_IDS = ['retro-light', 'retro-dark'] as const;
 
 export type ThemeId = (typeof THEME_IDS)[number];
-export type ThemeMode = 'dark' | 'light';
+export type ThemeMode = 'light' | 'dark';
+
+export const THEME_STORAGE_KEY = 'algoviz:theme:v1';
+export const DARK_QUERY = '(prefers-color-scheme: dark)';
 
 export interface ThemeDefinition {
   id: ThemeId;
   name: string;
-  shortName: string;
   mode: ThemeMode;
-  swatches: readonly [string, string, string];
 }
 
-export const DEFAULT_THEME: ThemeId = 'dark-aurora';
-export const THEME_STORAGE_KEY = 'algoviz:theme:v1';
-
 export const THEMES: readonly ThemeDefinition[] = [
-  {
-    id: 'dark-aurora',
-    name: 'Dark Aurora',
-    shortName: 'Aurora',
-    mode: 'dark',
-    swatches: ['#080b14', '#35d6c3', '#8b7cff'],
-  },
-  {
-    id: 'light-editorial',
-    name: 'Light Editorial',
-    shortName: 'Editorial',
-    mode: 'light',
-    swatches: ['#f7f4ed', '#3157b8', '#d9573b'],
-  },
-  {
-    id: 'retro-terminal',
-    name: 'Retro Terminal',
-    shortName: 'Retro',
-    mode: 'light',
-    swatches: ['#f1e1b8', '#9a4a26', '#5e6b2a'],
-  },
-  {
-    id: 'colorful-classroom',
-    name: 'Colorful Classroom',
-    shortName: 'Classroom',
-    mode: 'light',
-    swatches: ['#fff8e8', '#6d46e8', '#f06449'],
-  },
+  { id: 'retro-light', name: 'Retro Light', mode: 'light' },
+  { id: 'retro-dark', name: 'Retro Dark', mode: 'dark' },
 ];
 
 export function isThemeId(value: unknown): value is ThemeId {
@@ -65,13 +32,36 @@ function getStorage(): Storage | null {
   }
 }
 
-export function resolveStoredTheme(storage: Pick<Storage, 'getItem'> | null = getStorage()): ThemeId {
+export function themeForMode(mode: ThemeMode): ThemeId {
+  return mode === 'dark' ? 'retro-dark' : 'retro-light';
+}
+
+export function modeOf(theme: ThemeId): ThemeMode {
+  return theme === 'retro-dark' ? 'dark' : 'light';
+}
+
+function prefersDark(): boolean {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
   try {
-    const stored = storage?.getItem(THEME_STORAGE_KEY);
-    return isThemeId(stored) ? stored : DEFAULT_THEME;
+    return window.matchMedia(DARK_QUERY).matches;
   } catch {
-    return DEFAULT_THEME;
+    return false;
   }
+}
+
+/** Stored choice wins; otherwise follow the operating system. */
+export function resolveStoredTheme(
+  storage: Pick<Storage, 'getItem'> | null = getStorage(),
+  systemPrefersDark = prefersDark()
+): ThemeId {
+  let stored: string | null = null;
+  try {
+    stored = storage?.getItem(THEME_STORAGE_KEY) ?? null;
+  } catch {
+    stored = null;
+  }
+  if (isThemeId(stored)) return stored;
+  return themeForMode(systemPrefersDark ? 'dark' : 'light');
 }
 
 function writeStoredTheme(theme: ThemeId): void {
@@ -82,19 +72,6 @@ function writeStoredTheme(theme: ThemeId): void {
   }
 }
 
-function clearThemePreview(): void {
-  if (typeof window === 'undefined') return;
-  const url = new URL(window.location.href);
-  if (!url.searchParams.has('theme')) return;
-  url.searchParams.delete('theme');
-  window.history.replaceState(window.history.state, '', url);
-}
-
-function persistTheme(theme: ThemeId): void {
-  writeStoredTheme(theme);
-  clearThemePreview();
-}
-
 function updateThemeColor(root: HTMLElement): void {
   if (typeof document === 'undefined') return;
   const color = getComputedStyle(root).getPropertyValue('--meta-theme-color').trim();
@@ -103,7 +80,7 @@ function updateThemeColor(root: HTMLElement): void {
 }
 
 export function applyTheme(theme: ThemeId, root: HTMLElement = document.documentElement): ThemeId {
-  const validTheme = isThemeId(theme) ? theme : DEFAULT_THEME;
+  const validTheme = isThemeId(theme) ? theme : themeForMode('light');
   root.dataset.theme = validTheme;
   updateThemeColor(root);
   return validTheme;
@@ -112,34 +89,47 @@ export function applyTheme(theme: ThemeId, root: HTMLElement = document.document
 interface ThemeState {
   theme: ThemeId;
   setTheme: (theme: ThemeId) => void;
+  toggleMode: () => void;
 }
 
-export const useThemeStore = create<ThemeState>((set) => ({
-  theme: DEFAULT_THEME,
+export const useThemeStore = create<ThemeState>((set, get) => ({
+  theme: 'retro-light',
+
   setTheme: (theme) => {
     const applied = applyTheme(theme);
-    persistTheme(applied);
+    writeStoredTheme(applied);
     set({ theme: applied });
   },
+
+  toggleMode: () => get().setTheme(themeForMode(modeOf(get().theme) === 'dark' ? 'light' : 'dark')),
 }));
 
-let storageListenerBound = false;
+let mediaBound = false;
 
 export function initializeTheme(): ThemeId {
-  const requested = typeof window === 'undefined'
-    ? null
-    : new URLSearchParams(window.location.search).get('theme');
-  const theme = applyTheme(isThemeId(requested) ? requested : resolveStoredTheme());
-  if (isThemeId(requested)) writeStoredTheme(theme);
+  const theme = applyTheme(resolveStoredTheme());
   useThemeStore.setState({ theme });
 
-  if (!storageListenerBound && typeof window !== 'undefined') {
-    storageListenerBound = true;
-    window.addEventListener('storage', (event) => {
-      if (event.key !== THEME_STORAGE_KEY) return;
-      const applied = applyTheme(isThemeId(event.newValue) ? event.newValue : DEFAULT_THEME);
-      useThemeStore.setState({ theme: applied });
-    });
+  // Only meaningful when the visitor has never chosen explicitly.
+  if (!mediaBound && typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+    mediaBound = true;
+    try {
+      const media = window.matchMedia(DARK_QUERY);
+      const onChange = (event: MediaQueryListEvent) => {
+        let stored: string | null = null;
+        try {
+          stored = getStorage()?.getItem(THEME_STORAGE_KEY) ?? null;
+        } catch {
+          stored = null;
+        }
+        if (isThemeId(stored)) return;
+        const applied = applyTheme(themeForMode(event.matches ? 'dark' : 'light'));
+        useThemeStore.setState({ theme: applied });
+      };
+      if (typeof media.addEventListener === 'function') media.addEventListener('change', onChange);
+    } catch {
+      /* matchMedia unavailable — the stored/OS default already applied */
+    }
   }
 
   return theme;

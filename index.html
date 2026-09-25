@@ -1,19 +1,22 @@
 <!doctype html>
-<html lang="en" data-theme="dark-aurora">
+<html lang="en" data-theme="retro-light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#080b14" />
+    <meta name="theme-color" content="#17100a" />
     <meta name="description" content="Learn algorithms step by step with synchronized code, state, and visualizations." />
     <title>AlgoViz · Algorithm Visualizer</title>
     <script>
+      // Resolve the mode before first paint so the page never flashes the wrong
+      // palette. Mirrors resolveStoredTheme() in src/core/theme.ts.
       try {
         const stored = localStorage.getItem('algoviz:theme:v1');
-        const requested = new URLSearchParams(window.location.search).get('theme');
-        const themes = ['dark-aurora', 'light-editorial', 'retro-terminal', 'colorful-classroom'];
-        if (themes.includes(requested)) document.documentElement.dataset.theme = requested;
-        else if (themes.includes(stored)) document.documentElement.dataset.theme = stored;
+        const themes = ['retro-light', 'retro-dark'];
+        if (themes.includes(stored)) document.documentElement.dataset.theme = stored;
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.dataset.theme = 'retro-dark';
+        }
       } catch {}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
