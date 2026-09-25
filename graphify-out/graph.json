@@ -7,7 +7,7 @@
       "label": "ThemeDefinition",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L13",
+      "source_location": "L11",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -20,7 +20,7 @@
       "label": "ThemeId",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L10",
+      "source_location": "L5",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -33,7 +33,7 @@
       "label": "ThemeMode",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L11",
+      "source_location": "L6",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -46,7 +46,7 @@
       "label": "ThemeState",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L112",
+      "source_location": "L89",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -54,19 +54,6 @@
       "community": 0,
       "community_name": "theme.ts",
       "norm_label": "themestate"
-    },
-    {
-      "label": "StorageEventLike",
-      "file_type": "code",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L55",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_tests_theme_test_storageeventlike",
-      "community": 0,
-      "community_name": "theme.ts",
-      "norm_label": "storageeventlike"
     },
     {
       "label": "BSTNode",
@@ -247,7 +234,7 @@
       "_origin": "ast",
       "id": "src_components_player_algorithmcontrols_algorithmcontrolsprops",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "algorithmcontrolsprops"
     },
     {
@@ -260,34 +247,8 @@
       "_origin": "ast",
       "id": "src_core_player_playerstate",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "playerstate"
-    },
-    {
-      "label": "CategoryInfo",
-      "file_type": "code",
-      "source_file": "src/core/registry.ts",
-      "source_location": "L30",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_registry_categoryinfo",
-      "community": 2,
-      "community_name": "registry.ts",
-      "norm_label": "categoryinfo"
-    },
-    {
-      "label": "AlgorithmCategory",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L1",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_algorithmcategory",
-      "community": 2,
-      "community_name": "registry.ts",
-      "norm_label": "algorithmcategory"
     },
     {
       "label": "AlgorithmDef",
@@ -299,7 +260,7 @@
       "_origin": "ast",
       "id": "src_core_types_algorithmdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "algorithmdef"
     },
     {
@@ -312,8 +273,34 @@
       "_origin": "ast",
       "id": "src_core_types_algorithminput",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "algorithminput"
+    },
+    {
+      "label": "Step",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_step",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "step"
+    },
+    {
+      "label": "SidebarContentProps",
+      "file_type": "code",
+      "source_file": "src/components/sidebar/Sidebar.tsx",
+      "source_location": "L7",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_components_sidebar_sidebar_sidebarcontentprops",
+      "community": 22,
+      "community_name": "App.tsx",
+      "norm_label": "sidebarcontentprops"
     },
     {
       "label": "BadgeProps",
@@ -364,7 +351,7 @@
       "_origin": "ast",
       "id": "src_components_code_consolepanel_consolepanelprops",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "consolepanelprops"
     },
     {
@@ -377,7 +364,7 @@
       "_origin": "ast",
       "id": "src_components_layout_learningstudio_learningstudioprops",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "learningstudioprops"
     },
     {
@@ -390,7 +377,7 @@
       "_origin": "ast",
       "id": "src_components_layout_responsiveinspector_inspectortab",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "inspectortab"
     },
     {
@@ -403,34 +390,60 @@
       "_origin": "ast",
       "id": "src_components_panels_narrationbar_narrationbarprops",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "narrationbarprops"
     },
     {
-      "label": "VisualizationCanvasProps",
+      "label": "CodePanelProps",
       "file_type": "code",
-      "source_file": "src/components/viz/VisualizationCanvas.tsx",
-      "source_location": "L16",
+      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_location": "L11",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_components_viz_visualizationcanvas_visualizationcanvasprops",
-      "community": 23,
-      "community_name": "Step",
-      "norm_label": "visualizationcanvasprops"
+      "id": "src_components_panels_codepanel_codepanelprops",
+      "community": 24,
+      "community_name": "Layout.tsx",
+      "norm_label": "codepanelprops"
     },
     {
-      "label": "Step",
+      "label": "LoopScope",
       "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L10",
+      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_location": "L4",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_core_types_step",
-      "community": 23,
-      "community_name": "Step",
-      "norm_label": "step"
+      "id": "src_components_panels_codepanel_loopscope",
+      "community": 24,
+      "community_name": "Layout.tsx",
+      "norm_label": "loopscope"
+    },
+    {
+      "label": "LoopScope",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L235",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_loopscope",
+      "community": 24,
+      "community_name": "Layout.tsx",
+      "norm_label": "loopscope"
+    },
+    {
+      "label": "PseudocodeLine",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L228",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_pseudocodeline",
+      "community": 24,
+      "community_name": "Layout.tsx",
+      "norm_label": "pseudocodeline"
     },
     {
       "label": "ArrayVizProps",
@@ -498,6 +511,19 @@
       "norm_label": "searchvizprops"
     },
     {
+      "label": "VisualizationCanvasProps",
+      "file_type": "code",
+      "source_file": "src/components/viz/VisualizationCanvas.tsx",
+      "source_location": "L16",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_components_viz_visualizationcanvas_visualizationcanvasprops",
+      "community": 25,
+      "community_name": "types.ts",
+      "norm_label": "visualizationcanvasprops"
+    },
+    {
       "label": "LegendItem",
       "file_type": "code",
       "source_file": "src/components/viz/VizLegend.tsx",
@@ -522,32 +548,6 @@
       "community": 25,
       "community_name": "types.ts",
       "norm_label": "viztype"
-    },
-    {
-      "label": "EditorState",
-      "file_type": "code",
-      "source_file": "src/core/editorStore.ts",
-      "source_location": "L14",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_editorstore_editorstate",
-      "community": 25,
-      "community_name": "types.ts",
-      "norm_label": "editorstate"
-    },
-    {
-      "label": "EditorTool",
-      "file_type": "code",
-      "source_file": "src/core/editorStore.ts",
-      "source_location": "L3",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_editorstore_editortool",
-      "community": 25,
-      "community_name": "types.ts",
-      "norm_label": "editortool"
     },
     {
       "label": "AlgorithmOp",
@@ -628,6 +628,19 @@
       "norm_label": "edgehighlightkind"
     },
     {
+      "label": "GraphEdgeBase",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L47",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_graphedgebase",
+      "community": 25,
+      "community_name": "types.ts",
+      "norm_label": "graphedgebase"
+    },
+    {
       "label": "GridHighlightKind",
       "file_type": "code",
       "source_file": "src/core/types.ts",
@@ -678,19 +691,6 @@
       "community": 25,
       "community_name": "types.ts",
       "norm_label": "listvizvariant"
-    },
-    {
-      "label": "LoopScope",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L235",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_loopscope",
-      "community": 25,
-      "community_name": "types.ts",
-      "norm_label": "loopscope"
     },
     {
       "label": "NodeHighlightKind",
@@ -784,6 +784,58 @@
       "norm_label": "vizpayload"
     },
     {
+      "label": "EditorState",
+      "file_type": "code",
+      "source_file": "src/core/editorStore.ts",
+      "source_location": "L14",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_editorstore_editorstate",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "editorstate"
+    },
+    {
+      "label": "EditorTool",
+      "file_type": "code",
+      "source_file": "src/core/editorStore.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_editorstore_editortool",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "editortool"
+    },
+    {
+      "label": "CategoryInfo",
+      "file_type": "code",
+      "source_file": "src/core/registry.ts",
+      "source_location": "L30",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_registry_categoryinfo",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "categoryinfo"
+    },
+    {
+      "label": "AlgorithmCategory",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L1",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_algorithmcategory",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "algorithmcategory"
+    },
+    {
       "label": "InspectorLayout",
       "file_type": "code",
       "source_file": "src/components/layout/ResponsiveInspector.tsx",
@@ -808,19 +860,6 @@
       "community": 27,
       "community_name": "react",
       "norm_label": "responsiveinspectorprops"
-    },
-    {
-      "label": "SidebarContentProps",
-      "file_type": "code",
-      "source_file": "src/components/sidebar/Sidebar.tsx",
-      "source_location": "L7",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_components_sidebar_sidebar_sidebarcontentprops",
-      "community": 27,
-      "community_name": "react",
-      "norm_label": "sidebarcontentprops"
     },
     {
       "label": "SheetPlacement",
@@ -966,43 +1005,30 @@
       "norm_label": "hanoipegs"
     },
     {
-      "label": "CodePanelProps",
+      "label": "CodeEditorGuideProps",
       "file_type": "code",
-      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_file": "src/components/code/CodeEditor.tsx",
       "source_location": "L11",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_components_panels_codepanel_codepanelprops",
-      "community": 32,
-      "community_name": "CodePanel.tsx",
-      "norm_label": "codepanelprops"
+      "id": "src_components_code_codeeditor_codeeditorguideprops",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "codeeditorguideprops"
     },
     {
-      "label": "LoopScope",
+      "label": "CodeEditorProps",
       "file_type": "code",
-      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_file": "src/components/code/CodeEditor.tsx",
       "source_location": "L4",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_components_panels_codepanel_loopscope",
-      "community": 32,
-      "community_name": "CodePanel.tsx",
-      "norm_label": "loopscope"
-    },
-    {
-      "label": "PseudocodeLine",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L228",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_pseudocodeline",
-      "community": 32,
-      "community_name": "CodePanel.tsx",
-      "norm_label": "pseudocodeline"
+      "id": "src_components_code_codeeditor_codeeditorprops",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "codeeditorprops"
     },
     {
       "label": "VarsPanelProps",
@@ -1014,8 +1040,21 @@
       "_origin": "ast",
       "id": "src_components_panels_varspanel_varspanelprops",
       "community": 34,
-      "community_name": "VarsPanel.tsx",
+      "community_name": "CodeVisualizerPage.tsx",
       "norm_label": "varspanelprops"
+    },
+    {
+      "label": "Snippet",
+      "file_type": "code",
+      "source_file": "src/core/codeRunner.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_coderunner_snippet",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "snippet"
     },
     {
       "label": "GridHighlight",
@@ -1031,6 +1070,32 @@
       "norm_label": "gridhighlight"
     },
     {
+      "label": "GraphInputData",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L53",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_graphinputdata",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "graphinputdata"
+    },
+    {
+      "label": "GraphNodeBase",
+      "file_type": "code",
+      "source_file": "src/core/types.ts",
+      "source_location": "L40",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_core_types_graphnodebase",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "graphnodebase"
+    },
+    {
       "label": "GridInputData",
       "file_type": "code",
       "source_file": "src/core/types.ts",
@@ -1039,35 +1104,9 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_core_types_gridinputdata",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "gridinputdata"
-    },
-    {
-      "label": "CodeEditorGuideProps",
-      "file_type": "code",
-      "source_file": "src/components/code/CodeEditor.tsx",
-      "source_location": "L11",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_components_code_codeeditor_codeeditorguideprops",
-      "community": 7,
-      "community_name": "interpreter.ts",
-      "norm_label": "codeeditorguideprops"
-    },
-    {
-      "label": "CodeEditorProps",
-      "file_type": "code",
-      "source_file": "src/components/code/CodeEditor.tsx",
-      "source_location": "L4",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_components_code_codeeditor_codeeditorprops",
-      "community": 7,
-      "community_name": "interpreter.ts",
-      "norm_label": "codeeditorprops"
     },
     {
       "label": "MiniProgram",
@@ -1239,32 +1278,6 @@
       "norm_label": "coderunnerstate"
     },
     {
-      "label": "Snippet",
-      "file_type": "code",
-      "source_file": "src/core/codeRunner.ts",
-      "source_location": "L10",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_coderunner_snippet",
-      "community": 7,
-      "community_name": "interpreter.ts",
-      "norm_label": "snippet"
-    },
-    {
-      "label": "GraphEdgeBase",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L47",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_graphedgebase",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "graphedgebase"
-    },
-    {
       "label": "GraphEdgeHighlight",
       "file_type": "code",
       "source_file": "src/core/types.ts",
@@ -1274,34 +1287,8 @@
       "_origin": "ast",
       "id": "src_core_types_graphedgehighlight",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graphedgehighlight"
-    },
-    {
-      "label": "GraphInputData",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L53",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_graphinputdata",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "graphinputdata"
-    },
-    {
-      "label": "GraphNodeBase",
-      "file_type": "code",
-      "source_file": "src/core/types.ts",
-      "source_location": "L40",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_core_types_graphnodebase",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "graphnodebase"
     },
     {
       "label": "GraphNodeHighlight",
@@ -1313,26 +1300,26 @@
       "_origin": "ast",
       "id": "src_core_types_graphnodehighlight",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graphnodehighlight"
     },
     {
-      "label": "ThemeSwitcher()",
+      "label": "ModeToggle()",
       "file_type": "code",
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
+      "source_file": "src/components/ui/ModeToggle.tsx",
       "source_location": "L4",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_ui_themeswitcher_themeswitcher",
+      "id": "src_components_ui_modetoggle_modetoggle",
       "community": 0,
       "community_name": "theme.ts",
-      "norm_label": "themeswitcher()"
+      "norm_label": "modetoggle()"
     },
     {
       "label": "applyTheme()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L105",
+      "source_location": "L82",
       "_callable": true,
       "_origin": "ast",
       "id": "src_core_theme_applytheme",
@@ -1341,22 +1328,10 @@
       "norm_label": "applytheme()"
     },
     {
-      "label": "clearThemePreview()",
-      "file_type": "code",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L85",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_theme_clearthemepreview",
-      "community": 0,
-      "community_name": "theme.ts",
-      "norm_label": "clearthemepreview()"
-    },
-    {
       "label": "getStorage()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L59",
+      "source_location": "L26",
       "_callable": true,
       "_origin": "ast",
       "id": "src_core_theme_getstorage",
@@ -1368,7 +1343,7 @@
       "label": "initializeTheme()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L128",
+      "source_location": "L109",
       "_callable": true,
       "_origin": "ast",
       "id": "src_core_theme_initializetheme",
@@ -1380,7 +1355,7 @@
       "label": "isThemeId()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L55",
+      "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
       "id": "src_core_theme_isthemeid",
@@ -1389,22 +1364,34 @@
       "norm_label": "isthemeid()"
     },
     {
-      "label": "persistTheme()",
+      "label": "modeOf()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L93",
+      "source_location": "L39",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_core_theme_persisttheme",
+      "id": "src_core_theme_modeof",
       "community": 0,
       "community_name": "theme.ts",
-      "norm_label": "persisttheme()"
+      "norm_label": "modeof()"
+    },
+    {
+      "label": "prefersDark()",
+      "file_type": "code",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L43",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_theme_prefersdark",
+      "community": 0,
+      "community_name": "theme.ts",
+      "norm_label": "prefersdark()"
     },
     {
       "label": "resolveStoredTheme()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L68",
+      "source_location": "L53",
       "_callable": true,
       "_origin": "ast",
       "id": "src_core_theme_resolvestoredtheme",
@@ -1413,10 +1400,22 @@
       "norm_label": "resolvestoredtheme()"
     },
     {
+      "label": "themeForMode()",
+      "file_type": "code",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_theme_themeformode",
+      "community": 0,
+      "community_name": "theme.ts",
+      "norm_label": "themeformode()"
+    },
+    {
       "label": "updateThemeColor()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L98",
+      "source_location": "L75",
       "_callable": true,
       "_origin": "ast",
       "id": "src_core_theme_updatethemecolor",
@@ -1428,61 +1427,13 @@
       "label": "writeStoredTheme()",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L77",
+      "source_location": "L67",
       "_callable": true,
       "_origin": "ast",
       "id": "src_core_theme_writestoredtheme",
       "community": 0,
       "community_name": "theme.ts",
       "norm_label": "writestoredtheme()"
-    },
-    {
-      "label": "emitStorage()",
-      "file_type": "code",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L128",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_theme_test_emitstorage",
-      "community": 0,
-      "community_name": "theme.ts",
-      "norm_label": "emitstorage()"
-    },
-    {
-      "label": "href()",
-      "file_type": "code",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L74",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_theme_test_href",
-      "community": 0,
-      "community_name": "theme.ts",
-      "norm_label": "href()"
-    },
-    {
-      "label": "search()",
-      "file_type": "code",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L77",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_theme_test_search",
-      "community": 0,
-      "community_name": "theme.ts",
-      "norm_label": "search()"
-    },
-    {
-      "label": "state()",
-      "file_type": "code",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L82",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_theme_test_state",
-      "community": 0,
-      "community_name": "theme.ts",
-      "norm_label": "state()"
     },
     {
       "label": "fibonacci()",
@@ -1593,18 +1544,6 @@
       "norm_label": "listnode()"
     },
     {
-      "label": "makeContainerStep()",
-      "file_type": "code",
-      "source_file": "src/algos/ds/helpers.ts",
-      "source_location": "L30",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_ds_helpers_makecontainerstep",
-      "community": 1,
-      "community_name": "stepHelpers.ts",
-      "norm_label": "makecontainerstep()"
-    },
-    {
       "label": "makeListNodes()",
       "file_type": "code",
       "source_file": "src/algos/ds/helpers.ts",
@@ -1651,30 +1590,6 @@
       "community": 1,
       "community_name": "stepHelpers.ts",
       "norm_label": "treenode()"
-    },
-    {
-      "label": "queueDemo()",
-      "file_type": "code",
-      "source_file": "src/algos/ds/queue.ts",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_ds_queue_queuedemo",
-      "community": 1,
-      "community_name": "stepHelpers.ts",
-      "norm_label": "queuedemo()"
-    },
-    {
-      "label": "stackDemo()",
-      "file_type": "code",
-      "source_file": "src/algos/ds/stack.ts",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_algos_ds_stack_stackdemo",
-      "community": 1,
-      "community_name": "stepHelpers.ts",
-      "norm_label": "stackdemo()"
     },
     {
       "label": "makeTableStep()",
@@ -2097,6 +2012,42 @@
       "norm_label": "graphifyplugin()"
     },
     {
+      "label": "makeContainerStep()",
+      "file_type": "code",
+      "source_file": "src/algos/ds/helpers.ts",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_ds_helpers_makecontainerstep",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "makecontainerstep()"
+    },
+    {
+      "label": "queueDemo()",
+      "file_type": "code",
+      "source_file": "src/algos/ds/queue.ts",
+      "source_location": "L19",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_ds_queue_queuedemo",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "queuedemo()"
+    },
+    {
+      "label": "stackDemo()",
+      "file_type": "code",
+      "source_file": "src/algos/ds/stack.ts",
+      "source_location": "L19",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_algos_ds_stack_stackdemo",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "stackdemo()"
+    },
+    {
       "label": "factorialAlgo()",
       "file_type": "code",
       "source_file": "src/algos/recursion/factorial.ts",
@@ -2105,7 +2056,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_factorial_factorialalgo",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "factorialalgo()"
     },
     {
@@ -2117,7 +2068,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_permutations_fact",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "fact()"
     },
     {
@@ -2129,7 +2080,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_permutations_permutations",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "permutations()"
     },
     {
@@ -2141,7 +2092,7 @@
       "_origin": "ast",
       "id": "src_algos_search_binarysearch_binarysearch",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "binarysearch()"
     },
     {
@@ -2153,7 +2104,7 @@
       "_origin": "ast",
       "id": "src_algos_search_linearsearch_linearsearch",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "linearsearch()"
     },
     {
@@ -2165,7 +2116,7 @@
       "_origin": "ast",
       "id": "src_algos_search_twopointers_twopointers",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "twopointers()"
     },
     {
@@ -2177,7 +2128,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_bubblesort_bubblesort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "bubblesort()"
     },
     {
@@ -2189,7 +2140,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_heapsort_buildmaxheap",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "buildmaxheap()"
     },
     {
@@ -2201,7 +2152,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_heapsort_heapify",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "heapify()"
     },
     {
@@ -2213,7 +2164,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_heapsort_heapsort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "heapsort()"
     },
     {
@@ -2225,7 +2176,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_insertionsort_insertionsort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "insertionsort()"
     },
     {
@@ -2237,7 +2188,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_mergesort_merge",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "merge()"
     },
     {
@@ -2249,7 +2200,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_mergesort_mergesort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "mergesort()"
     },
     {
@@ -2261,7 +2212,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_mergesort_mergesortrec",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "mergesortrec()"
     },
     {
@@ -2273,7 +2224,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_quicksort_partition",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "partition()"
     },
     {
@@ -2285,7 +2236,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_quicksort_quicksort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "quicksort()"
     },
     {
@@ -2297,7 +2248,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_quicksort_quicksortrec",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "quicksortrec()"
     },
     {
@@ -2309,7 +2260,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_selectionsort_selectionsort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "selectionsort()"
     },
     {
@@ -2321,7 +2272,7 @@
       "_origin": "ast",
       "id": "src_core_registry_getallalgorithms",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "getallalgorithms()"
     },
     {
@@ -2333,7 +2284,7 @@
       "_origin": "ast",
       "id": "src_core_registry_registeralgorithm",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "registeralgorithm()"
     },
     {
@@ -2345,7 +2296,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_frame",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "frame()"
     },
     {
@@ -2357,7 +2308,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_highlightcompare",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "highlightcompare()"
     },
     {
@@ -2369,7 +2320,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_highlightcurrent",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "highlightcurrent()"
     },
     {
@@ -2381,7 +2332,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_highlightpivot",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "highlightpivot()"
     },
     {
@@ -2393,7 +2344,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_highlightsorted",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "highlightsorted()"
     },
     {
@@ -2405,7 +2356,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_highlightswap",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "highlightswap()"
     },
     {
@@ -2417,7 +2368,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_makearraystep",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "makearraystep()"
     },
     {
@@ -2429,7 +2380,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_makecallstackstep",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "makecallstackstep()"
     },
     {
@@ -2441,7 +2392,7 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_makepointer",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "makepointer()"
     },
     {
@@ -2453,8 +2404,32 @@
       "_origin": "ast",
       "id": "src_core_stephelpers_makesearchstep",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "makesearchstep()"
+    },
+    {
+      "label": "collect()",
+      "file_type": "code",
+      "source_file": "src/tests/dp.test.ts",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_dp_test_collect",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "collect()"
+    },
+    {
+      "label": "lastStep()",
+      "file_type": "code",
+      "source_file": "src/tests/dp.test.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_dp_test_laststep",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "laststep()"
     },
     {
       "label": "collect()",
@@ -2465,7 +2440,7 @@
       "_origin": "ast",
       "id": "src_tests_recursion_test_collect",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "collect()"
     },
     {
@@ -2477,20 +2452,20 @@
       "_origin": "ast",
       "id": "src_tests_recursion_test_laststep",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "laststep()"
     },
     {
-      "label": "App()",
+      "label": "Sidebar()",
       "file_type": "code",
-      "source_file": "src/App.tsx",
-      "source_location": "L14",
+      "source_file": "src/components/sidebar/Sidebar.tsx",
+      "source_location": "L158",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_app_app",
+      "id": "src_components_sidebar_sidebar_sidebar",
       "community": 22,
       "community_name": "App.tsx",
-      "norm_label": "app()"
+      "norm_label": "sidebar()"
     },
     {
       "label": "SidebarContent()",
@@ -2573,7 +2548,7 @@
       "_origin": "ast",
       "id": "src_components_code_consolepanel_consolepanel",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "consolepanel()"
     },
     {
@@ -2585,7 +2560,7 @@
       "_origin": "ast",
       "id": "src_components_layout_learningstudio_learningstudio",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "learningstudio()"
     },
     {
@@ -2597,7 +2572,7 @@
       "_origin": "ast",
       "id": "src_components_panels_narrationbar_narrationbar",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "narrationbar()"
     },
     {
@@ -2609,7 +2584,7 @@
       "_origin": "ast",
       "id": "src_components_player_playercontrols_icon",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "icon()"
     },
     {
@@ -2621,20 +2596,8 @@
       "_origin": "ast",
       "id": "src_components_player_playercontrols_playercontrols",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "playercontrols()"
-    },
-    {
-      "label": "resolveCodeViewMode()",
-      "file_type": "code",
-      "source_file": "src/core/codeRunner.ts",
-      "source_location": "L138",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_coderunner_resolvecodeviewmode",
-      "community": 23,
-      "community_name": "Step",
-      "norm_label": "resolvecodeviewmode()"
     },
     {
       "label": "collectSteps()",
@@ -2645,7 +2608,7 @@
       "_origin": "ast",
       "id": "src_core_player_collectsteps",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "collectsteps()"
     },
     {
@@ -2657,7 +2620,7 @@
       "_origin": "ast",
       "id": "src_core_player_generaterandomarray",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "generaterandomarray()"
     },
     {
@@ -2669,7 +2632,7 @@
       "_origin": "ast",
       "id": "src_core_player_usecurrentstep",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "usecurrentstep()"
     },
     {
@@ -2681,20 +2644,8 @@
       "_origin": "ast",
       "id": "src_core_presets_randomwalls",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "randomwalls()"
-    },
-    {
-      "label": "CodeVisualizerPage()",
-      "file_type": "code",
-      "source_file": "src/pages/CodeVisualizerPage.tsx",
-      "source_location": "L14",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_codevisualizerpage_codevisualizerpage",
-      "community": 23,
-      "community_name": "Step",
-      "norm_label": "codevisualizerpage()"
     },
     {
       "label": "TraceStudio()",
@@ -2705,7 +2656,7 @@
       "_origin": "ast",
       "id": "src_pages_codevisualizerpage_tracestudio",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "tracestudio()"
     },
     {
@@ -2719,6 +2670,30 @@
       "community": 24,
       "community_name": "Layout.tsx",
       "norm_label": "layout()"
+    },
+    {
+      "label": "CodePanel()",
+      "file_type": "code",
+      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_panels_codepanel_codepanel",
+      "community": 24,
+      "community_name": "Layout.tsx",
+      "norm_label": "codepanel()"
+    },
+    {
+      "label": "formatValue()",
+      "file_type": "code",
+      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_location": "L20",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_panels_codepanel_formatvalue",
+      "community": 24,
+      "community_name": "Layout.tsx",
+      "norm_label": "formatvalue()"
     },
     {
       "label": "parseLoops()",
@@ -2767,30 +2742,6 @@
       "community": 24,
       "community_name": "Layout.tsx",
       "norm_label": "algorithmloader()"
-    },
-    {
-      "label": "collect()",
-      "file_type": "code",
-      "source_file": "src/tests/dp.test.ts",
-      "source_location": "L6",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_dp_test_collect",
-      "community": 24,
-      "community_name": "Layout.tsx",
-      "norm_label": "collect()"
-    },
-    {
-      "label": "lastStep()",
-      "file_type": "code",
-      "source_file": "src/tests/dp.test.ts",
-      "source_location": "L10",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_dp_test_laststep",
-      "community": 24,
-      "community_name": "Layout.tsx",
-      "norm_label": "laststep()"
     },
     {
       "label": "ArrayViz()",
@@ -3129,30 +3080,6 @@
       "norm_label": "emptyvisualization()"
     },
     {
-      "label": "renderVisualization()",
-      "file_type": "code",
-      "source_file": "src/components/viz/VisualizationCanvas.tsx",
-      "source_location": "L32",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_viz_visualizationcanvas_rendervisualization",
-      "community": 25,
-      "community_name": "types.ts",
-      "norm_label": "rendervisualization()"
-    },
-    {
-      "label": "VisualizationCanvas()",
-      "file_type": "code",
-      "source_file": "src/components/viz/VisualizationCanvas.tsx",
-      "source_location": "L87",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_viz_visualizationcanvas_visualizationcanvas",
-      "community": 25,
-      "community_name": "types.ts",
-      "norm_label": "visualizationcanvas()"
-    },
-    {
       "label": "VizLegend()",
       "file_type": "code",
       "source_file": "src/components/viz/VizLegend.tsx",
@@ -3189,6 +3116,42 @@
       "norm_label": "laststep()"
     },
     {
+      "label": "EditorToolbar()",
+      "file_type": "code",
+      "source_file": "src/components/player/EditorToolbar.tsx",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_player_editortoolbar_editortoolbar",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "editortoolbar()"
+    },
+    {
+      "label": "resizeGrid()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L267",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_resizegrid",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "resizegrid()"
+    },
+    {
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_app_app",
+      "community": 27,
+      "community_name": "react",
+      "norm_label": "app()"
+    },
+    {
       "label": "getLayout()",
       "file_type": "code",
       "source_file": "src/components/layout/ResponsiveInspector.tsx",
@@ -3223,18 +3186,6 @@
       "community": 27,
       "community_name": "react",
       "norm_label": "useinspectorlayout()"
-    },
-    {
-      "label": "Sidebar()",
-      "file_type": "code",
-      "source_file": "src/components/sidebar/Sidebar.tsx",
-      "source_location": "L156",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_sidebar_sidebar_sidebar",
-      "community": 27,
-      "community_name": "react",
-      "norm_label": "sidebar()"
     },
     {
       "label": "Sheet()",
@@ -3369,28 +3320,28 @@
       "norm_label": "hanoiviz()"
     },
     {
-      "label": "CodePanel()",
+      "label": "CodeEditor()",
       "file_type": "code",
-      "source_file": "src/components/panels/CodePanel.tsx",
-      "source_location": "L28",
+      "source_file": "src/components/code/CodeEditor.tsx",
+      "source_location": "L58",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_panels_codepanel_codepanel",
-      "community": 32,
-      "community_name": "CodePanel.tsx",
-      "norm_label": "codepanel()"
+      "id": "src_components_code_codeeditor_codeeditor",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "codeeditor()"
     },
     {
-      "label": "formatValue()",
+      "label": "CodeEditorGuide()",
       "file_type": "code",
-      "source_file": "src/components/panels/CodePanel.tsx",
-      "source_location": "L20",
+      "source_file": "src/components/code/CodeEditor.tsx",
+      "source_location": "L16",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_panels_codepanel_formatvalue",
-      "community": 32,
-      "community_name": "CodePanel.tsx",
-      "norm_label": "formatvalue()"
+      "id": "src_components_code_codeeditor_codeeditorguide",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "codeeditorguide()"
     },
     {
       "label": "formatValue()",
@@ -3401,7 +3352,7 @@
       "_origin": "ast",
       "id": "src_components_panels_varspanel_formatvalue",
       "community": 34,
-      "community_name": "VarsPanel.tsx",
+      "community_name": "CodeVisualizerPage.tsx",
       "norm_label": "formatvalue()"
     },
     {
@@ -3413,8 +3364,56 @@
       "_origin": "ast",
       "id": "src_components_panels_varspanel_varspanel",
       "community": 34,
-      "community_name": "VarsPanel.tsx",
+      "community_name": "CodeVisualizerPage.tsx",
       "norm_label": "varspanel()"
+    },
+    {
+      "label": "renderVisualization()",
+      "file_type": "code",
+      "source_file": "src/components/viz/VisualizationCanvas.tsx",
+      "source_location": "L32",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_viz_visualizationcanvas_rendervisualization",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "rendervisualization()"
+    },
+    {
+      "label": "VisualizationCanvas()",
+      "file_type": "code",
+      "source_file": "src/components/viz/VisualizationCanvas.tsx",
+      "source_location": "L87",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_viz_visualizationcanvas_visualizationcanvas",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "visualizationcanvas()"
+    },
+    {
+      "label": "resolveCodeViewMode()",
+      "file_type": "code",
+      "source_file": "src/core/codeRunner.ts",
+      "source_location": "L138",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_coderunner_resolvecodeviewmode",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "resolvecodeviewmode()"
+    },
+    {
+      "label": "CodeVisualizerPage()",
+      "file_type": "code",
+      "source_file": "src/pages/CodeVisualizerPage.tsx",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_codevisualizerpage_codevisualizerpage",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "codevisualizerpage()"
     },
     {
       "label": "closedHi()",
@@ -3681,6 +3680,210 @@
       "norm_label": "defaultpathfindinggrid()"
     },
     {
+      "label": "buildWalls()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L191",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_buildwalls",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "buildwalls()"
+    },
+    {
+      "label": "carveRoute()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L171",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_carveroute",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "carveroute()"
+    },
+    {
+      "label": "dist()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L134",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_dist",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "dist()"
+    },
+    {
+      "label": "emptyGrid()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L145",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_emptygrid",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "emptygrid()"
+    },
+    {
+      "label": "mulberry32()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L157",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_mulberry32",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "mulberry32()"
+    },
+    {
+      "label": "nextNodeId()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L63",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_nextnodeid",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "nextnodeid()"
+    },
+    {
+      "label": "nodeIdAt()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_nodeidat",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "nodeidat()"
+    },
+    {
+      "label": "nodeIdIndex()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L50",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_nodeidindex",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "nodeidindex()"
+    },
+    {
+      "label": "randomGraph()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L79",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_randomgraph",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "randomgraph()"
+    },
+    {
+      "label": "randWeight()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L139",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_randweight",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "randweight()"
+    },
+    {
+      "label": "seededRandomWalls()",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L223",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_core_presets_seededrandomwalls",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "seededrandomwalls()"
+    },
+    {
+      "label": "collect()",
+      "file_type": "code",
+      "source_file": "src/tests/graph.test.ts",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_graph_test_collect",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "collect()"
+    },
+    {
+      "label": "graphOf()",
+      "file_type": "code",
+      "source_file": "src/tests/graph.test.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_graph_test_graphof",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "graphof()"
+    },
+    {
+      "label": "lastStep()",
+      "file_type": "code",
+      "source_file": "src/tests/graph.test.ts",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_graph_test_laststep",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "laststep()"
+    },
+    {
+      "label": "pathCost()",
+      "file_type": "code",
+      "source_file": "src/tests/graph.test.ts",
+      "source_location": "L57",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_graph_test_pathcost",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "pathcost()"
+    },
+    {
+      "label": "refDistances()",
+      "file_type": "code",
+      "source_file": "src/tests/graph.test.ts",
+      "source_location": "L44",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_graph_test_refdistances",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "refdistances()"
+    },
+    {
+      "label": "shortestHops()",
+      "file_type": "code",
+      "source_file": "src/tests/graph.test.ts",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_tests_graph_test_shortesthops",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "shortesthops()"
+    },
+    {
       "label": "emptyBase()",
       "file_type": "code",
       "source_file": "src/tests/grid.test.ts",
@@ -3688,8 +3891,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_grid_test_emptybase",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "emptybase()"
     },
     {
@@ -3700,8 +3903,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_grid_test_laststep",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "laststep()"
     },
     {
@@ -3712,8 +3915,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_grid_test_pathcells",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "pathcells()"
     },
     {
@@ -3724,8 +3927,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_grid_test_pathcost",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "pathcost()"
     },
     {
@@ -3736,8 +3939,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_grid_test_reachablefromstart",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "reachablefromstart()"
     },
     {
@@ -3748,33 +3951,9 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_tests_grid_test_rungrid",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "rungrid()"
-    },
-    {
-      "label": "CodeEditor()",
-      "file_type": "code",
-      "source_file": "src/components/code/CodeEditor.tsx",
-      "source_location": "L58",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_code_codeeditor_codeeditor",
-      "community": 7,
-      "community_name": "interpreter.ts",
-      "norm_label": "codeeditor()"
-    },
-    {
-      "label": "CodeEditorGuide()",
-      "file_type": "code",
-      "source_file": "src/components/code/CodeEditor.tsx",
-      "source_location": "L16",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_code_codeeditor_codeeditorguide",
-      "community": 7,
-      "community_name": "interpreter.ts",
-      "norm_label": "codeeditorguide()"
     },
     {
       "label": ".constructor()",
@@ -4013,7 +4192,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_astar_astar",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "astar()"
     },
     {
@@ -4025,7 +4204,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_bfs_bfs",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "bfs()"
     },
     {
@@ -4037,7 +4216,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_bfs_pathlength",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "pathlength()"
     },
     {
@@ -4049,7 +4228,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dfs_dfs",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "dfs()"
     },
     {
@@ -4061,7 +4240,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dfs_pathlen",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "pathlen()"
     },
     {
@@ -4073,7 +4252,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dijkstra_dijkstra",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "dijkstra()"
     },
     {
@@ -4085,7 +4264,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dijkstra_dijkstra_settledhi",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "settledhi()"
     },
     {
@@ -4097,7 +4276,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_helpers_asgraphinput",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "asgraphinput()"
     },
     {
@@ -4109,7 +4288,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_helpers_buildadjacency",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "buildadjacency()"
     },
     {
@@ -4121,7 +4300,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_helpers_euclid",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "euclid()"
     },
     {
@@ -4133,7 +4312,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_helpers_makegraphstep",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "makegraphstep()"
     },
     {
@@ -4145,7 +4324,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_helpers_nopathstep",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "nopathstep()"
     },
     {
@@ -4157,247 +4336,19 @@
       "_origin": "ast",
       "id": "src_algos_graph_helpers_revealpath",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "revealpath()"
     },
     {
-      "label": "EditorToolbar()",
+      "label": "ModeToggle.tsx",
       "file_type": "code",
-      "source_file": "src/components/player/EditorToolbar.tsx",
-      "source_location": "L30",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_player_editortoolbar_editortoolbar",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "editortoolbar()"
-    },
-    {
-      "label": "buildWalls()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L191",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_buildwalls",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "buildwalls()"
-    },
-    {
-      "label": "carveRoute()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L171",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_carveroute",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "carveroute()"
-    },
-    {
-      "label": "dist()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L134",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_dist",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "dist()"
-    },
-    {
-      "label": "emptyGrid()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L145",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_emptygrid",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "emptygrid()"
-    },
-    {
-      "label": "mulberry32()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L157",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_mulberry32",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "mulberry32()"
-    },
-    {
-      "label": "nextNodeId()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L63",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_nextnodeid",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "nextnodeid()"
-    },
-    {
-      "label": "nodeIdAt()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L39",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_nodeidat",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "nodeidat()"
-    },
-    {
-      "label": "nodeIdIndex()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L50",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_nodeidindex",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "nodeidindex()"
-    },
-    {
-      "label": "randomGraph()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L79",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_randomgraph",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "randomgraph()"
-    },
-    {
-      "label": "randWeight()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L139",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_randweight",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "randweight()"
-    },
-    {
-      "label": "resizeGrid()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L267",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_resizegrid",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "resizegrid()"
-    },
-    {
-      "label": "seededRandomWalls()",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L223",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_core_presets_seededrandomwalls",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "seededrandomwalls()"
-    },
-    {
-      "label": "collect()",
-      "file_type": "code",
-      "source_file": "src/tests/graph.test.ts",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_graph_test_collect",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "collect()"
-    },
-    {
-      "label": "graphOf()",
-      "file_type": "code",
-      "source_file": "src/tests/graph.test.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_graph_test_graphof",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "graphof()"
-    },
-    {
-      "label": "lastStep()",
-      "file_type": "code",
-      "source_file": "src/tests/graph.test.ts",
-      "source_location": "L16",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_graph_test_laststep",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "laststep()"
-    },
-    {
-      "label": "pathCost()",
-      "file_type": "code",
-      "source_file": "src/tests/graph.test.ts",
-      "source_location": "L57",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_graph_test_pathcost",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "pathcost()"
-    },
-    {
-      "label": "refDistances()",
-      "file_type": "code",
-      "source_file": "src/tests/graph.test.ts",
-      "source_location": "L44",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_graph_test_refdistances",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "refdistances()"
-    },
-    {
-      "label": "shortestHops()",
-      "file_type": "code",
-      "source_file": "src/tests/graph.test.ts",
-      "source_location": "L21",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_tests_graph_test_shortesthops",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "shortesthops()"
-    },
-    {
-      "label": "ThemeSwitcher.tsx",
-      "file_type": "code",
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
+      "source_file": "src/components/ui/ModeToggle.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_ui_themeswitcher",
+      "id": "src_components_ui_modetoggle",
       "community": 0,
       "community_name": "theme.ts",
-      "norm_label": "themeswitcher.tsx"
+      "norm_label": "modetoggle.tsx"
     },
     {
       "label": "theme.ts",
@@ -4411,15 +4362,15 @@
       "norm_label": "theme.ts"
     },
     {
-      "label": "DEFAULT_THEME",
+      "label": "DARK_QUERY",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L21",
+      "source_location": "L9",
       "_origin": "ast",
-      "id": "src_core_theme_default_theme",
+      "id": "src_core_theme_dark_query",
       "community": 0,
       "community_name": "theme.ts",
-      "norm_label": "default_theme"
+      "norm_label": "dark_query"
     },
     {
       "label": "THEME_IDS",
@@ -4436,7 +4387,7 @@
       "label": "THEME_STORAGE_KEY",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L22",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "src_core_theme_theme_storage_key",
       "community": 0,
@@ -4447,7 +4398,7 @@
       "label": "THEMES",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L24",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "src_core_theme_themes",
       "community": 0,
@@ -4458,7 +4409,7 @@
       "label": "useThemeStore",
       "file_type": "code",
       "source_file": "src/core/theme.ts",
-      "source_location": "L117",
+      "source_location": "L95",
       "_origin": "ast",
       "id": "src_core_theme_usethemestore",
       "community": 0,
@@ -4706,50 +4657,6 @@
       "community": 1,
       "community_name": "stepHelpers.ts",
       "norm_label": "ds/helpers.ts"
-    },
-    {
-      "label": "ds/index.ts",
-      "file_type": "code",
-      "source_file": "src/algos/ds/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_algos_ds_index",
-      "community": 1,
-      "community_name": "stepHelpers.ts",
-      "norm_label": "ds/index.ts"
-    },
-    {
-      "label": "queue.ts",
-      "file_type": "code",
-      "source_file": "src/algos/ds/queue.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_algos_ds_queue",
-      "community": 1,
-      "community_name": "stepHelpers.ts",
-      "norm_label": "queue.ts"
-    },
-    {
-      "label": "pseudocode",
-      "file_type": "code",
-      "source_file": "src/algos/ds/queue.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "src_algos_ds_queue_pseudocode",
-      "community": 1,
-      "community_name": "stepHelpers.ts",
-      "norm_label": "pseudocode"
-    },
-    {
-      "label": "queueDemoDef",
-      "file_type": "code",
-      "source_file": "src/algos/ds/queue.ts",
-      "source_location": "L80",
-      "_origin": "ast",
-      "id": "src_algos_ds_queue_queuedemodef",
-      "community": 1,
-      "community_name": "stepHelpers.ts",
-      "norm_label": "queuedemodef"
     },
     {
       "label": "stepHelpers.ts",
@@ -5181,6 +5088,50 @@
       "norm_label": "references"
     },
     {
+      "label": "ds/index.ts",
+      "file_type": "code",
+      "source_file": "src/algos/ds/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_ds_index",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "ds/index.ts"
+    },
+    {
+      "label": "queue.ts",
+      "file_type": "code",
+      "source_file": "src/algos/ds/queue.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_algos_ds_queue",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "queue.ts"
+    },
+    {
+      "label": "pseudocode",
+      "file_type": "code",
+      "source_file": "src/algos/ds/queue.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_algos_ds_queue_pseudocode",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "pseudocode"
+    },
+    {
+      "label": "queueDemoDef",
+      "file_type": "code",
+      "source_file": "src/algos/ds/queue.ts",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "src_algos_ds_queue_queuedemodef",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "queuedemodef"
+    },
+    {
       "label": "stack.ts",
       "file_type": "code",
       "source_file": "src/algos/ds/stack.ts",
@@ -5188,7 +5139,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_stack",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "stack.ts"
     },
     {
@@ -5199,7 +5150,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_stack_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5210,7 +5161,7 @@
       "_origin": "ast",
       "id": "src_algos_ds_stack_stackdemodef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "stackdemodef"
     },
     {
@@ -5221,7 +5172,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_factorial",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "factorial.ts"
     },
     {
@@ -5232,7 +5183,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_factorial_factorialdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "factorialdef"
     },
     {
@@ -5243,7 +5194,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_factorial_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5254,7 +5205,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_helpers",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "recursion/helpers.ts"
     },
     {
@@ -5265,7 +5216,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_index",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "recursion/index.ts"
     },
     {
@@ -5276,7 +5227,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_permutations",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "permutations.ts"
     },
     {
@@ -5287,7 +5238,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_permutations_permutationsdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "permutationsdef"
     },
     {
@@ -5298,7 +5249,7 @@
       "_origin": "ast",
       "id": "src_algos_recursion_permutations_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5309,7 +5260,7 @@
       "_origin": "ast",
       "id": "src_algos_search_binarysearch",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "binarysearch.ts"
     },
     {
@@ -5320,7 +5271,7 @@
       "_origin": "ast",
       "id": "src_algos_search_binarysearch_binarysearchdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "binarysearchdef"
     },
     {
@@ -5331,7 +5282,7 @@
       "_origin": "ast",
       "id": "src_algos_search_binarysearch_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5342,7 +5293,7 @@
       "_origin": "ast",
       "id": "src_algos_search_index",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "search/index.ts"
     },
     {
@@ -5353,7 +5304,7 @@
       "_origin": "ast",
       "id": "src_algos_search_linearsearch",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "linearsearch.ts"
     },
     {
@@ -5364,7 +5315,7 @@
       "_origin": "ast",
       "id": "src_algos_search_linearsearch_linearsearchdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "linearsearchdef"
     },
     {
@@ -5375,7 +5326,7 @@
       "_origin": "ast",
       "id": "src_algos_search_linearsearch_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5386,7 +5337,7 @@
       "_origin": "ast",
       "id": "src_algos_search_twopointers",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "twopointers.ts"
     },
     {
@@ -5397,7 +5348,7 @@
       "_origin": "ast",
       "id": "src_algos_search_twopointers_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5408,7 +5359,7 @@
       "_origin": "ast",
       "id": "src_algos_search_twopointers_twopointersdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "twopointersdef"
     },
     {
@@ -5419,7 +5370,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_bubblesort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "bubblesort.ts"
     },
     {
@@ -5430,7 +5381,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_bubblesort_bubblesortdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "bubblesortdef"
     },
     {
@@ -5441,7 +5392,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_bubblesort_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5452,7 +5403,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_heapsort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "heapsort.ts"
     },
     {
@@ -5463,7 +5414,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_heapsort_heapsortdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "heapsortdef"
     },
     {
@@ -5474,7 +5425,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_heapsort_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5485,7 +5436,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_helpers",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "sorting/helpers.ts"
     },
     {
@@ -5496,7 +5447,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_index",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "sorting/index.ts"
     },
     {
@@ -5507,7 +5458,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_insertionsort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "insertionsort.ts"
     },
     {
@@ -5518,7 +5469,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_insertionsort_insertionsortdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "insertionsortdef"
     },
     {
@@ -5529,7 +5480,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_insertionsort_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5540,7 +5491,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_mergesort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "mergesort.ts"
     },
     {
@@ -5551,7 +5502,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_mergesort_mergesortdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "mergesortdef"
     },
     {
@@ -5562,7 +5513,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_mergesort_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5573,7 +5524,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_quicksort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "quicksort.ts"
     },
     {
@@ -5584,7 +5535,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_quicksort_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5595,7 +5546,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_quicksort_quicksortdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "quicksortdef"
     },
     {
@@ -5606,7 +5557,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_selectionsort",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "selectionsort.ts"
     },
     {
@@ -5617,7 +5568,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_selectionsort_pseudocode",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "pseudocode"
     },
     {
@@ -5628,7 +5579,7 @@
       "_origin": "ast",
       "id": "src_algos_sorting_selectionsort_selectionsortdef",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "selectionsortdef"
     },
     {
@@ -5639,7 +5590,7 @@
       "_origin": "ast",
       "id": "src_core_registry",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "registry.ts"
     },
     {
@@ -5650,7 +5601,7 @@
       "_origin": "ast",
       "id": "src_core_registry_algorithms",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "algorithms"
     },
     {
@@ -5661,8 +5612,19 @@
       "_origin": "ast",
       "id": "src_core_registry_arraypresets",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "arraypresets"
+    },
+    {
+      "label": "dp.test.ts",
+      "file_type": "code",
+      "source_file": "src/tests/dp.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_tests_dp_test",
+      "community": 2,
+      "community_name": "Step",
+      "norm_label": "dp.test.ts"
     },
     {
       "label": "recursion.test.ts",
@@ -5672,7 +5634,7 @@
       "_origin": "ast",
       "id": "src_tests_recursion_test",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "recursion.test.ts"
     },
     {
@@ -5683,7 +5645,7 @@
       "_origin": "ast",
       "id": "src_tests_traces_test",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "traces.test.ts"
     },
     {
@@ -5694,7 +5656,7 @@
       "_origin": "ast",
       "id": "src_tests_traces_test_seededarray",
       "community": 2,
-      "community_name": "registry.ts",
+      "community_name": "Step",
       "norm_label": "seededarray"
     },
     {
@@ -5840,6 +5802,17 @@
       "norm_label": "app.tsx"
     },
     {
+      "label": "Sidebar.tsx",
+      "file_type": "code",
+      "source_file": "src/components/sidebar/Sidebar.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_sidebar_sidebar",
+      "community": 22,
+      "community_name": "App.tsx",
+      "norm_label": "sidebar.tsx"
+    },
+    {
       "label": "Badge.tsx",
       "file_type": "code",
       "source_file": "src/components/ui/Badge.tsx",
@@ -5882,17 +5855,6 @@
       "community": 22,
       "community_name": "App.tsx",
       "norm_label": "category_names"
-    },
-    {
-      "label": "main.tsx",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_main",
-      "community": 22,
-      "community_name": "App.tsx",
-      "norm_label": "main.tsx"
     },
     {
       "label": "CategoryPage.tsx",
@@ -5946,7 +5908,7 @@
       "_origin": "ast",
       "id": "src_components_code_consolepanel",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "consolepanel.tsx"
     },
     {
@@ -5957,7 +5919,7 @@
       "_origin": "ast",
       "id": "src_components_layout_learningstudio",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "learningstudio.tsx"
     },
     {
@@ -5968,7 +5930,7 @@
       "_origin": "ast",
       "id": "src_components_panels_narrationbar",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "narrationbar.tsx"
     },
     {
@@ -5979,7 +5941,7 @@
       "_origin": "ast",
       "id": "src_components_player_playercontrols",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "playercontrols.tsx"
     },
     {
@@ -5990,7 +5952,7 @@
       "_origin": "ast",
       "id": "src_components_player_playercontrols_speeds",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "speeds"
     },
     {
@@ -6001,7 +5963,7 @@
       "_origin": "ast",
       "id": "src_core_player",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "player.ts"
     },
     {
@@ -6012,19 +5974,8 @@
       "_origin": "ast",
       "id": "src_core_player_useplayerstore",
       "community": 23,
-      "community_name": "Step",
+      "community_name": "usePlayerStore",
       "norm_label": "useplayerstore"
-    },
-    {
-      "label": "CodeVisualizerPage.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/CodeVisualizerPage.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_codevisualizerpage",
-      "community": 23,
-      "community_name": "Step",
-      "norm_label": "codevisualizerpage.tsx"
     },
     {
       "label": "Layout.tsx",
@@ -6036,6 +5987,17 @@
       "community": 24,
       "community_name": "Layout.tsx",
       "norm_label": "layout.tsx"
+    },
+    {
+      "label": "CodePanel.tsx",
+      "file_type": "code",
+      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_panels_codepanel",
+      "community": 24,
+      "community_name": "Layout.tsx",
+      "norm_label": "codepanel.tsx"
     },
     {
       "label": "loopScopes.ts",
@@ -6058,17 +6020,6 @@
       "community": 24,
       "community_name": "Layout.tsx",
       "norm_label": "algorithmloader.tsx"
-    },
-    {
-      "label": "dp.test.ts",
-      "file_type": "code",
-      "source_file": "src/tests/dp.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_tests_dp_test",
-      "community": 24,
-      "community_name": "Layout.tsx",
-      "norm_label": "dp.test.ts"
     },
     {
       "label": "ArrayViz.tsx",
@@ -6179,6 +6130,17 @@
       "community": 25,
       "community_name": "types.ts",
       "norm_label": "palette.ts"
+    },
+    {
+      "label": "DISK_COLORS",
+      "file_type": "code",
+      "source_file": "src/components/viz/palette.ts",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "src_components_viz_palette_disk_colors",
+      "community": 25,
+      "community_name": "types.ts",
+      "norm_label": "disk_colors"
     },
     {
       "label": "EASE",
@@ -6346,28 +6308,6 @@
       "norm_label": "legends"
     },
     {
-      "label": "editorStore.ts",
-      "file_type": "code",
-      "source_file": "src/core/editorStore.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_core_editorstore",
-      "community": 25,
-      "community_name": "types.ts",
-      "norm_label": "editorstore.ts"
-    },
-    {
-      "label": "useEditorStore",
-      "file_type": "code",
-      "source_file": "src/core/editorStore.ts",
-      "source_location": "L30",
-      "_origin": "ast",
-      "id": "src_core_editorstore_useeditorstore",
-      "community": 25,
-      "community_name": "types.ts",
-      "norm_label": "useeditorstore"
-    },
-    {
       "label": "types.ts",
       "file_type": "code",
       "source_file": "src/core/types.ts",
@@ -6401,6 +6341,61 @@
       "norm_label": "motion.test.ts"
     },
     {
+      "label": "EditorToolbar.tsx",
+      "file_type": "code",
+      "source_file": "src/components/player/EditorToolbar.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_player_editortoolbar",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "editortoolbar.tsx"
+    },
+    {
+      "label": "GRAPH_TOOLS",
+      "file_type": "code",
+      "source_file": "src/components/player/EditorToolbar.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_components_player_editortoolbar_graph_tools",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "graph_tools"
+    },
+    {
+      "label": "GRID_TOOLS",
+      "file_type": "code",
+      "source_file": "src/components/player/EditorToolbar.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_components_player_editortoolbar_grid_tools",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "grid_tools"
+    },
+    {
+      "label": "editorStore.ts",
+      "file_type": "code",
+      "source_file": "src/core/editorStore.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_core_editorstore",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "editorstore.ts"
+    },
+    {
+      "label": "useEditorStore",
+      "file_type": "code",
+      "source_file": "src/core/editorStore.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "src_core_editorstore_useeditorstore",
+      "community": 26,
+      "community_name": "EditorToolbar.tsx",
+      "norm_label": "useeditorstore"
+    },
+    {
       "label": "ResponsiveInspector.tsx",
       "file_type": "code",
       "source_file": "src/components/layout/ResponsiveInspector.tsx",
@@ -6410,17 +6405,6 @@
       "community": 27,
       "community_name": "react",
       "norm_label": "responsiveinspector.tsx"
-    },
-    {
-      "label": "Sidebar.tsx",
-      "file_type": "code",
-      "source_file": "src/components/sidebar/Sidebar.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_sidebar_sidebar",
-      "community": 27,
-      "community_name": "react",
-      "norm_label": "sidebar.tsx"
     },
     {
       "label": "Sheet.tsx",
@@ -6443,6 +6427,17 @@
       "community": 27,
       "community_name": "react",
       "norm_label": "placement_classes"
+    },
+    {
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_main",
+      "community": 27,
+      "community_name": "react",
+      "norm_label": "main.tsx"
     },
     {
       "label": "react",
@@ -6621,26 +6616,15 @@
       "norm_label": "peg_labels"
     },
     {
-      "label": "DISK_COLORS",
+      "label": "CodeEditor.tsx",
       "file_type": "code",
-      "source_file": "src/components/viz/palette.ts",
-      "source_location": "L56",
-      "_origin": "ast",
-      "id": "src_components_viz_palette_disk_colors",
-      "community": 3,
-      "community_name": "hanoi.ts",
-      "norm_label": "disk_colors"
-    },
-    {
-      "label": "CodePanel.tsx",
-      "file_type": "code",
-      "source_file": "src/components/panels/CodePanel.tsx",
+      "source_file": "src/components/code/CodeEditor.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_panels_codepanel",
-      "community": 32,
-      "community_name": "CodePanel.tsx",
-      "norm_label": "codepanel.tsx"
+      "id": "src_components_code_codeeditor",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "codeeditor.tsx"
     },
     {
       "label": "VarsPanel.tsx",
@@ -6650,8 +6634,30 @@
       "_origin": "ast",
       "id": "src_components_panels_varspanel",
       "community": 34,
-      "community_name": "VarsPanel.tsx",
+      "community_name": "CodeVisualizerPage.tsx",
       "norm_label": "varspanel.tsx"
+    },
+    {
+      "label": "CODE_LANGUAGE_LABEL",
+      "file_type": "code",
+      "source_file": "src/core/codeRunner.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_core_coderunner_code_language_label",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "code_language_label"
+    },
+    {
+      "label": "CodeVisualizerPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/CodeVisualizerPage.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_codevisualizerpage",
+      "community": 34,
+      "community_name": "CodeVisualizerPage.tsx",
+      "norm_label": "codevisualizerpage.tsx"
     },
     {
       "label": "package.json",
@@ -7281,26 +7287,70 @@
       "norm_label": "grid/index.ts"
     },
     {
+      "label": "presets.ts",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_core_presets",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "presets.ts"
+    },
+    {
+      "label": "SEED_BOARD",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L236",
+      "_origin": "ast",
+      "id": "src_core_presets_seed_board",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "seed_board"
+    },
+    {
+      "label": "TERRAIN_COSTS",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L189",
+      "_origin": "ast",
+      "id": "src_core_presets_terrain_costs",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "terrain_costs"
+    },
+    {
+      "label": "WEIGHTS",
+      "file_type": "code",
+      "source_file": "src/core/presets.ts",
+      "source_location": "L138",
+      "_origin": "ast",
+      "id": "src_core_presets_weights",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "weights"
+    },
+    {
+      "label": "graph.test.ts",
+      "file_type": "code",
+      "source_file": "src/tests/graph.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_tests_graph_test",
+      "community": 6,
+      "community_name": "presets.ts",
+      "norm_label": "graph.test.ts"
+    },
+    {
       "label": "grid.test.ts",
       "file_type": "code",
       "source_file": "src/tests/grid.test.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_tests_grid_test",
-      "community": 5,
-      "community_name": "grid/bfs.ts",
+      "community": 6,
+      "community_name": "presets.ts",
       "norm_label": "grid.test.ts"
-    },
-    {
-      "label": "CodeEditor.tsx",
-      "file_type": "code",
-      "source_file": "src/components/code/CodeEditor.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_code_codeeditor",
-      "community": 7,
-      "community_name": "interpreter.ts",
-      "norm_label": "codeeditor.tsx"
     },
     {
       "label": "ast.ts",
@@ -7402,17 +7452,6 @@
       "norm_label": "code_language"
     },
     {
-      "label": "CODE_LANGUAGE_LABEL",
-      "file_type": "code",
-      "source_file": "src/core/codeRunner.ts",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "src_core_coderunner_code_language_label",
-      "community": 7,
-      "community_name": "interpreter.ts",
-      "norm_label": "code_language_label"
-    },
-    {
       "label": "SNIPPETS",
       "file_type": "code",
       "source_file": "src/core/codeRunner.ts",
@@ -7453,7 +7492,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_astar",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graph/astar.ts"
     },
     {
@@ -7464,7 +7503,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_astar_astardef",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "astardef"
     },
     {
@@ -7475,7 +7514,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_astar_pseudocode",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -7486,7 +7525,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_bfs",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graph/bfs.ts"
     },
     {
@@ -7497,7 +7536,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_bfs_bfsdef",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "bfsdef"
     },
     {
@@ -7508,7 +7547,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_bfs_pseudocode",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -7519,7 +7558,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dfs",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graph/dfs.ts"
     },
     {
@@ -7530,7 +7569,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dfs_dfsdef",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "dfsdef"
     },
     {
@@ -7541,7 +7580,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dfs_pseudocode",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -7552,7 +7591,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dijkstra",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graph/dijkstra.ts"
     },
     {
@@ -7563,7 +7602,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dijkstra_dijkstradef",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "dijkstradef"
     },
     {
@@ -7574,7 +7613,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_dijkstra_pseudocode",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "pseudocode"
     },
     {
@@ -7585,7 +7624,7 @@
       "_origin": "ast",
       "id": "src_algos_graph_helpers",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graph/helpers.ts"
     },
     {
@@ -7596,52 +7635,8 @@
       "_origin": "ast",
       "id": "src_algos_graph_index",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "graph/index.ts"
-    },
-    {
-      "label": "EditorToolbar.tsx",
-      "file_type": "code",
-      "source_file": "src/components/player/EditorToolbar.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_player_editortoolbar",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "editortoolbar.tsx"
-    },
-    {
-      "label": "GRAPH_TOOLS",
-      "file_type": "code",
-      "source_file": "src/components/player/EditorToolbar.tsx",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "src_components_player_editortoolbar_graph_tools",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "graph_tools"
-    },
-    {
-      "label": "GRID_TOOLS",
-      "file_type": "code",
-      "source_file": "src/components/player/EditorToolbar.tsx",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "src_components_player_editortoolbar_grid_tools",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "grid_tools"
-    },
-    {
-      "label": "presets.ts",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_core_presets",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "presets.ts"
     },
     {
       "label": "SAMPLE_GRAPH",
@@ -7651,52 +7646,8 @@
       "_origin": "ast",
       "id": "src_core_presets_sample_graph",
       "community": 8,
-      "community_name": "presets.ts",
+      "community_name": "graph/bfs.ts",
       "norm_label": "sample_graph"
-    },
-    {
-      "label": "SEED_BOARD",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L236",
-      "_origin": "ast",
-      "id": "src_core_presets_seed_board",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "seed_board"
-    },
-    {
-      "label": "TERRAIN_COSTS",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L189",
-      "_origin": "ast",
-      "id": "src_core_presets_terrain_costs",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "terrain_costs"
-    },
-    {
-      "label": "WEIGHTS",
-      "file_type": "code",
-      "source_file": "src/core/presets.ts",
-      "source_location": "L138",
-      "_origin": "ast",
-      "id": "src_core_presets_weights",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "weights"
-    },
-    {
-      "label": "graph.test.ts",
-      "file_type": "code",
-      "source_file": "src/tests/graph.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_tests_graph_test",
-      "community": 8,
-      "community_name": "presets.ts",
-      "norm_label": "graph.test.ts"
     },
     {
       "label": "tsconfig.app.json",
@@ -10509,12 +10460,24 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
-      "source_location": "L6",
+      "source_file": "src/components/ui/ModeToggle.tsx",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_components_ui_themeswitcher_themeswitcher",
+      "source": "src_components_ui_modetoggle_modetoggle",
       "target": "src_core_theme_usethemestore"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/ui/ModeToggle.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_ui_modetoggle_modetoggle",
+      "target": "src_core_theme_modeof"
     },
     {
       "relation": "calls",
@@ -12237,7 +12200,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L106",
+      "source_location": "L83",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_applytheme",
@@ -12249,7 +12212,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L108",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme_applytheme",
+      "target": "src_core_theme_themeformode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_applytheme",
@@ -12261,7 +12236,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L132",
+      "source_location": "L110",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_initializetheme",
@@ -12273,19 +12248,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L132",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme_initializetheme",
-      "target": "src_core_theme_isthemeid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L132",
+      "source_location": "L110",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_initializetheme",
@@ -12297,11 +12260,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L133",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_initializetheme",
-      "target": "src_core_theme_writestoredtheme",
+      "target": "src_core_theme_getstorage",
       "confidence_score": 1.0
     },
     {
@@ -12309,11 +12272,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L94",
+      "source_location": "L125",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_core_theme_persisttheme",
-      "target": "src_core_theme_writestoredtheme",
+      "source": "src_core_theme_initializetheme",
+      "target": "src_core_theme_isthemeid",
       "confidence_score": 1.0
     },
     {
@@ -12321,11 +12284,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L95",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_core_theme_persisttheme",
-      "target": "src_core_theme_clearthemepreview",
+      "source": "src_core_theme_initializetheme",
+      "target": "src_core_theme_themeformode",
       "confidence_score": 1.0
     },
     {
@@ -12333,7 +12296,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L71",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_resolvestoredtheme",
@@ -12345,7 +12308,55 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L120",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme_resolvestoredtheme",
+      "target": "src_core_theme_themeformode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme_usethemestore",
+      "target": "src_core_theme_writestoredtheme",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme_usethemestore",
+      "target": "src_core_theme_modeof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme_usethemestore",
+      "target": "src_core_theme_themeformode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L99",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_usethemestore",
@@ -12357,19 +12368,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L121",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme_usethemestore",
-      "target": "src_core_theme_persisttheme",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L79",
+      "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme_writestoredtheme",
@@ -17474,30 +17473,30 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_sidebar_sidebar",
-      "target": "src_components_ui_themeswitcher_themeswitcher",
+      "target": "src_components_ui_modetoggle_modetoggle",
       "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
-      "source_location": "L2",
+      "source_file": "src/components/ui/ModeToggle.tsx",
+      "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_components_ui_themeswitcher",
-      "target": "src_core_theme_themes",
+      "source": "src_components_ui_modetoggle",
+      "target": "src_core_theme_modeof",
       "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
-      "source_location": "L2",
+      "source_file": "src/components/ui/ModeToggle.tsx",
+      "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_components_ui_themeswitcher",
+      "source": "src_components_ui_modetoggle",
       "target": "src_core_theme_usethemestore",
       "confidence_score": 1.0
     },
@@ -19862,7 +19861,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_tests_theme_test",
-      "target": "src_core_theme_default_theme",
+      "target": "src_core_theme_dark_query",
       "confidence_score": 1.0
     },
     {
@@ -19887,6 +19886,18 @@
       "_origin": "ast",
       "source": "src_tests_theme_test",
       "target": "src_core_theme_isthemeid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/tests/theme.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_tests_theme_test",
+      "target": "src_core_theme_modeof",
       "confidence_score": 1.0
     },
     {
@@ -19923,6 +19934,18 @@
       "_origin": "ast",
       "source": "src_tests_theme_test",
       "target": "src_core_theme_theme_storage_key",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/tests/theme.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_tests_theme_test",
+      "target": "src_core_theme_themeformode",
       "confidence_score": 1.0
     },
     {
@@ -21866,7 +21889,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_sidebar_sidebar",
-      "target": "src_components_ui_themeswitcher",
+      "target": "src_components_ui_modetoggle",
       "confidence_score": 1.0
     },
     {
@@ -21897,36 +21920,24 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/ui/ModeToggle.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_ui_modetoggle",
+      "target": "src_core_theme",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/components/ui/Sheet.tsx",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_ui_sheet",
       "target": "ref_react",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_components_ui_themeswitcher",
-      "target": "ref_react",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_components_ui_themeswitcher",
-      "target": "src_core_theme",
       "confidence_score": 1.0
     },
     {
@@ -26324,7 +26335,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/sidebar/Sidebar.tsx",
-      "source_location": "L156",
+      "source_location": "L158",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_sidebar_sidebar",
@@ -26455,6 +26466,17 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/ui/ModeToggle.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_ui_modetoggle",
+      "target": "src_components_ui_modetoggle_modetoggle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/components/ui/Sheet.tsx",
       "source_location": "L18",
       "weight": 1.0,
@@ -26494,17 +26516,6 @@
       "_origin": "ast",
       "source": "src_components_ui_sheet",
       "target": "src_components_ui_sheet_sheetprops",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ui/ThemeSwitcher.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_components_ui_themeswitcher",
-      "target": "src_components_ui_themeswitcher_themeswitcher",
       "confidence_score": 1.0
     },
     {
@@ -28150,62 +28161,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme",
-      "target": "src_core_theme_themeid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L105",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme",
-      "target": "src_core_theme_applytheme",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme",
-      "target": "src_core_theme_thememode",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L112",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme",
-      "target": "src_core_theme_themestate",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L117",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme",
-      "target": "src_core_theme_usethemestore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L128",
+      "source_location": "L109",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
@@ -28216,7 +28172,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L13",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
@@ -28227,11 +28183,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L21",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
-      "target": "src_core_theme_default_theme",
+      "target": "src_core_theme_themes",
       "confidence_score": 1.0
     },
     {
@@ -28242,18 +28198,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
-      "target": "src_core_theme_theme_storage_key",
+      "target": "src_core_theme_isthemeid",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
-      "target": "src_core_theme_themes",
+      "target": "src_core_theme_getstorage",
       "confidence_score": 1.0
     },
     {
@@ -28271,29 +28227,51 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L55",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
-      "target": "src_core_theme_isthemeid",
+      "target": "src_core_theme_themeformode",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L59",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
-      "target": "src_core_theme_getstorage",
+      "target": "src_core_theme_modeof",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L68",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_prefersdark",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_themeid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
@@ -28304,7 +28282,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L77",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_thememode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
@@ -28315,33 +28304,66 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/core/theme.ts",
-      "source_location": "L85",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme",
-      "target": "src_core_theme_clearthemepreview",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L93",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_core_theme",
-      "target": "src_core_theme_persisttheme",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/core/theme.ts",
-      "source_location": "L98",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_core_theme",
       "target": "src_core_theme_updatethemecolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_theme_storage_key",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_applytheme",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_themestate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_dark_query",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/core/theme.ts",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_core_theme",
+      "target": "src_core_theme_usethemestore",
       "confidence_score": 1.0
     },
     {
@@ -29035,61 +29057,6 @@
       "_origin": "ast",
       "source": "src_tests_recursion_test",
       "target": "src_tests_recursion_test_collect",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L128",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_tests_theme_test",
-      "target": "src_tests_theme_test_emitstorage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L55",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_tests_theme_test",
-      "target": "src_tests_theme_test_storageeventlike",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L74",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_tests_theme_test",
-      "target": "src_tests_theme_test_href",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L77",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_tests_theme_test",
-      "target": "src_tests_theme_test_search",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/tests/theme.test.ts",
-      "source_location": "L82",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_tests_theme_test",
-      "target": "src_tests_theme_test_state",
       "confidence_score": 1.0
     },
     {
@@ -30343,5 +30310,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "e9c3424bc4bdcdc186a8e84168cdce38ea4c80e3"
+  "built_at_commit": "b834f4a7754676abd1370670fa58a73568deb43f"
 }

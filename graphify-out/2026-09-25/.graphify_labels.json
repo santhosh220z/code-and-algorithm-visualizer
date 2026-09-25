@@ -1,12 +1,11 @@
 {
   "0": "theme.ts",
   "1": "stepHelpers.ts",
-  "2": "Step",
+  "2": "registry.ts",
   "3": "hanoi.ts",
   "4": "devDependencies",
   "5": "grid/bfs.ts",
-  "6": "GridViz.tsx",
-  "7": "codeRunner.ts",
+  "7": "interpreter.ts",
   "8": "presets.ts",
   "9": "compilerOptions",
   "10": "compilerOptions",
@@ -22,11 +21,11 @@
   "20": "vite.config.ts",
   "21": "Algorithm Visualizer",
   "22": "App.tsx",
-  "23": "usePlayerStore",
+  "23": "Step",
   "24": "Layout.tsx",
   "25": "types.ts",
-  "27": "ResponsiveInspector.tsx",
+  "27": "react",
   "28": "AlgorithmControls.tsx",
   "32": "CodePanel.tsx",
-  "34": "VisualizationCanvas.tsx"
+  "34": "VarsPanel.tsx"
 }
