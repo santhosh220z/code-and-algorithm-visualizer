@@ -1,11 +1,11 @@
 # Graph Report - code-and-algorithm-visualizer  (2026-09-25)
 
 ## Corpus Check
-- 110 files · ~56,769 words
+- 108 files · ~55,520 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 696 nodes · 1890 edges · 29 communities (24 shown, 5 thin omitted)
+- 689 nodes · 1874 edges · 30 communities (25 shown, 5 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 39 edges (avg confidence: 0.6)
 - Token cost: 0 input · 0 output
 
@@ -17,11 +17,12 @@
 ## Community Hubs (Navigation)
 - theme.ts
 - stepHelpers.ts
-- registry.ts
+- Step
 - hanoi.ts
 - devDependencies
 - grid/bfs.ts
-- interpreter.ts
+- GridViz.tsx
+- codeRunner.ts
 - presets.ts
 - compilerOptions
 - compilerOptions
@@ -36,13 +37,13 @@
 - Step
 - Algorithm Visualizer
 - App.tsx
-- Step
+- usePlayerStore
 - Layout.tsx
 - types.ts
-- react
+- ResponsiveInspector.tsx
 - AlgorithmControls.tsx
 - CodePanel.tsx
-- VarsPanel.tsx
+- VisualizationCanvas.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `Step` - 54 edges
@@ -50,44 +51,44 @@
 3. `usePlayerStore` - 35 edges
 4. `AlgorithmInput` - 35 edges
 5. `Parser` - 31 edges
-6. `registerAlgorithm()` - 28 edges
-7. `makeArrayStep()` - 27 edges
-8. `makePointer()` - 25 edges
+6. `makeArrayStep()` - 29 edges
+7. `registerAlgorithm()` - 28 edges
+8. `makePointer()` - 27 edges
 9. `react` - 23 edges
 10. `highlightSorted()` - 23 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `ConsolePanelProps` --references--> `Step`  [EXTRACTED]
+  src/components/code/ConsolePanel.tsx → src/core/types.ts
+- `NarrationBarProps` --references--> `Step`  [EXTRACTED]
+  src/components/panels/NarrationBar.tsx → src/core/types.ts
 - `VarsPanelProps` --references--> `Step`  [EXTRACTED]
   src/components/panels/VarsPanel.tsx → src/core/types.ts
-- `FuncDef` --references--> `Stmt`  [EXTRACTED]
-  src/core/codeLang/interpreter.ts → src/core/codeLang/ast.ts
+- `VisualizationCanvasProps` --references--> `Step`  [EXTRACTED]
+  src/components/viz/VisualizationCanvas.tsx → src/core/types.ts
 - `InterpretResult` --references--> `Step`  [EXTRACTED]
   src/core/codeLang/interpreter.ts → src/core/types.ts
-- `queueDemo()` --calls--> `makeContainerStep()`  [EXTRACTED]
-  src/algos/ds/queue.ts → src/algos/ds/helpers.ts
-- `stackDemo()` --calls--> `makeContainerStep()`  [EXTRACTED]
-  src/algos/ds/stack.ts → src/algos/ds/helpers.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (29 total, 5 thin omitted)
+## Communities (30 total, 5 thin omitted)
 
 ### Community 0 - "theme.ts"
-Cohesion: 0.14
-Nodes (20): ThemeSwitcher(), applyTheme(), clearThemePreview(), DEFAULT_THEME, getStorage(), initializeTheme(), isThemeId(), persistTheme() (+12 more)
+Cohesion: 0.13
+Nodes (21): App(), ThemeSwitcher(), applyTheme(), clearThemePreview(), DEFAULT_THEME, getStorage(), initializeTheme(), isThemeId() (+13 more)
 
 ### Community 1 - "stepHelpers.ts"
-Cohesion: 0.08
-Nodes (44): fibonacci(), fibonacciDef, pseudocode, DEFAULT_VALUES, DEFAULT_WEIGHTS, knapsack(), knapsackDef, pseudocode (+36 more)
+Cohesion: 0.14
+Nodes (29): fibonacci(), fibonacciDef, pseudocode, DEFAULT_VALUES, DEFAULT_WEIGHTS, knapsack(), knapsackDef, pseudocode (+21 more)
 
-### Community 2 - "registry.ts"
+### Community 2 - "Step"
 Cohesion: 0.07
-Nodes (63): pseudocode, stackDemoDef, factorialAlgo(), factorialDef, pseudocode, fact(), permutations(), permutationsDef (+55 more)
+Nodes (66): makeContainerStep(), pseudocode, queueDemo(), queueDemoDef, pseudocode, stackDemo(), stackDemoDef, factorialAlgo() (+58 more)
 
 ### Community 3 - "hanoi.ts"
-Cohesion: 0.17
-Nodes (18): hanoi(), hanoiDef, Peg, pseudocode, HANOI_BASE_Y, HANOI_DISK_H, HANOI_PEG_X, HANOI_VIEW_H (+10 more)
+Cohesion: 0.18
+Nodes (17): hanoi(), hanoiDef, Peg, pseudocode, HANOI_BASE_Y, HANOI_DISK_H, HANOI_PEG_X, HANOI_VIEW_H (+9 more)
 
 ### Community 4 - "devDependencies"
 Cohesion: 0.05
@@ -97,13 +98,17 @@ Nodes (41): oxlint, dependencies, react, react-dom, react-router-dom, zustand, d
 Cohesion: 0.13
 Nodes (35): closedHi(), frontierHi(), gridAstar(), gridAstarDef, pseudocode, gridBfs(), gridBfsDef, pathSteps() (+27 more)
 
-### Community 7 - "interpreter.ts"
-Cohesion: 0.07
-Nodes (39): CodeEditor(), CodeEditorGuide(), CodeEditorGuideProps, CodeEditorProps, MiniProgram, BreakSignal, ContinueSignal, Frame (+31 more)
+### Community 6 - "GridViz.tsx"
+Cohesion: 0.18
+Nodes (13): EditorToolbar(), GRAPH_TOOLS, GRID_TOOLS, FILL, GridViz(), hiKey(), interpolateCells(), EditorState (+5 more)
+
+### Community 7 - "codeRunner.ts"
+Cohesion: 0.15
+Nodes (21): CodeEditor(), CodeEditorGuide(), CodeEditorGuideProps, CodeEditorProps, interpretSource(), callFunction(), evalExpr(), execBlock() (+13 more)
 
 ### Community 8 - "presets.ts"
 Cohesion: 0.08
-Nodes (46): astar(), astarDef, pseudocode, bfs(), bfsDef, pathLength(), pseudocode, dfs() (+38 more)
+Nodes (47): astar(), astarDef, pseudocode, bfs(), bfsDef, pathLength(), pseudocode, dfs() (+39 more)
 
 ### Community 9 - "compilerOptions"
 Cohesion: 0.08
@@ -114,8 +119,8 @@ Cohesion: 0.10
 Nodes (19): node, vite.config.ts, compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection (+11 more)
 
 ### Community 11 - "Parser"
-Cohesion: 0.26
-Nodes (4): Expr, Stmt, Token, Parser
+Cohesion: 0.11
+Nodes (22): Expr, MiniProgram, Stmt, BreakSignal, ContinueSignal, Frame, FuncDef, InterpretResult (+14 more)
 
 ### Community 12 - "Algorithms auto-register via side-effect imports in src/algos/<category>/index.ts"
 Cohesion: 0.17
@@ -135,23 +140,23 @@ Nodes (9): 🧩 Adding a New Algorithm, Algorithm Visualizer, 🗺️ Algorithms
 
 ### Community 22 - "App.tsx"
 Cohesion: 0.15
-Nodes (15): App(), SidebarContent(), Badge(), BadgeProps, BadgeTone, tones, categories, CATEGORY_NAMES (+7 more)
+Nodes (16): Sidebar(), SidebarContent(), SidebarContentProps, Badge(), BadgeProps, BadgeTone, tones, categories (+8 more)
 
-### Community 23 - "Step"
-Cohesion: 0.18
-Nodes (19): ConsolePanel(), ConsolePanelProps, LearningStudio(), LearningStudioProps, InspectorTab, NarrationBar(), NarrationBarProps, PlayerControls() (+11 more)
+### Community 23 - "usePlayerStore"
+Cohesion: 0.26
+Nodes (10): LearningStudioProps, InspectorTab, NarrationBar(), NarrationBarProps, PlayerControls(), SPEEDS, collectSteps(), generateRandomArray() (+2 more)
 
 ### Community 24 - "Layout.tsx"
-Cohesion: 0.31
-Nodes (5): Layout(), parseLoops(), getAlgorithm(), supportsRegeneration(), AlgorithmLoader()
+Cohesion: 0.36
+Nodes (8): Layout(), LearningStudio(), parseLoops(), useCurrentStep(), getAlgorithm(), supportsRegeneration(), AlgorithmLoader(), TraceStudio()
 
 ### Community 25 - "types.ts"
 Cohesion: 0.05
-Nodes (69): ArrayViz(), ArrayVizProps, CallStackViz(), CallStackVizProps, clamp(), EDGE_STROKE, fmtDist(), GraphViz() (+61 more)
+Nodes (62): BSTNode, bstSearch(), bstSearchDef, buildBst(), PositionedBSTNode, pseudocode, TREE_VALUES, makeTreeStep() (+54 more)
 
-### Community 27 - "react"
-Cohesion: 0.19
-Nodes (12): react, getLayout(), InspectorLayout, ResponsiveInspector(), ResponsiveInspectorProps, useInspectorLayout(), Sidebar(), SidebarContentProps (+4 more)
+### Community 27 - "ResponsiveInspector.tsx"
+Cohesion: 0.24
+Nodes (9): getLayout(), InspectorLayout, ResponsiveInspector(), ResponsiveInspectorProps, useInspectorLayout(), PLACEMENT_CLASSES, Sheet(), SheetPlacement (+1 more)
 
 ### Community 28 - "AlgorithmControls.tsx"
 Cohesion: 0.19
@@ -161,9 +166,9 @@ Nodes (12): AlgorithmControls(), FieldKind, fieldsFor(), FieldSpec, parseList(),
 Cohesion: 0.47
 Nodes (5): CodePanel(), CodePanelProps, formatValue(), LoopScope, PseudocodeLine
 
-### Community 34 - "VarsPanel.tsx"
-Cohesion: 0.67
-Nodes (3): formatValue(), VarsPanel(), VarsPanelProps
+### Community 34 - "VisualizationCanvas.tsx"
+Cohesion: 0.19
+Nodes (11): react, ConsolePanel(), ConsolePanelProps, formatValue(), VarsPanel(), VarsPanelProps, renderVisualization(), VisualizationCanvas() (+3 more)
 
 ## Knowledge Gaps
 - **206 isolated node(s):** `$schema`, `.opencode/plugins/graphify.js`, `$schema`, `typescript`, `oxc` (+201 more)
@@ -173,17 +178,17 @@ Nodes (3): formatValue(), VarsPanel(), VarsPanelProps
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Step` connect `Step` to `CodePanel.tsx`, `stepHelpers.ts`, `registry.ts`, `hanoi.ts`, `VarsPanel.tsx`, `grid/bfs.ts`, `interpreter.ts`, `presets.ts`, `Layout.tsx`, `types.ts`?**
+- **Why does `Step` connect `Step` to `CodePanel.tsx`, `stepHelpers.ts`, `VisualizationCanvas.tsx`, `hanoi.ts`, `grid/bfs.ts`, `codeRunner.ts`, `presets.ts`, `Parser`, `usePlayerStore`, `types.ts`?**
   _High betweenness centrality (0.082) - this node is a cross-community bridge._
-- **Why does `react` connect `react` to `CodePanel.tsx`, `theme.ts`, `interpreter.ts`, `presets.ts`, `plugins`, `App.tsx`, `Step`, `Layout.tsx`, `types.ts`, `AlgorithmControls.tsx`?**
-  _High betweenness centrality (0.064) - this node is a cross-community bridge._
-- **Why does `Stmt` connect `Parser` to `interpreter.ts`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
+- **Why does `react` connect `VisualizationCanvas.tsx` to `CodePanel.tsx`, `theme.ts`, `GridViz.tsx`, `codeRunner.ts`, `presets.ts`, `plugins`, `App.tsx`, `usePlayerStore`, `Layout.tsx`, `types.ts`, `ResponsiveInspector.tsx`, `AlgorithmControls.tsx`?**
+  _High betweenness centrality (0.065) - this node is a cross-community bridge._
 - **What connects `$schema`, `.opencode/plugins/graphify.js`, `$schema` to the rest of the system?**
   _206 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `theme.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.1396011396011396 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12807881773399016 - nodes in this community are weakly interconnected._
 - **Should `stepHelpers.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.08376623376623377 - nodes in this community are weakly interconnected._
-- **Should `registry.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.07338935574229692 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1422475106685633 - nodes in this community are weakly interconnected._
+- **Should `Step` be split into smaller, more focused modules?**
+  _Cohesion score 0.06965871902758299 - nodes in this community are weakly interconnected._
+- **Should `devDependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
